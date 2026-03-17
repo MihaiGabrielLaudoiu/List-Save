@@ -1,0 +1,346 @@
+{
+    "title": "List & Save - Troba els millors preus",
+    "menu": {
+        "home": "Inici",
+        "my_list": "La meva llista",
+        "comparator": "Comparador",
+        "products": "Productes",
+        "stats": "Estadístiques",
+        "about_us": "Nosaltres"
+    },
+    "hero": {
+        "title": "Troba els millors preus",
+        "subtitle": "Compara preus de productes en diferents supermercats en temps real",
+        "search_placeholder": "Cerca un producte...",
+        "search_button": "Cercar",
+        "search_input_title": "Escriu el nom del producte que vols cercar per comparar preus en diferents supermercats",
+        "search_input_aria": "Camp de cerca de productes",
+        "search_button_title": "Prem per veure els preus del producte en diferents supermercats",
+        "search_button_aria": "Realitzar cerca"
+    },
+    "why_us": {
+        "title": "Per què fer servir List & Save?",
+        "features": {
+            "money_save": {
+                "icon": "💰",
+                "title": "Estalvia Diners",
+                "text": "Troba els millors preus en diferents supermercats"
+            },
+            "time_save": {
+                "icon": "⏰",
+                "title": "Estalvia Temps",
+                "text": "Compara preus sense visitar múltiples botigues"
+            },
+            "real_time": {
+                "icon": "📊",
+                "title": "Preus Actualitzats",
+                "text": "Informació de preus en temps real"
+            }
+        }
+    },
+    "cookies": {
+        "banner": {
+            "text": "Fem servir galetes necessaries per al funcionament (sessio) i, si acceptes, analitica anonima per millorar el servei.",
+            "accept": "Acceptar",
+            "reject": "Nomes necessaries",
+            "policy": "Politica de galetes"
+        }
+    },
+    "stores": {
+        "title": "Supermercats que comparem",
+        "alt": {
+            "mercadona": "Mercadona",
+            "carrefour": "Carrefour",
+            "eroski": "Eroski"
+        }
+    },
+    "cta": {
+        "title": "Preparat per començar a estalviar?",
+        "text": "Crea la teva llista de la compra personalitzada i descobreix on aconseguir els millors preus",
+        "button": "Crear la meva llista ara"
+    },
+    "sponsors": {
+        "title": "Els nostres Patrocinadors",
+        "alt": {
+            "redbull": "Red Bull",
+            "adidas": "Adidas",
+            "santander": "Santander",
+            "bizum": "Bizum",
+            "gobierno": "Govern d'Espanya",
+            "burgerking": "Burger King"
+        }
+    },
+    "footer": {
+        "description": "La millor plataforma per comparar preus i estalviar en les teves compres del supermercat",
+        "quick_links": {
+            "title": "Enllaços ràpids",
+            "about": "Sobre nosaltres",
+            "contact": "Contacte",
+            "blog": "Blog",
+            "faq": "FAQ"
+        },
+        "legal": {
+            "title": "Legal",
+            "privacy": "Política de privacitat",
+            "terms": "Termes i condicions",
+            "cookies": "Política de cookies"
+        },
+        "social": {
+            "title": "Segueix-nos",
+            "contact_info": {
+                "email": "Email: info@listandsave.com",
+                "phone": "Tel: +34 900 123 456"
+            },
+            "icons": {
+                "facebook": "Facebook",
+                "twitter": "Twitter",
+                "instagram": "Instagram",
+                "linkedin": "LinkedIn"
+            }
+        },
+        "copyright": "List & Save. Tots els drets reservats."
+    },
+    "comparator": {
+        "title": "Comparador de Productes",
+        "subtitle": "Compara preus i característiques de diferents productes per trobar la millor opció",
+        "select_placeholder": "Selecciona un producte",
+        "syncButton": "Actualitzar preus",
+        "syncing": "Sincronitzant...",
+        "syncDone": "Llest: {{insertados}} nous, {{actualizados}} actualitzats",
+        "no_results": "No s'han trobat productes",
+        "offer_label": "Oferta",
+        "price_badge": "Millor preu",
+        "toast_added": "Producte afegit a la teva llista",
+        "toast_error": "No s'ha pogut afegir el producte",
+        "sync_ok": "Preus actualitzats",
+        "sync_err": "Error en actualitzar",
+        "sync_err_network": "Sense connexio o el servidor ha trigat massa",
+        "hero_title": "Compara preus a l'instant",
+        "hero_subtitle": "Tria categoria i producte, o cerca lliurement",
+        "search_placeholder": "Que busques? Ex.: llet, pa, ous...",
+        "wizard_step_category": "1. Tria una categoria",
+        "wizard_step_group": "2. Tria un producte",
+        "wizard_step_group_all": "2. Tria un producte (totes les categories)",
+        "wizard_back_cats": "Tornar a categories",
+        "wizard_all_categories": "Totes",
+        "wizard_all_hint": "Veure grups de totes les categories",
+        "wizard_step_sub": "2. Tria subcategoria",
+        "wizard_all_subs": "Totes les subcategories",
+        "wizard_step_product": "3. Tria producte",
+        "wizard_empty": "No hi ha productes en aquesta categoria",
+        "empty_title": "Que vols comparar?",
+        "empty_subtitle": "Tria a sota o escriu al cercador",
+        "new_search": "Nova cerca",
+        "summary_supers": "Supermercats",
+        "summary_best": "Millor preu",
+        "summary_save": "Estalvi maxim",
+        "comparison_title": "Comparativa entre supermercats",
+        "add_to_list": "Afegir a la meva llista"
+    },
+    "products_page": {
+        "pagination_prev": "Anterior",
+        "pagination_next": "Seguent",
+        "pagination_info": "Pagina {{page}} de {{totalPages}} — {{total}} productes",
+        "pagination_single": "Tots els resultats caben en aquesta pagina.",
+        "all_categories": "Totes les categories",
+        "search_placeholder": "Cercar productes...",
+        "list_add_ok": "Producte afegit a la teva llista",
+        "list_add_err": "No s'ha pogut afegir el producte",
+        "from_price": "Des de {{price}} €",
+        "pack_price": "{{price}} €",
+        "unit_price_line": "{{price}} € / {{unit}}"
+    },
+    "my_list_page": {
+        "hero_title": "Les meves llistes de la compra",
+        "hero_subtitle": "Diverses llistes amb nom, preus i on surt més barat",
+        "new_list": "Nova llista",
+        "rename_list": "Canviar nom",
+        "delete_list": "Eliminar llista",
+        "delete_list_confirm": "Vols eliminar aquesta llista i tots els productes?",
+        "tab_close_aria": "Tancar llista",
+        "col_product": "Producte",
+        "col_qty": "Quantitat",
+        "col_brand": "Marca",
+        "col_best_price": "Millor preu",
+        "col_best_store": "Comprar a",
+        "col_actions": "Opcions",
+        "col_unit_price": "Preu unit.",
+        "col_line_total": "Total",
+        "total_label": "Total llista",
+        "wizard_title": "Afegir per categoria (millor preu)",
+        "wizard_reset": "Tornar a comencar",
+        "no_price": "Sense dada",
+        "no_store": "—",
+        "empty": "Aquesta llista no té productes.",
+        "add_placeholder": "Cerca un producte per afegir...",
+        "add_btn": "Incloure",
+        "edit": "Editar",
+        "remove": "Eliminar",
+        "new_list_prompt": "Nom de la nova llista",
+        "rename_prompt": "Nou nom de la llista",
+        "qty_prompt": "Nova quantitat",
+        "err_delete_product": "No s'ha pogut eliminar el producte",
+        "err_qty_invalid": "Quantitat no valida",
+        "err_qty_update": "No s'ha pogut actualitzar la quantitat",
+        "err_add_product": "No s'ha pogut afegir el producte",
+        "msg_type_product": "Escriu un producte per cercar-lo",
+        "msg_no_active_list": "No hi ha cap llista activa",
+        "msg_product_not_found": "No s'ha trobat aquest producte al catalog",
+        "err_generic": "S'ha produit un error",
+        "err_load_lists": "No s'han pogut carregar les llistes. Si acabes de desplegar el projecte, executa a MySQL el fitxer backend/db/migration-listas-cabecera.sql"
+    },
+    "fab": {
+        "comparator_tooltip": "Anar al comparador",
+        "comparator_aria": "Obrir el comparador de preus"
+    },
+    "about_page": {
+        "hero_title": "Qui som?",
+        "hero_subtitle": "Una historia que va comencar el 2020",
+        "mission_title": "Missio",
+        "mission_text": "Volem que estalviis en la compra diaria. Et mostrem preus reals perque triis on comprar.",
+        "vision_title": "Visio",
+        "vision_text": "Volem ser el teu aliat de confianca quan fas la compra."
+    },
+    "auth": {
+        "login": "Iniciar Sessió",
+        "register": "Registrar-se",
+        "my_account": "El meu compte",
+        "settings": "Configuració",
+        "logout": "Tancar sessió"
+    },
+    "register": {
+        "title": "Crear un compte",
+        "steps": {
+            "basic": "Dades bàsiques",
+            "personal": "Dades personals",
+            "preferences": "Preferències"
+        },
+        "form": {
+            "username": {
+                "label": "Nom d'usuari",
+                "placeholder": "Joan Puig",
+                "hint": "Entre 4 i 16 caràcters, només lletres, números i guions baixos",
+                "error": "El nom d'usuari ha de tenir entre 4 i 16 caràcters i només pot contenir lletres, números i guions baixos"
+            },
+            "email": {
+                "label": "Correu electrònic",
+                "placeholder": "exemple@correu.com",
+                "hint": "Introdueix un correu electrònic vàlid",
+                "error": "Si us plau, introdueix un correu electrònic vàlid"
+            },
+            "password": {
+                "label": "Contrasenya",
+                "hint": "Mínim 8 caràcters, almenys una lletra i un número",
+                "error": "La contrasenya ha de tenir almenys 8 caràcters, una lletra i un número"
+            },
+            "confirm_password": {
+                "label": "Confirmar contrasenya",
+                "hint": "Repeteix la contrasenya",
+                "error": "Les contrasenyes no coincideixen"
+            },
+            "fullname": {
+                "label": "Nom complet",
+                "hint": "El teu nom i cognoms",
+                "error": "El nom ha de contenir només lletres i espais (2-50 caràcters)"
+            },
+            "age": {
+                "label": "Edat",
+                "hint": "Has de ser major d'edat",
+                "error": "Has de ser major de 18 anys"
+            },
+            "categories": {
+                "label": "Categories d'interès",
+                "hint": "Selecciona almenys una",
+                "error": "Selecciona almenys una categoria",
+                "options": {
+                    "food": "Alimentació",
+                    "cleaning": "Neteja",
+                    "home": "Llar"
+                }
+            }
+        },
+        "buttons": {
+            "next": "Següent",
+            "previous": "Anterior",
+            "submit": "Registrar-se",
+            "cancel": "Cancel·lar"
+        },
+        "login_prompt": "Ja tens un compte?",
+        "success": "Usuari registrat correctament",
+        "confirm_modal": {
+            "title": "Estàs segur que vols registrar-te?",
+            "text": "Un cop registrat, podràs accedir a totes les funcionalitats de l'aplicació.",
+            "confirm": "Confirmar",
+            "cancel": "Cancel·lar"
+        },
+        "language_change_error": "No s'ha pogut canviar l'idioma. Torna-ho a provar."
+    },
+    "modal": {
+        "ok": "D'acord",
+        "cancel": "Cancel·lar",
+        "confirm": "Confirmar",
+        "confirm_title": "Confirmar acció",
+        "notice": "Avís",
+        "input_title": "Entrada"
+    },
+    "settings": {
+        "title": "Configuració d'Usuari",
+        "tabs": {
+            "location": "Ubicació",
+            "language": "Idioma",
+            "payment": "Pagaments"
+        },
+        "location": {
+            "country": {
+                "label": "País",
+                "placeholder": "Selecciona el teu país"
+            },
+            "postal_code": {
+                "label": "Codi Postal",
+                "placeholder": "Ex: 08001"
+            },
+            "detect_location": "Detectar ubicació"
+        },
+        "language": {
+            "label": "Selecciona el teu idioma preferit",
+            "options": {
+                "es": "Espanyol (Castellà)",
+                "ca": "Català",
+                "en": "Anglès"
+            }
+        },
+        "payment": {
+            "card_number": {
+                "label": "Número de Targeta",
+                "placeholder": "1234 5678 9012 3456",
+                "error": "Introdueix un número de targeta vàlid"
+            },
+            "expiry_date": {
+                "label": "Data de Caducitat",
+                "placeholder": "MM/AA",
+                "error": "Format vàlid: MM/AA"
+            },
+            "cvv": {
+                "label": "CVV",
+                "placeholder": "123",
+                "error": "El CVV ha de tenir 3 o 4 dígits"
+            },
+            "card_name": {
+                "label": "Nom a la Targeta",
+                "placeholder": "NOM COGNOMS",
+                "error": "Introdueix el nom tal com apareix a la targeta"
+            }
+        },
+        "buttons": {
+            "save": "Desar canvis",
+            "back": "Tornar"
+        },
+        "messages": {
+            "success": "Configuració desada correctament",
+            "location_error": "No s'ha pogut detectar la teva ubicació. Si us plau, introdueix el teu codi postal manualment.",
+            "browser_error": "El teu navegador no suporta la geolocalització.",
+            "geo_pending": "La geolocalitzacio encara no esta connectada a un proveidor.",
+            "save_error": "No s'ha pogut desar la configuracio"
+        }
+    }
+}

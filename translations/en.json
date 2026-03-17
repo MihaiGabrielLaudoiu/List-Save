@@ -1,0 +1,346 @@
+{
+    "title": "List & Save - Find the Best Prices",
+    "menu": {
+        "home": "Home",
+        "my_list": "My List",
+        "comparator": "Compare",
+        "products": "Products",
+        "stats": "Statistics",
+        "about_us": "About Us"
+    },
+    "hero": {
+        "title": "Find the Best Prices",
+        "subtitle": "Compare product prices across different supermarkets in real-time",
+        "search_placeholder": "Search for a product...",
+        "search_button": "Search",
+        "search_input_title": "Type the name of the product you want to search to compare prices across different supermarkets",
+        "search_input_aria": "Product search field",
+        "search_button_title": "Click to see product prices in different supermarkets",
+        "search_button_aria": "Perform search"
+    },
+    "why_us": {
+        "title": "Why Use List & Save?",
+        "features": {
+            "money_save": {
+                "icon": "💰",
+                "title": "Save Money",
+                "text": "Find the best prices across different supermarkets"
+            },
+            "time_save": {
+                "icon": "⏰",
+                "title": "Save Time",
+                "text": "Compare prices without visiting multiple stores"
+            },
+            "real_time": {
+                "icon": "📊",
+                "title": "Updated Prices",
+                "text": "Real-time price information"
+            }
+        }
+    },
+    "cookies": {
+        "banner": {
+            "text": "We use necessary cookies for the site to work (session) and, if you accept, anonymous analytics to improve the service.",
+            "accept": "Accept",
+            "reject": "Necessary only",
+            "policy": "Cookie policy"
+        }
+    },
+    "stores": {
+        "title": "Supermarkets we compare",
+        "alt": {
+            "mercadona": "Mercadona",
+            "carrefour": "Carrefour",
+            "eroski": "Eroski"
+        }
+    },
+    "cta": {
+        "title": "Ready to Start Saving?",
+        "text": "Create your personalized shopping list and discover where to get the best prices",
+        "button": "Create My List Now"
+    },
+    "sponsors": {
+        "title": "Our Sponsors",
+        "alt": {
+            "redbull": "Red Bull",
+            "adidas": "Adidas",
+            "santander": "Santander",
+            "bizum": "Bizum",
+            "gobierno": "Government of Spain",
+            "burgerking": "Burger King"
+        }
+    },
+    "footer": {
+        "description": "The best platform to compare prices and save on your supermarket shopping",
+        "quick_links": {
+            "title": "Quick Links",
+            "about": "About Us",
+            "contact": "Contact",
+            "blog": "Blog",
+            "faq": "FAQ"
+        },
+        "legal": {
+            "title": "Legal",
+            "privacy": "Privacy Policy",
+            "terms": "Terms and Conditions",
+            "cookies": "Cookie Policy"
+        },
+        "social": {
+            "title": "Follow Us",
+            "contact_info": {
+                "email": "Email: info@listandsave.com",
+                "phone": "Tel: +34 900 123 456"
+            },
+            "icons": {
+                "facebook": "Facebook",
+                "twitter": "Twitter",
+                "instagram": "Instagram",
+                "linkedin": "LinkedIn"
+            }
+        },
+        "copyright": "List & Save. All rights reserved."
+    },
+    "comparator": {
+        "title": "Product Comparator",
+        "subtitle": "Compare prices and features of different products to find the best option",
+        "select_placeholder": "Select a product",
+        "syncButton": "Update prices",
+        "syncing": "Syncing...",
+        "syncDone": "Done: {{insertados}} new, {{actualizados}} updated",
+        "no_results": "No products found",
+        "offer_label": "Offer",
+        "price_badge": "Best price",
+        "toast_added": "Product added to your list",
+        "toast_error": "Could not add the product",
+        "sync_ok": "Prices updated",
+        "sync_err": "Update failed",
+        "sync_err_network": "No connection or the server took too long",
+        "hero_title": "Compare prices instantly",
+        "hero_subtitle": "Pick a category and product, or search freely",
+        "search_placeholder": "What are you looking for? e.g. milk, bread, eggs...",
+        "wizard_step_category": "1. Choose a category",
+        "wizard_step_group": "2. Choose a product",
+        "wizard_step_group_all": "2. Choose a product (all categories)",
+        "wizard_back_cats": "Back to categories",
+        "wizard_all_categories": "All",
+        "wizard_all_hint": "Browse every product group",
+        "wizard_step_sub": "2. Choose subcategory",
+        "wizard_all_subs": "All subcategories",
+        "wizard_step_product": "3. Choose product",
+        "wizard_empty": "No products in this category",
+        "empty_title": "What do you want to compare?",
+        "empty_subtitle": "Choose below or use the search box",
+        "new_search": "New search",
+        "summary_supers": "Supermarkets",
+        "summary_best": "Best price",
+        "summary_save": "Top savings",
+        "comparison_title": "Supermarket comparison",
+        "add_to_list": "Add to my list"
+    },
+    "products_page": {
+        "pagination_prev": "Previous",
+        "pagination_next": "Next",
+        "pagination_info": "Page {{page}} of {{totalPages}} — {{total}} products",
+        "pagination_single": "All results fit on this page.",
+        "all_categories": "All categories",
+        "search_placeholder": "Search products...",
+        "list_add_ok": "Product added to your list",
+        "list_add_err": "Could not add the product",
+        "from_price": "From {{price}} €",
+        "pack_price": "{{price}} €",
+        "unit_price_line": "{{price}} € / {{unit}}"
+    },
+    "my_list_page": {
+        "hero_title": "My shopping lists",
+        "hero_subtitle": "Named lists, prices, and where each item is cheapest",
+        "new_list": "New list",
+        "rename_list": "Rename",
+        "delete_list": "Delete list",
+        "delete_list_confirm": "Delete this list and all its items?",
+        "tab_close_aria": "Close list",
+        "col_product": "Product",
+        "col_qty": "Qty",
+        "col_brand": "Brand",
+        "col_best_price": "Best price",
+        "col_best_store": "Buy at",
+        "col_actions": "Actions",
+        "col_unit_price": "Unit price",
+        "col_line_total": "Line total",
+        "total_label": "List total",
+        "wizard_title": "Add by category (best price)",
+        "wizard_reset": "Start over",
+        "no_price": "N/A",
+        "no_store": "—",
+        "empty": "This list has no products yet.",
+        "add_placeholder": "Search for a product to add...",
+        "add_btn": "Add",
+        "edit": "Edit",
+        "remove": "Remove",
+        "new_list_prompt": "Name for the new list",
+        "rename_prompt": "New list name",
+        "qty_prompt": "New quantity",
+        "err_delete_product": "Could not remove the product",
+        "err_qty_invalid": "Invalid quantity",
+        "err_qty_update": "Could not update quantity",
+        "err_add_product": "Could not add the product",
+        "msg_type_product": "Type a product name to search",
+        "msg_no_active_list": "No active list",
+        "msg_product_not_found": "No matching product in the catalog",
+        "err_generic": "Something went wrong",
+        "err_load_lists": "Could not load lists. If you just deployed the app, run backend/db/migration-listas-cabecera.sql on MySQL"
+    },
+    "fab": {
+        "comparator_tooltip": "Open price comparator",
+        "comparator_aria": "Open the price comparator"
+    },
+    "about_page": {
+        "hero_title": "Who we are",
+        "hero_subtitle": "A story that started in 2020",
+        "mission_title": "Mission",
+        "mission_text": "We want you to save on everyday shopping. We show real supermarket prices so you can choose where to buy.",
+        "vision_title": "Vision",
+        "vision_text": "We want to be your trusted ally when you go grocery shopping."
+    },
+    "auth": {
+        "login": "Log In",
+        "register": "Sign Up",
+        "my_account": "My Account",
+        "settings": "Settings",
+        "logout": "Log Out"
+    },
+    "register": {
+        "title": "Create an Account",
+        "steps": {
+            "basic": "Basic Information",
+            "personal": "Personal Information",
+            "preferences": "Preferences"
+        },
+        "form": {
+            "username": {
+                "label": "Username",
+                "placeholder": "John Doe",
+                "hint": "Between 4 and 16 characters, only letters, numbers and underscores",
+                "error": "Username must be between 4 and 16 characters and can only contain letters, numbers and underscores"
+            },
+            "email": {
+                "label": "Email",
+                "placeholder": "example@email.com",
+                "hint": "Enter a valid email address",
+                "error": "Please enter a valid email address"
+            },
+            "password": {
+                "label": "Password",
+                "hint": "Minimum 8 characters, at least one letter and one number",
+                "error": "Password must have at least 8 characters, one letter and one number"
+            },
+            "confirm_password": {
+                "label": "Confirm Password",
+                "hint": "Repeat your password",
+                "error": "Passwords do not match"
+            },
+            "fullname": {
+                "label": "Full Name",
+                "hint": "Your first and last name",
+                "error": "Name must contain only letters and spaces (2-50 characters)"
+            },
+            "age": {
+                "label": "Age",
+                "hint": "You must be of legal age",
+                "error": "You must be over 18 years old"
+            },
+            "categories": {
+                "label": "Categories of Interest",
+                "hint": "Select at least one",
+                "error": "Select at least one category",
+                "options": {
+                    "food": "Food",
+                    "cleaning": "Cleaning",
+                    "home": "Home"
+                }
+            }
+        },
+        "buttons": {
+            "next": "Next",
+            "previous": "Previous",
+            "submit": "Sign Up",
+            "cancel": "Cancel"
+        },
+        "login_prompt": "Already have an account?",
+        "success": "User successfully registered",
+        "confirm_modal": {
+            "title": "Are you sure you want to register?",
+            "text": "Once registered, you will have access to all application features.",
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+        },
+        "language_change_error": "Could not change the language. Please try again."
+    },
+    "modal": {
+        "ok": "OK",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "confirm_title": "Confirm action",
+        "notice": "Notice",
+        "input_title": "Input"
+    },
+    "settings": {
+        "title": "User Settings",
+        "tabs": {
+            "location": "Location",
+            "language": "Language",
+            "payment": "Payment"
+        },
+        "location": {
+            "country": {
+                "label": "Country",
+                "placeholder": "Select your country"
+            },
+            "postal_code": {
+                "label": "Postal Code",
+                "placeholder": "E.g.: 28001"
+            },
+            "detect_location": "Detect Location"
+        },
+        "language": {
+            "label": "Select your preferred language",
+            "options": {
+                "es": "Spanish (Castellano)",
+                "ca": "Catalan",
+                "en": "English"
+            }
+        },
+        "payment": {
+            "card_number": {
+                "label": "Card Number",
+                "placeholder": "1234 5678 9012 3456",
+                "error": "Enter a valid card number"
+            },
+            "expiry_date": {
+                "label": "Expiry Date",
+                "placeholder": "MM/YY",
+                "error": "Valid format: MM/YY"
+            },
+            "cvv": {
+                "label": "CVV",
+                "placeholder": "123",
+                "error": "CVV must be 3 or 4 digits"
+            },
+            "card_name": {
+                "label": "Name on Card",
+                "placeholder": "FULL NAME",
+                "error": "Enter the name as it appears on the card"
+            }
+        },
+        "buttons": {
+            "save": "Save Changes",
+            "back": "Back"
+        },
+        "messages": {
+            "success": "Settings saved successfully",
+            "location_error": "Could not detect your location. Please enter your postal code manually.",
+            "browser_error": "Your browser does not support geolocation.",
+            "geo_pending": "Geolocation is not wired to a provider yet.",
+            "save_error": "Could not save settings"
+        }
+    }
+}
