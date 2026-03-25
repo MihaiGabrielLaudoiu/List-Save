@@ -1,0 +1,273 @@
+/* Header */
+.header {
+    background-color: var(--color-white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 80px;
+}
+
+.header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.header__logo-img {
+    height: 7em;
+}
+
+.header__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* Hero Section */
+.hero {
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--color-background);
+    text-align: center;
+}
+
+.hero__container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero__title {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.hero__subtitle {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Features Grid */
+.features__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* Stores Section */
+.stores {
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--color-white);
+}
+
+.stores__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+/* Footer */
+.footer {
+    flex-shrink: 0;
+    background-color: #1a1a1a;
+    color: var(--color-white);
+    padding: var(--spacing-xl) 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.footer__logo img {
+    height: 100px;
+    object-fit: contain;
+    position: relative;
+    right: 0.7em;
+}
+.footer__logo {
+    background-color: var(--color-white);
+    border-radius: 50%;
+    padding: 1rem;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer__description {
+    color: #a1a1aa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer__title {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer__list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer__list li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer__list a {
+    color: #a1a1aa;
+    transition: color 0.3s ease;
+}
+
+.footer__list a:hover {
+    color: var(--color-white);
+}
+
+.footer__social {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.social-icon {
+    color: var(--color-white);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--color-primary);
+}
+
+.footer__contact {
+    color: #a1a1aa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer__bottom {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid #333;
+    color: #a1a1aa;
+    font-size: 0.9rem;
+}
+
+/* Nuevas secciones */
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-text);
+}
+
+.why-us {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-white);
+}
+
+/* Sponsors slider */
+.sponsors {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-background);
+    overflow: hidden;
+}
+
+.sponsors__slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.sponsors__track {
+    display: flex;
+    animation: scroll 30s linear infinite;
+}
+
+.sponsors__track img {
+    height: 60px;
+    margin: 0 var(--spacing-md);
+    object-fit: contain;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Ajuste para el main en la página de login */
+.main {
+    flex: 1 0 auto;
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+/* Shopping List Layout */
+.shopping-list-page {
+    padding: var(--spacing-lg) var(--spacing-md);
+    min-height: calc(100vh - 60px);
+    background-color: var(--color-background);
+}
+
+/* Mover aquí todos los elementos de layout como:
+- Header
+- Footer
+- Grid systems
+- Contenedores principales
+- Secciones de página */
+
+/* Mantener la estructura actual y añadir:
+1. Layout containers
+2. Grid systems
+3. Header
+4. Footer
+5. Secciones principales
+6. Media queries para layout */
+
+/* Grid system simplificado */
+.grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+}
+
+/* Estructura base para sticky footer */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}

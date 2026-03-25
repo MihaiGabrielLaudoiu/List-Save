@@ -1,0 +1,225 @@
+ /* Estas son las animaciones que hacen que las cosas aparezcan suavemente! */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Empieza invisible */
+        transform: translateY(20px); /* Un poquito abajo */
+    }
+    to {
+        opacity: 1; /* Termina visible */
+        transform: translateY(0); /* En su lugar normal */
+    }
+}
+
+/* Esta animacion hace que las cosas entren desde la izquierda */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Estas clases son para usar las animaciones facilmente */
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.4s ease forwards;
+}
+
+/* Este es el circulo que gira cuando algo esta cargando */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--color-background);
+    border-top: 4px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Gira para siempre */
+}
+
+/* Hace que el circulo de vueltas */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Esto es para la barra de progreso */
+@keyframes progress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.progress-animate {
+    animation: progress 0.3s ease;
+}
+
+/* Esta parte es para los logos que se mueven solos */
+.sponsors__slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.sponsors__track {
+    display: flex;
+    gap: 2rem;
+    white-space: nowrap;
+}
+
+.sponsors__group {
+    display: flex;
+    gap: 2rem;
+    flex-shrink: 0;
+}
+
+.sponsor-logo__wrapper {
+    flex-shrink: 0;
+}
+
+/* Mueve los logos de un lado a otro */
+@keyframes slideSponsors {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+/* Estas son animaciones para que la pagina se vea mas bonita */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.92);
+    animation: scaleIn 0.6s ease forwards;
+}
+
+.slide-in {
+    opacity: 0;
+    transform: translateX(-100px);
+    animation: slideIn 0.8s ease forwards;
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    animation: fadeInLeft 0.6s ease forwards;
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(80px);
+    animation: fadeInRight 0.6s ease forwards;
+}
+
+/* Animaciones más rápidas para el timeline */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.values__icon {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+/* Animaciones para cuando agregamos cosas a la lista */
+.shopping-table tr {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.add-item input:focus {
+    animation: pulse 0.3s ease-in-out;
+}
+
+/* Hace que brille cuando escribimos */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(64, 112, 244, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(64, 112, 244, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(64, 112, 244, 0);
+    }
+}
+
+/* Animaciones simples para usar en cualquier parte */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes deslizarDesdeIzquierda {
+    from {
+        transform: translateX(-50px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Clases faciles de usar */
+.animar-aparecer {
+    animation: aparecer 1s ease;
+}
+
+.animar-deslizar {
+    animation: deslizarDesdeIzquierda 1s ease;
+}
+
+/* Este es el circulo que gira cuando algo esta cargando */
+.cargando {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #4070f4;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Lo hace girar! */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
