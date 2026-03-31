@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">List & Save - Encuentra los mejores precios</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+<!-- SASS -->
+<link rel="stylesheet" href="scss/main.css">
+
+</head>
+<body>
+    
+    <header class="header">
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+                <li><a href="/" data-i18n="menu.home">Inicio</a></li>
+                <li><a href="./mi-lista.html" data-i18n="menu.my_list">Mi lista</a></li>
+                <li><a href="./comparador.html" data-i18n="menu.comparator">Comparador</a></li>
+                <li><a href="./productos.html" data-i18n="menu.products">Productos</a></li>
+                <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
+                <li><a href="./nosotros.html" data-i18n="menu.about_us">Nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link" data-i18n="menu.my_list">Mi lista</a></li>
+                    <li class="nav__item"><a href="comparador.html" class="nav__link" data-i18n="menu.comparator">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link" data-i18n="menu.about_us">Nosotros</a></li>
+                </ul>
+            </nav>
+
+
+            <div class="header__actions">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <div class="header__user">
+                    <img src="assets/images/user.svg" alt="Icono de usuario" class="header__user-img">
+                </div>
+                <div id="auth-buttons" class="auth-buttons">
+                    <a href="login.html" class="button button--secondary" data-i18n="auth.login">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary" data-i18n="auth.register">Registrarse</a>
+                </div>
+                <div id="user-menu" style="display: none;" class="header__user-menu">
+                    <div class="header__user-menu-content">
+                        <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
+                        <div class="header__user-menu-buttons">
+                            <button class="header__user-button" onclick="window.location.href='ajustes.html'">
+                                <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
+                            </button>
+                            <button class="header__user-button" onclick="cerrarSesion()">
+                                <i class="fas fa-sign-out-alt"></i> <span data-i18n="auth.logout">Cerrar sesión</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero page-hero--home">
+            <div class="page-hero__inner">
+                <h1 class="page-hero__title" data-i18n="hero.title">Encuentra los mejores precios</h1>
+                <p class="page-hero__subtitle" data-i18n="hero.subtitle">Compara precios de productos en diferentes supermercados en tiempo real</p>
+                <div class="search">
+                    <input 
+                        type="text" 
+                        id="search-product" 
+                        class="search__input" 
+                        data-i18n="hero.search_placeholder"
+                        placeholder="Busca un producto..." 
+                        title="Escribe el nombre del producto que deseas buscar para comparar precios en diferentes supermercados"
+                        aria-label="Campo de búsqueda de productos"
+                    >
+                    <button
+                        type="button"
+                        class="search__button"
+                        title="Pulsa para ver los precios del producto en diferentes supermercados"
+                        aria-label="Realizar búsqueda"
+                    >
+                        <i class="fas fa-search search__button-icon" aria-hidden="true"></i>
+                        <span data-i18n="hero.search_button">Buscar</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-us">
+            <h2 class="section-title" data-i18n="why_us.title">¿Por qué usar List & Save?</h2>
+            <div class="features__container">
+                <div class="features__item">
+                    <div class="features__icon" data-i18n="why_us.features.money_save.icon">💰</div>
+                    <h3 class="features__title" data-i18n="why_us.features.money_save.title">Ahorra Dinero</h3>
+                    <p class="features__text" data-i18n="why_us.features.money_save.text">Encuentra los mejores precios en diferentes supermercados</p>
+                </div>
+                <div class="features__item">
+                    <div class="features__icon" data-i18n="why_us.features.time_save.icon">⏰</div>
+                    <h3 class="features__title" data-i18n="why_us.features.time_save.title">Ahorra Tiempo</h3>
+                    <p class="features__text" data-i18n="why_us.features.time_save.text">Compara precios sin visitar múltiples tiendas</p>
+                </div>
+                <div class="features__item">
+                    <div class="features__icon" data-i18n="why_us.features.real_time.icon">📊</div>
+                    <h3 class="features__title" data-i18n="why_us.features.real_time.title">Precios Actualizados</h3>
+                    <p class="features__text" data-i18n="why_us.features.real_time.text">Información de precios en tiempo real</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stores">
+            <div class="container">
+                <h2 class="stores__title" data-i18n="stores.title">Supermercados que comparamos</h2>
+                <div class="stores__logos" id="home-stores-root"></div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta__container">
+                <h2 class="cta__title" data-i18n="cta.title">¿Listo para empezar a ahorrar?</h2>
+                <p class="cta__text" data-i18n="cta.text">Crea tu lista de compra personalizada y descubre dónde conseguir los mejores precios</p>
+                <a href="./mi-lista.html" class="button button--large button--primary" data-i18n="cta.button">Crear mi lista ahora</a>
+            </div>
+        </section>
+
+        <section class="sponsors">
+            <h2 class="section-title" data-i18n="sponsors.title">Nuestros Sponsors</h2>
+            <div class="sponsors__slider">
+                <div class="sponsors__track">
+                    <div class="sponsors__group">
+                        <div class="sponsor-logo__wrapper">
+                            <span class="sponsor-chip" data-i18n="sponsors.alt.redbull">Red Bull</span>
+                        </div>
+                        <div class="sponsor-logo__wrapper">
+                            <span class="sponsor-chip" data-i18n="sponsors.alt.adidas">Adidas</span>
+                        </div>
+                        <div class="sponsor-logo__wrapper">
+                            <span class="sponsor-chip" data-i18n="sponsors.alt.santander">Santander</span>
+                        </div>
+                        <div class="sponsor-logo__wrapper">
+                            <span class="sponsor-chip" data-i18n="sponsors.alt.bizum">Bizum</span>
+                        </div>
+                        <div class="sponsor-logo__wrapper">
+                            <span class="sponsor-chip" data-i18n="sponsors.alt.gobierno">Gobierno de España</span>
+                        </div>
+                        <div class="sponsor-logo__wrapper">
+                            <span class="sponsor-chip" data-i18n="sponsors.alt.burgerking">Burger King</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__column">
+                <h3 class="footer__title">List & Save</h3>
+                <div class="footer__logo">
+                    <img src="assets/images/logo.svg" alt="List & Save Logo">
+                </div>
+                <p class="footer__description" data-i18n="footer.description">
+                    La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.
+                </p>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rápidos</h3>
+                <ul class="footer__list">
+                    <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
+                    <li><a href="./blog.html" data-i18n="footer.quick_links.blog">Blog</a></li>
+                    <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
+                <ul class="footer__list">
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Términos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.social.title">Síguenos</h3>
+                <div class="footer__social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook" data-i18n-title="footer.social.icons.facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter" data-i18n-title="footer.social.icons.twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram" data-i18n-title="footer.social.icons.instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin" data-i18n-title="footer.social.icons.linkedin"></i></a>
+
+                </div>
+                <p class="footer__contact">
+                    <span data-i18n="footer.social.contact_info.email">Email: info@listandsave.com</span><br>
+                    <span data-i18n="footer.social.contact_info.phone">Tel: +34 900 123 456</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p data-i18n="footer.copyright">&copy; List & Save. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/home-stores.js"></script>
+    <script src="js/home-search.js"></script>
+    <script src="js/fab-global.js"></script>
+</body>
+</html>

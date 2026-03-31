@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="register.title">Crear una cuenta - List & Save</title>
+    <link rel="stylesheet" href="scss/main.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <div class="language-selector">
+                <select id="language" class="form__input form__input--small" aria-label="Seleccionar idioma">
+                    <option value="es" data-i18n="settings.language.options.es">Español (Castellano)</option>
+                    <option value="ca" data-i18n="settings.language.options.ca">Català</option>
+                    <option value="en" data-i18n="settings.language.options.en">English</option>
+                </select>
+            </div>
+            <a href="/" class="button button--primary" data-i18n="menu.home">Volver al inicio</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="form-wrapper">
+            <div class="form-container">
+                <h1 class="form__title" data-i18n="register.title">Crear una cuenta</h1>
+                
+                <div class="form__progress">
+                    <div class="progress__step progress__step--active" data-step="1">
+                        <div class="progress__indicator">
+                            <div class="progress__circle"></div>
+                            <div class="progress__line">
+                                <div class="progress__line-fill"></div>
+                            </div>
+                        </div>
+                        <span class="progress__label" data-i18n="register.steps.basic">Datos básicos</span>
+                    </div>
+                    <div class="progress__step" data-step="2">
+                        <div class="progress__indicator">
+                            <div class="progress__circle"></div>
+                            <div class="progress__line">
+                                <div class="progress__line-fill"></div>
+                            </div>
+                        </div>
+                        <span class="progress__label" data-i18n="register.steps.personal">Datos personales</span>
+                    </div>
+                    <div class="progress__step" data-step="3">
+                        <div class="progress__indicator">
+                            <div class="progress__circle"></div>
+                        </div>
+                        <span class="progress__label" data-i18n="register.steps.preferences">Preferencias</span>
+                    </div>
+                </div>
+
+                <form class="form">
+                    <div class="form__step form__step--active" data-step="1">
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.username.label">Nombre de usuario</label>
+                            <input 
+                                type="text" 
+                                name="username" 
+                                class="form__input" 
+                                data-i18n-placeholder="register.form.username.placeholder"
+                                placeholder="Mihai Gabriel"
+                            >
+                            <span class="form__hint" data-i18n="register.form.username.hint">Entre 4 y 16 caracteres, solo letras, números y guiones bajos</span>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.email.label">Correo electrónico</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                class="form__input" 
+                                data-i18n-placeholder="register.form.email.placeholder"
+                                placeholder="ejemplo@correo.com"
+                            >
+                            <span class="form__hint" data-i18n="register.form.email.hint">Introduce un correo electrónico válido</span>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.password.label">Contraseña</label>
+                            <input type="password" name="password" class="form__input">
+                            <span class="form__hint" data-i18n="register.form.password.hint">Mínimo 8 caracteres, al menos una letra y un número</span>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.confirm_password.label">Confirmar contraseña</label>
+                            <input type="password" name="confirmPassword" class="form__input">
+                            <span class="form__hint" data-i18n="register.form.confirm_password.hint">Repite la contraseña</span>
+                        </div>
+                    </div>
+
+                    <div class="form__step" data-step="2">
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.fullname.label">Nombre completo</label>
+                            <input type="text" name="fullname" class="form__input">
+                            <span class="form__hint" data-i18n="register.form.fullname.hint">Tu nombre y apellidos</span>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.age.label">Edad</label>
+                            <input type="number" name="age" class="form__input" min="18" max="120">
+                            <span class="form__hint" data-i18n="register.form.age.hint">Debes ser mayor de edad</span>
+                        </div>
+                    </div>
+
+                    <div class="form__step" data-step="3">
+                        <div class="form__group">
+                            <label class="form__label" data-i18n="register.form.categories.label">Categorías de interés</label>
+                            <div class="form__checkbox-group">
+                                <label class="form__checkbox-label">
+                                    <input type="checkbox" name="categories" value="alimentacion">
+                                    <span data-i18n="register.form.categories.options.food">Alimentación</span>
+                                </label>
+                                <label class="form__checkbox-label">
+                                    <input type="checkbox" name="categories" value="limpieza">
+                                    <span data-i18n="register.form.categories.options.cleaning">Limpieza</span>
+                                </label>
+                                <label class="form__checkbox-label">
+                                    <input type="checkbox" name="categories" value="hogar">
+                                    <span data-i18n="register.form.categories.options.home">Hogar</span>
+                                </label>
+                            </div>
+                            <span class="form__hint" data-i18n="register.form.categories.hint">Selecciona al menos una</span>
+                        </div>
+                    </div>
+
+                    <div class="form__actions">
+                        <button type="button" class="form__button form__button--secondary" id="prevBtn" data-i18n="register.buttons.previous">Anterior</button>
+                        <button type="button" class="form__button form__button--primary" id="nextBtn" data-i18n="register.buttons.next">Siguiente</button>
+                        <button type="submit" class="form__button form__button--primary" id="submitBtn" hidden data-i18n="register.buttons.submit">Registrarse</button>
+                    </div>
+
+                    <div class="form__footer">
+                        <p><span data-i18n="register.login_prompt">¿Ya tienes cuenta?</span> <a href="login.html" class="form__link" data-i18n="auth.login">Inicia sesión</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de confirmación -->
+    <div class="modal-overlay">
+        <div class="modal-container">
+            <h2 class="modal-title" data-i18n="register.confirm_modal.title">¿Estás seguro de que quieres registrarte?</h2>
+            <p data-i18n="register.confirm_modal.text">Una vez registrado, podrás acceder a todas las funcionalidades de la aplicación.</p>
+            <div class="modal-buttons">
+                <button class="button button--secondary" id="cancelRegisterConfirm" data-i18n="register.buttons.cancel">Cancelar</button>
+                <button class="button button--primary" id="confirmRegisterBtn" data-i18n="register.confirm_modal.confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/fab-global.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
