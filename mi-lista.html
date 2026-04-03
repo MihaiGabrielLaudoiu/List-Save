@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="menu.my_list">Mi Lista de la Compra - L&S</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="scss/main.css">
+    <!-- Hotjar Tracking Code for https://listandsave.laudoiu.com/ -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:5301097,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+                <li><a href="/" data-i18n="menu.home">Inicio</a></li>
+                <li><a href="./mi-lista.html" data-i18n="menu.my_list">Mi lista</a></li>
+                <li><a href="./comparador.html" data-i18n="menu.comparator">Comparador</a></li>
+                <li><a href="./productos.html" data-i18n="menu.products">Productos</a></li>
+                <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
+                <li><a href="./nosotros.html" data-i18n="menu.about_us">Nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link nav__link--active" data-i18n="menu.my_list">Mi lista</a></li>
+                    <li class="nav__item"><a href="./comparador.html" class="nav__link" data-i18n="menu.comparator">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link" data-i18n="menu.about_us">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <div id="auth-buttons" class="auth-buttons">
+                    <a href="login.html" class="button button--secondary" data-i18n="auth.login">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary" data-i18n="auth.register">Registrarse</a>
+                </div>
+                <div class="header__user">
+                    <img src="assets/images/user.svg" alt="Icono de usuario" class="header__user-img">
+                </div>
+                <div id="user-menu" style="display: none;" class="header__user-menu">
+                    <div class="header__user-menu-content">
+                        <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
+                        <div class="header__user-menu-buttons">
+                            <button class="header__user-button" onclick="window.location.href='ajustes.html'">
+                                <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
+                            </button>
+                            <button class="header__user-button" onclick="cerrarSesion()">
+                                <i class="fas fa-sign-out-alt"></i> <span data-i18n="auth.logout">Cerrar sesión</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+
+    <main id="main-content" class="list-page-main">
+        <section class="page-hero">
+            <div class="page-hero__inner">
+                <h1 class="page-hero__title" data-i18n="my_list_page.hero_title">Mis listas de la compra</h1>
+                <p class="page-hero__subtitle" data-i18n="my_list_page.hero_subtitle">Varias listas con nombre y la tienda donde sale más barato</p>
+            </div>
+        </section>
+
+        <div class="shopping-list shopping-list--notepad">
+            <div class="list-tabs" id="list-tabs" role="tablist" aria-label="Listas"></div>
+
+            <div class="list-controls">
+                <h2 class="list-title" id="list-title">Mi lista</h2>
+                <div class="list-controls__actions">
+                    <button type="button" class="button button--secondary" id="btn-rename-list" data-i18n="my_list_page.rename_list">Renombrar</button>
+                    <button type="button" class="button button--primary" id="btn-new-list" data-i18n="my_list_page.new_list">Nueva lista</button>
+                    <button type="button" class="button button--secondary" id="btn-delete-list" data-i18n="my_list_page.delete_list">Eliminar lista</button>
+                </div>
+            </div>
+
+            <div class="list-add-wizard" id="list-add-wizard">
+                <p class="list-add-wizard__title" data-i18n="my_list_page.wizard_title">Añadir por categoría (mejor precio)</p>
+                <div id="list-wizard-step-label" class="list-add-wizard__title" style="font-weight:600;font-size:0.85rem;"></div>
+                <div class="list-add-wizard__tiles" id="list-wizard-tiles" aria-live="polite"></div>
+                <button type="button" class="button button--secondary" id="list-wizard-reset" data-i18n="my_list_page.wizard_reset">Empezar de nuevo</button>
+            </div>
+
+            <table class="shopping-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="my_list_page.col_product">Producto</th>
+                        <th data-i18n="my_list_page.col_qty">Cantidad</th>
+                        <th data-i18n="my_list_page.col_brand">Marca</th>
+                        <th data-i18n="my_list_page.col_unit_price">Precio unit.</th>
+                        <th data-i18n="my_list_page.col_line_total">Total</th>
+                        <th data-i18n="my_list_page.col_best_store">Comprar en</th>
+                        <th data-i18n="my_list_page.col_actions">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="list-tbody">
+                    <tr><td colspan="7" class="shopping-table__empty">…</td></tr>
+                </tbody>
+                <tfoot id="list-tfoot" class="shopping-table__tfoot" hidden>
+                    <tr class="shopping-table__total-row">
+                        <td colspan="4" data-i18n="my_list_page.total_label">Total lista</td>
+                        <td id="list-total-amount" colspan="1">—</td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="list-cats" id="list-cats">
+                <span class="cat-chip active" data-cat="">🔍 Todo</span>
+                <span class="cat-chip" data-cat="lacteos">🥛 Lácteos</span>
+                <span class="cat-chip" data-cat="carnes">🥩 Carnes</span>
+                <span class="cat-chip" data-cat="frutas">🍎 Frutas</span>
+                <span class="cat-chip" data-cat="verduras">🥦 Verduras</span>
+                <span class="cat-chip" data-cat="panaderia">🍞 Panadería</span>
+                <span class="cat-chip" data-cat="bebidas">🧃 Bebidas</span>
+                <span class="cat-chip" data-cat="higiene">🧴 Higiene</span>
+                <span class="cat-chip" data-cat="limpieza">🧹 Limpieza</span>
+            </div>
+
+            <div class="add-item">
+                <div class="add-item__search">
+                    <input type="text" id="add-item-input" data-i18n="my_list_page.add_placeholder" placeholder="Busca un producto para añadir..." autocomplete="off">
+                    <div class="add-item__suggestions" id="add-item-suggestions" hidden></div>
+                </div>
+                <button type="button" class="button button--primary" id="add-item-btn" data-i18n="my_list_page.add_btn">Incluir</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__column">
+                <h3 class="footer__title">List & Save</h3>
+                <div class="footer__logo">
+                    <img src="assets/images/logo.svg" alt="List & Save Logo">
+                </div>
+                <p class="footer__description" data-i18n="footer.description">
+                    La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.
+                </p>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rápidos</h3>
+                <ul class="footer__list">
+                    <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
+                    <li><a href="./blog.html" data-i18n="footer.quick_links.blog">Blog</a></li>
+                    <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
+                <ul class="footer__list">
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Términos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.social.title">Síguenos</h3>
+                <div class="footer__social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook" data-i18n-title="footer.social.icons.facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter" data-i18n-title="footer.social.icons.twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram" data-i18n-title="footer.social.icons.instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin" data-i18n-title="footer.social.icons.linkedin"></i></a>
+
+                </div>
+                <p class="footer__contact">
+                    <span data-i18n="footer.social.contact_info.email">Email: info@listandsave.com</span><br>
+                    <span data-i18n="footer.social.contact_info.phone">Tel: +34 900 123 456</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p data-i18n="footer.copyright">&copy; List & Save. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="js/api.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/fab-global.js"></script>
+    <script src="js/list-context.js"></script>
+    <script src="js/mi-lista.js"></script>
+</body>
+</html> 
