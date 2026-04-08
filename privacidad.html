@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - List & Save</title>
+    <link rel="stylesheet" href="scss/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+.page-content { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem; }
+.legal-section { margin-bottom: 2rem; }
+.legal-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.6rem;
+}
+.legal-section p {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.75;
+    margin: 0;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="./mi-lista.html">Mi lista</a></li>
+                <li><a href="./comparador.html">Comparador</a></li>
+                <li><a href="./productos.html">Productos</a></li>
+                <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
+                <li><a href="./nosotros.html">Nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link">Mi lista</a></li>
+                    <li class="nav__item"><a href="./comparador.html" class="nav__link">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <div id="auth-buttons">
+                    <a href="login.html" class="button button--secondary">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary">Registrarse</a>
+                </div>
+                <div class="header__user">
+                    <img src="assets/images/user.svg" alt="Icono de usuario" class="header__user-img">
+                </div>
+                <div id="user-menu" style="display: none;" class="header__user-menu">
+                    <div class="header__user-menu-content">
+                        <span class="header__user-name">Mi cuenta</span>
+                        <div class="header__user-menu-buttons">
+                            <button class="header__user-button" onclick="window.location.href='ajustes.html'">
+                                <i class="fas fa-cog"></i> Ajustes
+                            </button>
+                            <button class="header__user-button" onclick="cerrarSesion()">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero__inner">
+                <h1 class="page-hero__title">Política de Privacidad</h1>
+                <p class="page-hero__subtitle">Última actualización: mayo 2026</p>
+            </div>
+        </section>
+
+        <div class="page-content">
+            <div class="legal-section">
+                <h2>1. Datos que recogemos</h2>
+                <p>Cuando te registras en List & Save recogemos tu nombre de usuario, dirección de correo electrónico y una contraseña cifrada. Durante el uso del servicio podemos guardar las listas de la compra que crees y tus preferencias de configuración (como el tema visual). No recogemos datos de pago ni información sensible de ningún tipo.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2>2. Uso de cookies</h2>
+                <p>Utilizamos cookies técnicas imprescindibles para mantener tu sesión activa y recordar tus preferencias. También podemos usar cookies de analítica anónima para entender cómo se usa la aplicación y mejorarla. Puedes consultar los detalles en nuestra <a href="./cookies.html">Política de Cookies</a>. Puedes desactivar las cookies no esenciales desde los ajustes de tu navegador.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2>3. Tus derechos (RGPD)</h2>
+                <p>Conforme al Reglamento General de Protección de Datos (RGPD) tienes derecho a acceder a tus datos, rectificarlos, solicitar su eliminación, oponerte a su tratamiento y solicitar la portabilidad. Para ejercer cualquiera de estos derechos escríbenos a <strong>info@listandsave.com</strong> indicando tu solicitud. Responderemos en un plazo máximo de 30 días.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2>4. Contacto del responsable</h2>
+                <p>El responsable del tratamiento es List & Save (Mihai Gabriel Laudoiu). Puedes contactarnos en <strong>info@listandsave.com</strong> o en la dirección Calle Principal 123, 28001 Madrid, España. Si consideras que el tratamiento de tus datos no es conforme a la normativa, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" itemscope itemtype="https://schema.org/Organization">
+        <div class="footer__container">
+            <div class="footer__column">
+                <h3 class="footer__title" itemprop="name">List & Save</h3>
+                <div class="footer__logo">
+                    <img itemprop="logo" src="assets/images/logo.svg" alt="List & Save Logo">
+                </div>
+                <p class="footer__description" itemprop="description">
+                    Te ayudamos a ahorrar en tus compras. Así de fácil.
+                </p>
+            </div>
+
+            <div class="footer__column">
+                <div itemscope itemtype="https://schema.org/ContactPoint">
+                    <h3 class="footer__title">Contacto</h3>
+                    <p class="footer__contact">
+                        Email: <span itemprop="email">info@listandsave.com</span><br>
+                        Tel: <span itemprop="telephone">+34 900 123 456</span><br>
+                        <span itemprop="contactType">Atención al cliente</span>
+                    </p>
+                    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">Calle Principal 123</span><br>
+                        <span itemprop="postalCode">28001</span>
+                        <span itemprop="addressLocality">Madrid</span>,
+                        <span itemprop="addressCountry">España</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__column">
+                <h3 class="footer__title">Enlaces rápidos</h3>
+                <ul class="footer__list">
+                    <li><a href="./nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html">Contacto</a></li>
+                    <li><a href="./blog.html">Blog</a></li>
+                    <li><a href="./faq.html">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__column">
+                <h3 class="footer__title">Legal</h3>
+                <ul class="footer__list">
+                    <li><a href="./privacidad.html">Política de privacidad</a></li>
+                    <li><a href="./terminos.html">Términos y condiciones</a></li>
+                    <li><a href="./cookies.html">Política de cookies</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__column">
+                <h3 class="footer__title">Síguenos</h3>
+                <div class="footer__social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook" title="Facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter" title="Twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram" title="Instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin" title="LinkedIn"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> List & Save. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/fab-global.js"></script>
+</body>
+</html>

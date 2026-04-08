@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - List & Save</title>
+    <link rel="stylesheet" href="scss/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+.page-content { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem; }
+.blog-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+@media (max-width: 600px) {
+    .blog-grid { grid-template-columns: 1fr; }
+}
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.blog-card:first-child {
+    grid-column: 1 / -1;
+}
+.blog-card__date { font-size: 0.8rem; color: #6b7280; }
+.blog-card__title { font-size: 1.1rem; font-weight: 700; color: #111827; margin: 0; }
+.blog-card__desc { font-size: 0.9rem; color: #374151; line-height: 1.6; margin: 0; }
+.blog-card__tag {
+    display: inline-block;
+    background: #eff6ff; color: #2563eb;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.2rem 0.6rem; border-radius: 20px;
+    width: fit-content;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="./mi-lista.html">Mi lista</a></li>
+                <li><a href="./comparador.html">Comparador</a></li>
+                <li><a href="./productos.html">Productos</a></li>
+                <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
+                <li><a href="./nosotros.html">Nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link">Mi lista</a></li>
+                    <li class="nav__item"><a href="./comparador.html" class="nav__link">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <div id="auth-buttons">
+                    <a href="login.html" class="button button--secondary">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary">Registrarse</a>
+                </div>
+                <div class="header__user">
+                    <img src="assets/images/user.svg" alt="Icono de usuario" class="header__user-img">
+                </div>
+                <div id="user-menu" style="display: none;" class="header__user-menu">
+                    <div class="header__user-menu-content">
+                        <span class="header__user-name">Mi cuenta</span>
+                        <div class="header__user-menu-buttons">
+                            <button class="header__user-button" onclick="window.location.href='ajustes.html'">
+                                <i class="fas fa-cog"></i> Ajustes
+                            </button>
+                            <button class="header__user-button" onclick="cerrarSesion()">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero__inner">
+                <h1 class="page-hero__title">Blog</h1>
+                <p class="page-hero__subtitle">Noticias y consejos para ahorrar</p>
+            </div>
+        </section>
+
+        <div class="page-content">
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <span class="blog-card__tag">Ahorro</span>
+                    <p class="blog-card__date">12 mayo 2026</p>
+                    <h2 class="blog-card__title">5 trucos para reducir tu factura del supermercado</h2>
+                    <p class="blog-card__desc">Comparar precios antes de salir de casa puede ahorrarte entre un 15% y un 25% en la compra mensual. Te contamos cómo aprovechar al máximo el comparador de List & Save para planificar tu lista antes de ir al súper.</p>
+                </div>
+                <div class="blog-card">
+                    <span class="blog-card__tag">Novedades</span>
+                    <p class="blog-card__date">5 mayo 2026</p>
+                    <h2 class="blog-card__title">Ahora comparamos precios en Mercadona, Carrefour y Eroski</h2>
+                    <p class="blog-card__desc">Hemos ampliado nuestra cobertura a más de 1.000 productos en tres de los principales supermercados de España. Encuentra siempre el precio más bajo sin moverte de casa.</p>
+                </div>
+                <div class="blog-card">
+                    <span class="blog-card__tag">Consejos</span>
+                    <p class="blog-card__date">28 abril 2026</p>
+                    <h2 class="blog-card__title">La lista de la compra inteligente: organízate por categorías</h2>
+                    <p class="blog-card__desc">Hacer la compra sin una lista organizada puede costarte hasta un 30% más. Aprende a usar Mi Lista en List & Save para agrupar productos por categoría y no olvidar nada.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" itemscope itemtype="https://schema.org/Organization">
+        <div class="footer__container">
+            <div class="footer__column">
+                <h3 class="footer__title" itemprop="name">List & Save</h3>
+                <div class="footer__logo">
+                    <img itemprop="logo" src="assets/images/logo.svg" alt="List & Save Logo">
+                </div>
+                <p class="footer__description" itemprop="description">
+                    Te ayudamos a ahorrar en tus compras. Así de fácil.
+                </p>
+            </div>
+
+            <div class="footer__column">
+                <div itemscope itemtype="https://schema.org/ContactPoint">
+                    <h3 class="footer__title">Contacto</h3>
+                    <p class="footer__contact">
+                        Email: <span itemprop="email">info@listandsave.com</span><br>
+                        Tel: <span itemprop="telephone">+34 900 123 456</span><br>
+                        <span itemprop="contactType">Atención al cliente</span>
+                    </p>
+                    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">Calle Principal 123</span><br>
+                        <span itemprop="postalCode">28001</span>
+                        <span itemprop="addressLocality">Madrid</span>,
+                        <span itemprop="addressCountry">España</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__column">
+                <h3 class="footer__title">Enlaces rápidos</h3>
+                <ul class="footer__list">
+                    <li><a href="./nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html">Contacto</a></li>
+                    <li><a href="./blog.html">Blog</a></li>
+                    <li><a href="./faq.html">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__column">
+                <h3 class="footer__title">Legal</h3>
+                <ul class="footer__list">
+                    <li><a href="./privacidad.html">Política de privacidad</a></li>
+                    <li><a href="./terminos.html">Términos y condiciones</a></li>
+                    <li><a href="./cookies.html">Política de cookies</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__column">
+                <h3 class="footer__title">Síguenos</h3>
+                <div class="footer__social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook" title="Facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter" title="Twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram" title="Instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin" title="LinkedIn"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> List & Save. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/fab-global.js"></script>
+</body>
+</html>

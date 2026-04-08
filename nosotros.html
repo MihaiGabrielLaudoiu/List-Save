@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags Básicos -->
+    <meta name="description" content="Te contamos quiénes somos y por qué hacemos lo que hacemos. Descubre la historia detrás de List & Save.">
+    <meta name="keywords" content="List & Save, precios, supermercados, equipo, historia">
+    <meta name="author" content="List & Save">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://listandsave.com/nosotros.html">
+    <meta property="og:title" content="Sobre Nosotros - List & Save">
+    <meta property="og:description" content="Te contamos quiénes somos y por qué hacemos lo que hacemos.">
+    <meta property="og:image" content="https://listandsave.com/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://listandsave.com/nosotros.html">
+    <meta property="twitter:title" content="Sobre Nosotros - List & Save">
+    <meta property="twitter:description" content="Te contamos quiénes somos y por qué hacemos lo que hacemos.">
+    <meta property="twitter:image" content="https://listandsave.com/assets/images/twitter-image.jpg">
+
+    <title>Sobre Nosotros - List & Save</title>
+    
+    <!-- Schema.org markup para Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "List & Save",
+      "url": "https://listandsave.com",
+      "logo": "https://listandsave.com/assets/images/logo.svg",
+      "description": "Plataforma de comparación de precios de supermercados",
+      "foundingDate": "2020",
+      "founder": {
+        "@type": "Person",
+        "name": "Mihai Gabriel Laudoiu",
+        "jobTitle": "CEO & Fundador"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ES"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+34-900-123-456",
+        "contactType": "customer service",
+        "email": "info@listandsave.com"
+      },
+      "sameAs": [
+        "https://facebook.com/listandsave",
+        "https://twitter.com/listandsave",
+        "https://instagram.com/listandsave",
+        "https://linkedin.com/company/listandsave"
+      ]
+    }
+    </script>
+
+    <!-- Schema.org markup para la página About -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "List & Save",
+        "member": [
+          {
+            "@type": "Person",
+            "name": "Mihai Gabriel Laudoiu",
+            "jobTitle": "CEO & Fundador",
+            "image": "https://listandsave.com/assets/images/ceo.png"
+          }
+        ],
+        "description": "List & Save es una plataforma de comparación de precios fundada en 2020 durante la pandemia."
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="scss/main.css">
+</head>
+<body class="page-nosotros">
+    <header class="header">
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+                <li><a href="/" data-i18n="menu.home">Inicio</a></li>
+                <li><a href="./mi-lista.html" data-i18n="menu.my_list">Mi lista</a></li>
+                <li><a href="./comparador.html" data-i18n="menu.comparator">Comparador</a></li>
+                <li><a href="./productos.html" data-i18n="menu.products">Productos</a></li>
+                <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
+                <li><a href="./nosotros.html" data-i18n="menu.about_us">Nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link" data-i18n="menu.my_list">Mi lista</a></li>
+                    <li class="nav__item"><a href="./comparador.html" class="nav__link" data-i18n="menu.comparator">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link nav__link--active" data-i18n="menu.about_us">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <div id="auth-buttons">
+                    <a href="login.html" class="button button--secondary" data-i18n="auth.login">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary" data-i18n="auth.register">Registrarse</a>
+                </div>
+                <div class="header__user">
+                    <img src="assets/images/user.svg" alt="Icono de usuario" class="header__user-img">
+                </div>
+                <div id="user-menu" style="display: none;" class="header__user-menu">
+                    <div class="header__user-menu-content">
+                        <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
+                        <div class="header__user-menu-buttons">
+                            <button class="header__user-button" onclick="window.location.href='ajustes.html'">
+                                <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
+                            </button>
+                            <button class="header__user-button" onclick="cerrarSesion()">
+                                <i class="fas fa-sign-out-alt"></i> <span data-i18n="auth.logout">Cerrar sesión</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main itemscope itemtype="https://schema.org/AboutPage">
+        <section class="page-hero">
+            <div class="page-hero__inner">
+                <h1 class="page-hero__title" itemprop="name" data-i18n="about_page.hero_title">¿Quiénes Somos?</h1>
+                <p class="page-hero__subtitle" itemprop="description" data-i18n="about_page.hero_subtitle">Una historia que comenzó en 2020</p>
+                <a href="./comparador.html" class="button button--secondary page-hero__cta" data-i18n="about_page.hero_cta">Comparar precios</a>
+            </div>
+        </section>
+
+        <section class="mission-vision" itemscope itemtype="https://schema.org/Organization">
+            <div class="container">
+                <div class="mission-vision__grid">
+                    <div class="mission-vision__item fade-in">
+                        <h2 class="section-title" data-i18n="about_page.mission_title">Misión</h2>
+                        <p itemprop="description" data-i18n="about_page.mission_text">Queremos que ahorres en tus compras diarias. Así de simple. Te mostramos los precios reales de los supermercados para que decidas dónde comprar.</p>
+                    </div>
+                    <div class="mission-vision__item fade-in">
+                        <h2 class="section-title" data-i18n="about_page.vision_title">Visión</h2>
+                        <p data-i18n="about_page.vision_text">Queremos ser tu aliado de confianza cuando vas a hacer la compra. Nada más, nada menos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="timeline">
+            <div class="container">
+                <h2 class="section-title text-center">Nuestra Evolución</h2>
+                <div class="timeline__container">
+                    <div itemscope itemtype="https://schema.org/Article" class="timeline__item timeline__item--left">
+                        <div class="timeline__content">
+                            <h3 itemprop="headline">El comienzo</h3>
+                            <p itemprop="description">Todo empezó en casa, durante el confinamiento. Una idea sencilla: ayudar a las personas a comparar precios de supermercados sin tener que salir, evitando así gastos innecesarios.</p>
+                            <time itemprop="datePublished" datetime="2020">2020</time>
+                        </div>
+                    </div>
+                    <div class="timeline__item timeline__item--right">
+                        <div class="timeline__content">
+                            <h3>Creciendo juntos</h3>
+                            <p>Ya somos más de 100.000 usuarios ahorrando. Integramos nuevas cadenas de supermercados, mejoramos nuestra tecnología de scraping y añadimos la función de listas de la compra.</p>
+                            <time datetime="2021">2021</time>
+                        </div>
+                    </div>
+                    <div class="timeline__item timeline__item--left">
+                        <div class="timeline__content">
+                            <h3>Siempre en tu bolsillo</h3>
+                            <p>Llegamos a tu móvil. Adaptamos toda nuestra interfaz para dispositivos móviles, permitiéndote consultar los precios en tiempo real mientras recorres los pasillos del súper.</p>
+                            <time datetime="2022">2022</time>
+                        </div>
+                    </div>
+                    <div class="timeline__item timeline__item--right">
+                        <div class="timeline__content">
+                            <h3>Por toda España</h3>
+                            <p>Nos expandimos a nivel nacional. Rediseñamos completamente el comparador (V2.4) para ofrecer una experiencia ultrarrápida donde en una sola búsqueda encuentras el mejor precio del país.</p>
+                            <time datetime="2024">2024</time>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team">
+            <div class="container">
+                <h2 class="section-title text-center">Nuestro Equipo</h2>
+                <div class="team__grid">
+                    <div itemscope itemtype="https://schema.org/Person" class="team__member fade-in">
+                        <div class="team__image--initials">MGL</div>
+                        <h3 itemprop="name">Mihai Gabriel Laudoiu</h3>
+                        <p itemprop="jobTitle">CEO &amp; Fundador</p>
+                        <p>Contacto: <a itemprop="email" href="mailto:mihai@listandsave.com">mihai@listandsave.com</a></p>
+                        <time itemprop="foundingDate" datetime="2020">Desde 2020</time>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values">
+            <div class="container">
+                <h2 class="section-title text-center">Nuestros Valores</h2>
+                <div class="values__grid">
+                    <div class="values__item scale-in">
+                        <div class="values__icon"><i class="fas fa-bullseye"></i></div>
+                        <h3>Sin rodeos</h3>
+                        <p>Las cosas como son</p>
+                    </div>
+                    <div class="values__item scale-in">
+                        <div class="values__icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Siempre adelante</h3>
+                        <p>Cada día mejor</p>
+                    </div>
+                    <div class="values__item scale-in">
+                        <div class="values__icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Contigo</h3>
+                        <p>Tú eres lo primero</p>
+                    </div>
+                    <div class="values__item scale-in">
+                        <div class="values__icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Al grano</h3>
+                        <p>Sin perder tiempo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" itemscope itemtype="https://schema.org/Organization">
+        <div class="footer__container">
+            <div class="footer__column">
+                <h3 class="footer__title" itemprop="name">List & Save</h3>
+                <div class="footer__logo">
+                    <img itemprop="logo" src="assets/images/logo.svg" alt="List & Save Logo">
+                </div>
+                <p class="footer__description" itemprop="description" data-i18n="footer.description">
+                    Te ayudamos a ahorrar en tus compras. Así de fácil.
+                </p>
+            </div>
+            
+            <div class="footer__column">
+                <div itemscope itemtype="https://schema.org/ContactPoint">
+                    <h3 class="footer__title">Contacto</h3>
+                    <p class="footer__contact">
+                        Email: <span itemprop="email">info@listandsave.com</span><br>
+                        Tel: <span itemprop="telephone">+34 900 123 456</span><br>
+                        <span itemprop="contactType">Atención al cliente</span>
+                    </p>
+                    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">Calle Principal 123</span><br>
+                        <span itemprop="postalCode">28001</span>
+                        <span itemprop="addressLocality">Madrid</span>,
+                        <span itemprop="addressCountry">España</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rápidos</h3>
+                <ul class="footer__list">
+                    <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
+                    <li><a href="./blog.html" data-i18n="footer.quick_links.blog">Blog</a></li>
+                    <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
+                <ul class="footer__list">
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Términos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.social.title">Síguenos</h3>
+                <div class="footer__social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook" data-i18n-title="footer.social.icons.facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter" data-i18n-title="footer.social.icons.twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram" data-i18n-title="footer.social.icons.instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin" data-i18n-title="footer.social.icons.linkedin"></i></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p data-i18n="footer.copyright">&copy; List & Save. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/fab-global.js"></script>
+</body>
+</html> 
