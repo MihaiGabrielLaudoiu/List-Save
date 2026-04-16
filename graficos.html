@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas - List & Save</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="scss/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-main" title="Saltar al contenido principal"></a>
+
+    <header class="header">
+        <div class="hamburger">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="menuppal">
+            <ul>
+                <li><a href="/" data-i18n="menu.home">Inicio</a></li>
+                <li><a href="./mi-lista.html" data-i18n="menu.my_list">Mi lista</a></li>
+                <li><a href="./comparador.html" data-i18n="menu.comparator">Comparador</a></li>
+                <li><a href="./productos.html" data-i18n="menu.products">Productos</a></li>
+                <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
+                <li><a href="./nosotros.html" data-i18n="menu.about_us">Nosotros</a></li>
+            </ul>
+        </nav>
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/images/logo.svg" alt="List & Save Logo" class="header__logo-img">
+            </a>
+            <nav class="header__nav nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link" data-i18n="menu.my_list">Mi lista</a></li>
+                    <li class="nav__item"><a href="./comparador.html" class="nav__link" data-i18n="menu.comparator">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link nav__link--active" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link" data-i18n="menu.about_us">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <div class="header__user">
+                    <img src="assets/images/user.png" alt="Icono de usuario" class="header__user-img">
+                </div>
+                <div id="auth-buttons" class="auth-buttons">
+                    <a href="login.html" class="button button--secondary" data-i18n="auth.login">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary" data-i18n="auth.register">Registrarse</a>
+                </div>
+                <div id="user-menu" style="display: none;" class="header__user-menu">
+                    <div class="header__user-menu-content">
+                        <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
+                        <div class="header__user-menu-buttons">
+                            <button class="header__user-button" onclick="window.location.href='ajustes.html'">
+                                <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
+                            </button>
+                            <button class="header__user-button" onclick="cerrarSesion()">
+                                <i class="fas fa-sign-out-alt"></i> <span data-i18n="auth.logout">Cerrar sesión</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero__inner">
+            <h1 class="page-hero__title">📊 Estadísticas del catálogo</h1>
+            <p class="page-hero__subtitle">Datos reales de precios, supermercados y categorías</p>
+        </div>
+    </section>
+
+    <main id="main-content" class="graficos-page">
+
+        <div class="graficos-loading" id="graficos-loading">
+            <div class="spinner"></div>
+            <p>Cargando datos del catálogo…</p>
+        </div>
+
+        <div class="graficos-error" id="graficos-error" style="display:none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>No se pudieron cargar las estadísticas. Comprueba que el servidor está activo.</p>
+            <button type="button" class="button button--primary" onclick="initGraficos()">Reintentar</button>
+        </div>
+
+        <div id="graficos-content" style="display:none;">
+
+            <div class="stats-kpis">
+                <div class="stats-kpi">
+                    <div class="stats-kpi__value" id="kpi-productos">—</div>
+                    <div class="stats-kpi__label">Productos</div>
+                </div>
+                <div class="stats-kpi">
+                    <div class="stats-kpi__value" id="kpi-precios">—</div>
+                    <div class="stats-kpi__label">Precios registrados</div>
+                </div>
+                <div class="stats-kpi">
+                    <div class="stats-kpi__value" id="kpi-supers">—</div>
+                    <div class="stats-kpi__label">Supermercados</div>
+                </div>
+                <div class="stats-kpi">
+                    <div class="stats-kpi__value" id="kpi-sin-precio">—</div>
+                    <div class="stats-kpi__label">Sin precio aún</div>
+                </div>
+            </div>
+
+            <div class="graficos-grid">
+
+                <div class="chart-card">
+                    <h2 class="chart-card__title"><span>🗂️</span> Productos por categoría</h2>
+                    <p class="chart-card__subtitle">Distribución del catálogo por tipo de producto</p>
+                    <div class="chart-card__canvas-wrap" style="max-height:320px;">
+                        <canvas id="chart-categorias"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h2 class="chart-card__title"><span>🏬</span> Cobertura por supermercado</h2>
+                    <p class="chart-card__subtitle">Productos con precio disponible en cada cadena</p>
+                    <div class="chart-card__canvas-wrap" style="max-height:320px;">
+                        <canvas id="chart-supermercados"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h2 class="chart-card__title"><span>💶</span> Distribución de precios</h2>
+                    <p class="chart-card__subtitle">Cuántos productos hay en cada rango de precio (mínimo por producto)</p>
+                    <div class="chart-card__canvas-wrap" style="max-height:320px;">
+                        <canvas id="chart-rangos"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h2 class="chart-card__title"><span>📈</span> Precio medio por supermercado</h2>
+                    <p class="chart-card__subtitle">Media del precio actual de todas las referencias con precio</p>
+                    <div class="chart-card__canvas-wrap" style="max-height:320px;">
+                        <canvas id="chart-precio-medio"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card chart-card--wide">
+                    <h2 class="chart-card__title"><span>🏆</span> Top 10 productos más baratos</h2>
+                    <p class="chart-card__subtitle">Precio mínimo encontrado en el catálogo actual</p>
+                    <div class="chart-card__canvas-wrap" style="max-height:400px;">
+                        <canvas id="chart-baratos"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card chart-card--wide">
+                    <h2 class="chart-card__title"><span>🔍</span> Subcategorías más completas</h2>
+                    <p class="chart-card__subtitle">Top 10 subcategorías con más productos en el catálogo</p>
+                    <div class="chart-card__canvas-wrap" style="max-height:340px;">
+                        <canvas id="chart-subcats"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__column">
+                <h3 class="footer__title">List & Save</h3>
+                <div class="footer__logo">
+                    <img src="assets/images/logo.svg" alt="List & Save Logo">
+                </div>
+                <p class="footer__description" data-i18n="footer.description">
+                    La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.
+                </p>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rápidos</h3>
+                <ul class="footer__list">
+                    <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
+                    <li><a href="./blog.html" data-i18n="footer.quick_links.blog">Blog</a></li>
+                    <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
+                <ul class="footer__list">
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Términos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__title" data-i18n="footer.social.title">Síguenos</h3>
+                <div class="footer__social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook" data-i18n-title="footer.social.icons.facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter" data-i18n-title="footer.social.icons.twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram" data-i18n-title="footer.social.icons.instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin" data-i18n-title="footer.social.icons.linkedin"></i></a>
+                </div>
+                <p class="footer__contact">
+                    <span data-i18n="footer.social.contact_info.email">Email: info@listandsave.com</span><br>
+                    <span data-i18n="footer.social.contact_info.phone">Tel: +34 900 123 456</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p data-i18n="footer.copyright">&copy; List & Save. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/fab-global.js"></script>
+    <script src="js/graficos.js"></script>
+</body>
+</html>
