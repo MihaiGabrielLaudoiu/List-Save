@@ -3,10 +3,11 @@
 // Hero unificado (misma banda que el comparador: gradiente, tipografía, espaciado)
 .page-hero {
   @include app-hero-band-bg;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-xl);
   text-align: center;
   isolation: isolate;
   color: #fff;
+  margin-top: calc(-1 * var(--spacing-xl));
 
   // Comparador / buscador flotante: más aire inferior
   &--comparator,
