@@ -39,3 +39,4 @@ COPILOT.md
 *.prompt.md
 superpowers/
 *.map
+pnpm-lock.yaml
