@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.querySelector(".products-search__input");
     const productsGrid = document.querySelector(".all-products__grid");
     const featuredGrid = document.querySelector(".featured-products__grid");
-    const supermarketsGrid = document.querySelector(".product-categories__grid");
+    const supermarketsGrid = document.getElementById("supermarket-filter-bar");
     const filterButtons = document.querySelectorAll(".filter-button");
     const categorySelect = document.getElementById("category-filter");
     const supermarketSelect = document.getElementById("supermarket-filter");
@@ -304,24 +304,59 @@ document.addEventListener("DOMContentLoaded", function () {
             summary[supermarketName] = summary[supermarketName] + 1;
         });
 
-        const html = Object.keys(summary).map(function (supermarketName) {
+        const allBtn = document.createElement("button");
+        allBtn.type = "button";
+        allBtn.className = "supermarket-filter-chip supermarket-filter-chip--active";
+        allBtn.innerHTML = '<i class="fas fa-store"></i> ' + escapeHtml(productsPageT("all_supermarkets", "Todos")) + ' <span class="supermarket-filter-chip__count">' + items.length + '</span>';
+        allBtn.addEventListener("click", function () {
+            supermarketsGrid.querySelectorAll(".supermarket-filter-chip").forEach(function (c) { c.classList.remove("supermarket-filter-chip--active"); });
+            allBtn.classList.add("supermarket-filter-chip--active");
+            if (supermarketSelect) {
+                supermarketSelect.value = "";
+                loadProducts(1);
+            }
+        });
+        supermarketsGrid.innerHTML = "";
+        supermarketsGrid.appendChild(allBtn);
+
+        Object.keys(summary).forEach(function (supermarketName) {
             const visual = getSupermarketVisual(supermarketName);
             const safeName = escapeHtml(supermarketName);
             const totalProducts = summary[supermarketName];
-            let visualMarkup = "<span class=\"category-card__emoji\">" + visual.emoji + "</span>";
+            let visualMarkup = '<span class="supermarket-filter-chip__emoji">' + visual.emoji + '</span>';
 
             if (visual.image) {
-                visualMarkup = "<img src=\"" + visual.image + "\" alt=\"" + safeName + "\" class=\"category-card__image\">";
+                visualMarkup = '<img src="' + visual.image + '" alt="' + safeName + '" class="supermarket-filter-chip__image">';
             }
 
-            return "<article class=\"category-card\" style=\"--supermarket-accent:" + visual.accent + "\">" +
-                "<div class=\"category-card__visual\">" + visualMarkup + "</div>" +
-                "<h3 class=\"category-card__title\">" + safeName + "</h3>" +
-                "<p class=\"category-card__count\">" + totalProducts + " productos con mejor precio</p>" +
-                "</article>";
-        }).join("");
-
-        supermarketsGrid.innerHTML = html;
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "supermarket-filter-chip";
+            btn.style.setProperty("--supermarket-accent", visual.accent);
+            btn.innerHTML = visualMarkup + '<span class="supermarket-filter-chip__name">' + safeName + '</span> <span class="supermarket-filter-chip__count">' + totalProducts + '</span>';
+            btn.addEventListener("click", function () {
+                supermarketsGrid.querySelectorAll(".supermarket-filter-chip").forEach(function (c) { c.classList.remove("supermarket-filter-chip--active"); });
+                btn.classList.add("supermarket-filter-chip--active");
+                if (supermarketSelect) {
+                    var opt = supermarketSelect.querySelector('option[value="' + CSS.escape(supermarketName) + '"]');
+                    if (opt) {
+                        supermarketSelect.value = supermarketName;
+                    } else {
+                        var realSlug = "";
+                        if (catalogMeta && catalogMeta.supermarkets) {
+                            catalogMeta.supermarkets.forEach(function (s) {
+                                if (s.nombre_supermercado === supermarketName) {
+                                    realSlug = s.slug;
+                                }
+                            });
+                        }
+                        supermarketSelect.value = realSlug || supermarketName;
+                    }
+                    loadProducts(1);
+                }
+            });
+            supermarketsGrid.appendChild(btn);
+        });
     }
 
     // Muestra en el grid los productos con mejor precio (hasta 6 tarjetas)

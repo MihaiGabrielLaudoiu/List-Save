@@ -10,11 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const syncButton = document.getElementById("sync-prices");
     const syncStatus = document.getElementById("sync-status");
 
-    const comparatorWizard = document.getElementById("comparator-wizard");
-    const wizardCategoriesEl = document.getElementById("wizard-categories");
-    const wizardSubcatsEl = document.getElementById("wizard-subcategories");
-    const wizardTitle = document.getElementById("wizard-title");
-    const wizardBack = document.getElementById("wizard-back");
+    const subcatChipsRow = document.getElementById("subcat-chips-row");
 
     const subcatStoreView = document.getElementById("subcat-store-view");
     const subcatStoreGrid = document.getElementById("subcat-store-grid");
@@ -29,10 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let allOptions = [];
     let groupedProducts = {};
     let supermarketVisuals = {};
-    let wizardFlow = "cats";
-    let wizardPendingCategory = "";
-    /** Si true, las etiquetas de subcategoria vienen del front (nombre), no del campo subcategoria en BD. */
-    let wizardSubModeSynthetic = false;
+    let currentCategoryLabel = "";
+    let currentSubModeSynthetic = false;
     let activeCategory = "";
     let lastSelectedGroup = null;
 
@@ -63,18 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return (cat.includes("fruta-verdura") || cat.includes("verdura")) && VEG_RE.test(name);
         }
         return cat.includes(chipSlug);
-    }
-
-    function hideComparatorWizard() {
-        if (comparatorWizard) {
-            comparatorWizard.hidden = true;
-        }
-    }
-
-    function showComparatorWizard() {
-        if (comparatorWizard) {
-            comparatorWizard.hidden = false;
-        }
     }
 
     function collectCategoriesFromGroups() {
@@ -300,8 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function showSubcatStoreShell(titleText) {
-        hideComparatorWizard();
+    function showSubcatStoreShell(titleText, cat) {
         if (noSelectionMsg) {
             noSelectionMsg.hidden = true;
         }
@@ -314,10 +295,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (subcatViewTitle) {
             subcatViewTitle.textContent = titleText;
         }
+        if (cat) {
+            renderSubcatChips(cat);
+        } else {
+            if (subcatChipsRow) {
+                subcatChipsRow.hidden = true;
+                subcatChipsRow.innerHTML = "";
+            }
+        }
     }
 
     function getBestVariantPerSuperForSubcat(cat, subLabel, allSubsInCategory) {
-        const synthetic = wizardSubModeSynthetic;
+        const synthetic = currentSubModeSynthetic;
         const groupsInCat = filterGroupsForCategoryLabel(cat, null);
         const byStore = {};
         groupsInCat.forEach(function (g) {
@@ -357,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (subLabel) {
             subPart = " · " + subLabel;
         }
-        showSubcatStoreShell(titleBase + subPart);
+        showSubcatStoreShell(titleBase + subPart, cat);
 
         const minTicket = Math.min.apply(
             null,
@@ -564,127 +553,51 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function renderWizardSubcatTiles(cat, pack) {
-        if (!wizardSubcatsEl) {
-            wizardSubModeSynthetic = pack.synthetic;
-            showStoreComparisonView(cat, null, true);
+    function chipSlugToCategoryLabel(slug) {
+        if (!slug) return "TODAS";
+        var cats = collectCategoriesFromGroups();
+        for (var i = 0; i < cats.length; i++) {
+            if (chipMatchesGroup(slug, { categoria: cats[i], nombre: "" })) {
+                return cats[i];
+            }
+        }
+        return slug;
+    }
+
+    function renderSubcatChips(cat) {
+        if (!subcatChipsRow) return;
+        var pack = getSubcategoriesForWizard(cat === "TODAS" ? "TODAS" : cat);
+        if (!pack.labels.length) {
+            subcatChipsRow.hidden = true;
+            subcatChipsRow.innerHTML = "";
             return;
         }
-        wizardFlow = "subs";
-        wizardPendingCategory = cat;
-        wizardSubModeSynthetic = pack.synthetic;
-        wizardSubcatsEl.innerHTML = "";
-        wizardSubcatsEl.hidden = false;
-        wizardCategoriesEl.hidden = true;
-        wizardBack.hidden = false;
-        showComparatorWizard();
-        hideSubcatStoreView();
-        wizardTitle.removeAttribute("data-i18n");
-        wizardTitle.textContent =
-            comparatorT("wizard_step_sub", "2. Elige subcategoria") + " — " + cat;
+        currentSubModeSynthetic = pack.synthetic;
+        subcatChipsRow.hidden = false;
+        subcatChipsRow.innerHTML = "";
 
-        const allBtn = document.createElement("button");
-        allBtn.type = "button";
-        allBtn.className = "comparator-wizard__tile";
-        allBtn.innerHTML =
-            '<span class="comparator-wizard__tile-label">' +
-            escapeHtml(comparatorT("wizard_all_subs", "Todas las subcategorias")) +
-            "</span>" +
-            '<span class="comparator-wizard__tile-meta">' +
-            escapeHtml(comparatorT("wizard_sub_all_meta", "Mejor precio por tienda en toda la categoria")) +
-            "</span>";
-        allBtn.addEventListener("click", function () {
-            wizardSubcatsEl.hidden = true;
+        var allChip = document.createElement("span");
+        allChip.className = "cat-chip active";
+        allChip.textContent = comparatorT("wizard_all_subs", "Todas");
+        allChip.addEventListener("click", function () {
+            subcatChipsRow.querySelectorAll(".cat-chip").forEach(function (c) { c.classList.remove("active"); });
+            allChip.classList.add("active");
             showStoreComparisonView(cat, null, true);
         });
-        wizardSubcatsEl.appendChild(allBtn);
+        subcatChipsRow.appendChild(allChip);
 
         pack.labels.forEach(function (sub) {
-            const b = document.createElement("button");
-            b.type = "button";
-            b.className = "comparator-wizard__tile";
-            b.innerHTML =
-                '<span class="comparator-wizard__tile-label">' +
-                escapeHtml(sub) +
-                "</span>" +
-                '<span class="comparator-wizard__tile-meta">' +
-                escapeHtml(comparatorT("wizard_sub_meta", "Mejor oferta por supermercado")) +
-                "</span>";
-            b.addEventListener("click", function () {
-                wizardSubcatsEl.hidden = true;
+            var chip = document.createElement("span");
+            chip.className = "cat-chip";
+            chip.textContent = sub;
+            chip.addEventListener("click", function () {
+                subcatChipsRow.querySelectorAll(".cat-chip").forEach(function (c) { c.classList.remove("active"); });
+                chip.classList.add("active");
+                currentSubModeSynthetic = pack.synthetic;
                 showStoreComparisonView(cat, sub, false);
             });
-            wizardSubcatsEl.appendChild(b);
+            subcatChipsRow.appendChild(chip);
         });
-    }
-
-    function renderWizardCategoryTiles() {
-        if (!wizardCategoriesEl) {
-            return;
-        }
-
-        wizardCategoriesEl.innerHTML = "";
-
-        const allBtn = document.createElement("button");
-        allBtn.type = "button";
-        allBtn.className = "comparator-wizard__tile";
-        allBtn.innerHTML =
-            '<span class="comparator-wizard__tile-label">' +
-            escapeHtml(comparatorT("wizard_all_categories", "Todas")) +
-            "</span>" +
-            '<span class="comparator-wizard__tile-meta">' +
-            escapeHtml(comparatorT("wizard_all_subs_hint", "Ver todas las subcategorias del catalogo")) +
-            "</span>";
-        allBtn.addEventListener("click", function () {
-            const pack = getSubcategoriesForWizard("TODAS");
-            if (pack.labels.length === 0) {
-                showToast(comparatorT("wizard_empty", "No hay productos"));
-                return;
-            }
-            renderWizardSubcatTiles("TODAS", pack);
-        });
-        wizardCategoriesEl.appendChild(allBtn);
-
-        collectCategoriesFromGroups().forEach(function (cat) {
-            const btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "comparator-wizard__tile";
-            btn.innerHTML =
-                '<span class="comparator-wizard__tile-label">' +
-                escapeHtml(cat) +
-                "</span>" +
-                '<span class="comparator-wizard__tile-meta">' +
-                escapeHtml(comparatorT("wizard_step_sub_hint", "Subcategorias")) +
-                "</span>";
-            btn.addEventListener("click", function () {
-                const pack = getSubcategoriesForWizard(cat);
-                if (pack.labels.length === 0) {
-                    showToast(comparatorT("wizard_empty", "No hay productos"));
-                    return;
-                }
-                renderWizardSubcatTiles(cat, pack);
-            });
-            wizardCategoriesEl.appendChild(btn);
-        });
-    }
-
-    function showWizardCategoriesStep() {
-        if (!wizardCategoriesEl || !wizardBack || !wizardTitle) {
-            return;
-        }
-        hideSubcatStoreView();
-        if (wizardSubcatsEl) {
-            wizardSubcatsEl.hidden = true;
-            wizardSubcatsEl.innerHTML = "";
-        }
-        wizardCategoriesEl.hidden = false;
-        wizardBack.hidden = true;
-        wizardFlow = "cats";
-        wizardTitle.setAttribute("data-i18n", "comparator.wizard_step_category");
-        wizardTitle.textContent = comparatorT("wizard_step_category", "1. Elige una categoria");
-        if (typeof TranslationManager !== "undefined" && TranslationManager.translatePage) {
-            TranslationManager.translatePage();
-        }
     }
 
     function comparatorT(key, fallback) {
@@ -844,7 +757,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function selectProduct(group) {
         hideSubcatStoreView();
-        hideComparatorWizard();
         noSelectionMsg.hidden = true;
         priceTableContainer.hidden = false;
 
@@ -1067,33 +979,14 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    if (wizardBack) {
-        wizardBack.addEventListener("click", function () {
-            if (subcatStoreView && !subcatStoreView.hidden) {
-                backFromSubcatStoreView();
-                return;
-            }
-            if (wizardFlow === "subs") {
-                showWizardCategoriesStep();
-                renderWizardCategoryTiles();
-                return;
-            }
-            showWizardCategoriesStep();
-            renderWizardCategoryTiles();
-        });
-    }
-
     function backFromSubcatStoreView() {
         hideSubcatStoreView();
-        showComparatorWizard();
-        const cat = wizardPendingCategory;
-        const pack = getSubcategoriesForWizard(cat);
-        if (!pack.labels.length) {
-            showWizardCategoriesStep();
-            renderWizardCategoryTiles();
-            return;
+        if (noSelectionMsg) {
+            noSelectionMsg.hidden = false;
         }
-        renderWizardSubcatTiles(cat, pack);
+        if (priceTableContainer) {
+            priceTableContainer.hidden = true;
+        }
     }
 
     if (subcatViewBack) {
@@ -1110,6 +1003,14 @@ document.addEventListener("DOMContentLoaded", function () {
             chip.classList.add("active");
             activeCategory = chip.dataset.cat || "";
             renderSearchResults(searchInput.value);
+            if (activeCategory) {
+                currentCategoryLabel = chipSlugToCategoryLabel(activeCategory);
+                showStoreComparisonView(currentCategoryLabel, null, true);
+            } else {
+                hideSubcatStoreView();
+                if (priceTableContainer) priceTableContainer.hidden = true;
+                if (noSelectionMsg) noSelectionMsg.hidden = false;
+            }
         });
     });
 
@@ -1149,9 +1050,12 @@ document.addEventListener("DOMContentLoaded", function () {
         priceTableContainer.hidden = true;
         noSelectionMsg.hidden = false;
         searchInput.value = "";
-        showComparatorWizard();
-        showWizardCategoriesStep();
-        renderWizardCategoryTiles();
+        document.querySelectorAll(".cat-chip").forEach(function (c) {
+            c.classList.remove("active");
+        });
+        document.querySelector('.cat-chip[data-cat=""]').classList.add("active");
+        activeCategory = "";
+        currentCategoryLabel = "";
     });
 
     if (syncButton) {
@@ -1171,9 +1075,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 syncStatus.style.display = "inline-block";
                 syncStatus.style.color = "#16a34a";
                 await loadOptions();
-                if (wizardCategoriesEl) {
-                    renderWizardCategoryTiles();
-                    showWizardCategoriesStep();
+                if (activeCategory) {
+                    currentCategoryLabel = chipSlugToCategoryLabel(activeCategory);
+                    showStoreComparisonView(currentCategoryLabel, null, true);
                 }
                 const qv = (searchInput && searchInput.value) || "";
                 if (qv.trim()) {
@@ -1229,11 +1133,6 @@ document.addEventListener("DOMContentLoaded", function () {
     async function init() {
         await loadSources();
         await loadOptions();
-        if (wizardCategoriesEl) {
-            renderWizardCategoryTiles();
-            showWizardCategoriesStep();
-            showComparatorWizard();
-        }
         applyQueryFromUrl();
     }
 

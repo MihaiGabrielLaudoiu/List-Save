@@ -83,7 +83,7 @@
         <div class="page-hero page-hero--comparator">
             <div class="page-hero__inner">
                 <h1 class="page-hero__title" data-i18n="comparator.hero_title">Compara precios al instante</h1>
-                <p class="page-hero__subtitle" data-i18n="comparator.hero_subtitle">Elige categoría y subcategoría, o busca libremente</p>
+                <p class="page-hero__subtitle" data-i18n="comparator.hero_subtitle">Selecciona una categoría o busca un producto</p>
                 <div class="page-hero__search-box comparator__search-wrapper">
                     <input type="text" id="search-main" data-i18n-placeholder="comparator.search_placeholder" placeholder="¿Qué producto buscas? Ej: leche, pan, huevos..." autocomplete="off">
                     <div class="comparator__search-results" id="results-main" hidden></div>
@@ -112,22 +112,14 @@
             <span id="sync-status" class="comparator__sync-status" style="display:none;"></span>
         </div>
 
-        <div id="comparator-wizard" class="comparator-wizard">
-            <div class="comparator-wizard__toolbar" id="wizard-toolbar">
-                <p class="comparator-wizard__title" id="wizard-title" data-i18n="comparator.wizard_step_category">1. Elige una categoria</p>
-                <button type="button" class="button button--secondary" id="wizard-back" hidden data-i18n="comparator.wizard_back_cats">Volver a categorias</button>
-            </div>
-            <div id="wizard-categories" class="comparator-wizard__grid" aria-live="polite"></div>
-            <div id="wizard-subcategories" class="comparator-wizard__grid" hidden aria-live="polite"></div>
-        </div>
-
         <!-- Resultados de comparación -->
         <div class="comparator-body">
             <div id="subcat-store-view" class="comparator-subcat-view" hidden>
                 <div class="comparator-subcat-view__toolbar">
-                    <button type="button" class="button button--secondary" id="subcat-view-back" data-i18n="comparator.wizard_back_subs">Volver a subcategorías</button>
+                    <button type="button" class="button button--secondary" id="subcat-view-back" data-i18n="comparator.wizard_back_subs">Volver</button>
                     <p class="comparator-subcat-view__title" id="subcat-view-title" aria-live="polite"></p>
                 </div>
+                <div id="subcat-chips-row" class="comparator-cats" hidden></div>
                 <div id="subcat-store-grid" class="comparator-store-grid" role="list"></div>
                 <section id="subcat-winner" class="comparator-winner" aria-labelledby="subcat-winner-heading" hidden>
                     <h3 id="subcat-winner-heading" class="visually-hidden">Ganador por precio unitario</h3>

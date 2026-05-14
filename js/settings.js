@@ -5,17 +5,37 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    var LS_KEY = "ls_settings";
+
+    function loadFromLocal() {
+        try {
+            return JSON.parse(localStorage.getItem(LS_KEY)) || {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function saveToLocal(data) {
+        try {
+            var current = loadFromLocal();
+            Object.keys(data).forEach(function (k) {
+                if (data[k] !== undefined && data[k] !== null) {
+                    current[k] = data[k];
+                }
+            });
+            localStorage.setItem(LS_KEY, JSON.stringify(current));
+        } catch (e) {}
+    }
+
     async function settingsT(keyPath) {
         const lang = SessionManager.getCurrentLanguage();
         const tr = await TranslationManager.loadTranslations(lang);
         return TranslationManager.getTranslatedValue(tr, keyPath.split(".")) || keyPath;
     }
 
-    // Elementos de las pestanas y sus contenidos
     const tabs = document.querySelectorAll(".tab-button");
     const contents = document.querySelectorAll(".tab-content");
 
-    // Campos del formulario de ajustes
     const languageInput = document.getElementById("language");
     const postalCodeInput = document.getElementById("postalCode");
     const cardNumberInput = document.getElementById("cardNumber");
@@ -24,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveButton = document.getElementById("saveSettings");
     const backButton = document.getElementById("backToHome");
 
-    // Activa la pestana que se le pasa y oculta las demas
     function activateTab(tabId) {
         tabs.forEach(function (tab) {
             tab.classList.remove("active");
@@ -48,11 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Carga los ajustes del usuario desde el servidor y rellena el formulario
     async function loadSettings() {
         try {
             const response = await ApiClient.get("/api/settings/me");
             const ajustes = response.settings || {};
+            saveToLocal(ajustes);
 
             if (languageInput) {
                 languageInput.value = ajustes.language || SessionManager.getCurrentLanguage();
@@ -66,13 +85,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 cardNameInput.value = ajustes.card_name || "";
             }
 
-            // Si tiene tarjeta guardada mostramos solo los ultimos 4 digitos con asteriscos
             if (cardNumberInput && ajustes.card_last4) {
                 cardNumberInput.value = "**** **** **** " + ajustes.card_last4;
             }
         } catch (error) {
             if (error.message === "No autenticado") {
-                window.location.href = "./login.html";
+                var local = loadFromLocal();
+
+                if (languageInput) {
+                    languageInput.value = local.language || SessionManager.getCurrentLanguage();
+                }
+
+                if (postalCodeInput) {
+                    postalCodeInput.value = local.postal_code || "";
+                }
+
+                if (cardNameInput) {
+                    cardNameInput.value = local.card_name || "";
+                }
                 return;
             }
 
@@ -80,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Recoge los datos del formulario y los manda al servidor
     async function saveSettings(event) {
         event.preventDefault();
 
@@ -96,18 +125,29 @@ document.addEventListener("DOMContentLoaded", function () {
             cardName: cardNameInput ? cardNameInput.value.trim() : ""
         };
 
+        saveToLocal({
+            language: datos.language,
+            postal_code: datos.postalCode,
+            card_name: datos.cardName
+        });
+
         try {
             await ApiClient.put("/api/settings/me", datos);
-            // Cambiamos el idioma en la pagina tambien para que se vea de inmediato
             await SessionManager.setLanguage(datos.language);
             await AppModal.alert(await settingsT("settings.messages.success"));
             window.location.href = "./index.html";
         } catch (error) {
+            if (error.message === "No autenticado") {
+                await SessionManager.setLanguage(datos.language);
+                await AppModal.alert(await settingsT("settings.messages.success"));
+                window.location.href = "./index.html";
+                return;
+            }
+
             await AppModal.alert(error.message || (await settingsT("settings.messages.save_error")));
         }
     }
 
-    // Ponemos el listener de click a cada pestana
     tabs.forEach(function (tab) {
         tab.addEventListener("click", function (event) {
             event.preventDefault();
@@ -132,7 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Boton para detectar ubicacion automaticamente (pendiente de implementar)
     const detectLocationBtn = document.getElementById("detectLocation");
     if (detectLocationBtn) {
         detectLocationBtn.addEventListener("click", async function () {
@@ -140,7 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Abrimos la primera pestana por defecto y cargamos los datos
     activateTab("location");
     loadSettings();
 });
