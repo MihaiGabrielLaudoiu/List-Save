@@ -5,6 +5,13 @@ var SUPERMERCADOS = { mercadona: 1, carrefour: 2, eroski: 3 };
 var CARREFOUR_FACTOR = 1.05;
 var EROSKI_FACTOR = 1.02;
 
+var IMAGE_MAP = {
+  "leche-entera-uht-1l": "leche.webp",
+  "leche-semidesnatada-1l": "leche.webp",
+  "patata-1kg": "patata.png",
+  "pan-molde-blanco-500g": "pandemolde.jpg"
+};
+
 var PRODUCTOS_BASE = [
   { nombre: "leche entera", marca: "Hacendado", ean: "8480000001001", categoria: "lacteos", subcategoria: "leche", unidad: "l", cantidad: 1, formato: "Brik 1L", alergenos: "lactosa", ingredientes: "Leche entera de vaca", nutricion: {calorias:64,grasas:3.6,hidratos:4.8,proteinas:3.2,sal:0.1}, origen: "Espana", clave: "leche-entera-uht-1l", mercadona: 0.95, carrefour: null, eroski: null },
   { nombre: "leche semidesnatada", marca: "Hacendado", ean: "8480000001002", categoria: "lacteos", subcategoria: "leche", unidad: "l", cantidad: 1, formato: "Brik 1L", alergenos: "lactosa", ingredientes: "Leche semidesnatada", nutricion: {calorias:46,grasas:1.8,hidratos:5,proteinas:3.3,sal:0.12}, origen: "Espana", clave: "leche-semidesnatada-1l", mercadona: 0.89 },
@@ -83,9 +90,10 @@ async function main() {
     if (existing.length > 0) {
       idProd = existing[0].id_producto;
     } else {
+      var imagenValor = IMAGE_MAP[p.clave] || null;
       var ins = await consultaDatos(
-        "INSERT IGNORE INTO Productos (nombre, marca, ean, imagen, descripcion, categoria, subcategoria, unidad_medida, cantidad_unidad, formato, alergenos, ingredientes, info_nutricional, origen, clave_comparable) VALUES (?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [p.nombre, p.marca, p.ean, p.nombre.charAt(0).toUpperCase() + p.nombre.slice(1) + ".", p.categoria, p.subcategoria, p.unidad, p.cantidad, p.formato, p.alergenos, p.ingredientes, p.nutricion ? JSON.stringify(p.nutricion) : null, p.origen, p.clave]
+        "INSERT IGNORE INTO Productos (nombre, marca, ean, imagen, descripcion, categoria, subcategoria, unidad_medida, cantidad_unidad, formato, alergenos, ingredientes, info_nutricional, origen, clave_comparable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [p.nombre, p.marca, p.ean, imagenValor, p.nombre.charAt(0).toUpperCase() + p.nombre.slice(1) + ".", p.categoria, p.subcategoria, p.unidad, p.cantidad, p.formato, p.alergenos, p.ingredientes, p.nutricion ? JSON.stringify(p.nutricion) : null, p.origen, p.clave]
       );
       if (ins.affectedRows > 0) {
         idProd = ins.insertId;
@@ -210,8 +218,8 @@ async function main() {
     }
 
     var ins2 = await consultaDatos(
-      "INSERT IGNORE INTO Productos (nombre, marca, ean, imagen, descripcion, categoria, subcategoria, unidad_medida, cantidad_unidad, formato, alergenos, ingredientes, info_nutricional, origen, clave_comparable) VALUES (?, ?, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, ?, ?)",
-      [sp.nombre, sp.marca, sp.nombre.charAt(0).toUpperCase() + sp.nombre.slice(1) + ".", sp.categoria, sp.subcategoria, sp.unidad, sp.cantidad, sp.formato, sp.alergenos, sp.origen || "Espana", claveConMarca]
+      "INSERT IGNORE INTO Productos (nombre, marca, ean, imagen, descripcion, categoria, subcategoria, unidad_medida, cantidad_unidad, formato, alergenos, ingredientes, info_nutricional, origen, clave_comparable) VALUES (?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, ?, ?)",
+      [sp.nombre, sp.marca, IMAGE_MAP[sp.clave] || null, sp.nombre.charAt(0).toUpperCase() + sp.nombre.slice(1) + ".", sp.categoria, sp.subcategoria, sp.unidad, sp.cantidad, sp.formato, sp.alergenos, sp.origen || "Espana", claveConMarca]
     );
     if (ins2.affectedRows > 0) {
       idProd2 = ins2.insertId;
