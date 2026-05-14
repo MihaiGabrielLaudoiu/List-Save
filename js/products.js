@@ -144,34 +144,123 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/'/g, "&#39;");
     }
 
-    // Devuelve un emoji segun el nombre del producto
-    // Si no coincide con ningun patron conocido devuelve el carrito de compra
-    function getProductEmoji(productName) {
-        const normalizedName = String(productName || "").toLowerCase();
+    function getProductEmoji(productName, category) {
+        var name = String(productName || "").toLowerCase();
+        var cat = String(category || "").toLowerCase();
 
-        if (normalizedName.includes("leche") || normalizedName.includes("yogur")) {
+        if (name.includes("leche") || name.includes("yogur") || name.includes("nata") || name.includes("kefir") || name.includes("cuajada") || name.includes("batido")) {
             return "🥛";
         }
-
-        if (normalizedName.includes("pan") || normalizedName.includes("galleta")) {
+        if (name.includes("queso")) {
+            return "🧀";
+        }
+        if (name.includes("mantequilla") || name.includes("margarina")) {
+            return "🧈";
+        }
+        if (name.includes("pan") || name.includes("galleta") || name.includes("croissant") || name.includes("bolleria")) {
             return "🍞";
         }
-
-        if (normalizedName.includes("huevo")) {
+        if (name.includes("huevo")) {
             return "🥚";
         }
-
-        if (normalizedName.includes("fruta") || normalizedName.includes("manzana")) {
+        if (name.includes("manzana") || name.includes("pera") || name.includes("fruta")) {
             return "🍎";
         }
-
-        if (normalizedName.includes("arroz")) {
+        if (name.includes("naranja") || name.includes("zumo") || name.includes("mandarina") || name.includes("limon")) {
+            return "🍊";
+        }
+        if (name.includes("platano") || name.includes("banana") || name.includes("banana")) {
+            return "🍌";
+        }
+        if (name.includes("arroz")) {
             return "🍚";
         }
-
-        if (normalizedName.includes("pasta")) {
+        if (name.includes("pasta") || name.includes("espagueti") || name.includes("fideo") || name.includes("macarron")) {
             return "🍝";
         }
+        if (name.includes("lenteja") || name.includes("garbanzo") || name.includes("alubia") || name.includes("legumbre")) {
+            return "🫘";
+        }
+        if (name.includes("tomate") || name.includes("verdura") || name.includes("cebolla") || name.includes("zanahoria") || name.includes("patata") || name.includes("pimiento") || name.includes("lechuga") || name.includes("pepino") || name.includes("ajo") || name.includes("calabacin")) {
+            return "🥦";
+        }
+        if (name.includes("pollo") || name.includes("pavo") || name.includes("cerdo") || name.includes("ternera") || name.includes("carne") || name.includes("lomo") || name.includes("filete")) {
+            return "🥩";
+        }
+        if (name.includes("jamon") || name.includes("embutido") || name.includes("salami") || name.includes("chorizo")) {
+            return "🥓";
+        }
+        if (name.includes("salmon") || name.includes("atun") || name.includes("pescado") || name.includes("sardina")) {
+            return "🐟";
+        }
+        if (name.includes("agua")) {
+            return "💧";
+        }
+        if (name.includes("cerveza")) {
+            return "🍺";
+        }
+        if (name.includes("refresco") || name.includes("cola")) {
+            return "🥤";
+        }
+        if (name.includes("aceite")) {
+            return "🫒";
+        }
+        if (name.includes(" vinagre") || name.includes("vinagre")) {
+            return "🫙";
+        }
+        if (name.includes("sal")) {
+            return "🧂";
+        }
+        if (name.includes("azucar") || name.includes("mermelada") || name.includes("miel")) {
+            return "🍯";
+        }
+        if (name.includes("cafe") || name.includes("te")) {
+            return "☕";
+        }
+        if (name.includes("cereal")) {
+            return "🥣";
+        }
+        if (name.includes("detergente") || name.includes("lavavajillas") || name.includes("lejia") || name.includes("fregasuelos") || name.includes("limpieza")) {
+            return "🧹";
+        }
+        if (name.includes("champu") || name.includes("gel") || name.includes("desodorante") || name.includes("pasta de diente") || name.includes("dentifrico") || name.includes("higiene")) {
+            return "🧴";
+        }
+        if (name.includes("papel")) {
+            return "🧻";
+        }
+        if (name.includes("congelado") || name.includes("pizza") || name.includes("helado")) {
+            return "🧊";
+        }
+        if (name.includes("conserva") || name.includes("lat")) {
+            return "🥫";
+        }
+        if (name.includes("aceituna") || name.includes("encurtido") || name.includes("pepinillo")) {
+            return "🫒";
+        }
+        if (name.includes("bebe") || name.includes("panal") || name.includes("pañal") || name.includes("papilla")) {
+            return "👶";
+        }
+        if (name.includes("mascota") || name.includes("pienso") || name.includes("perro") || name.includes("gato")) {
+            return "🐾";
+        }
+
+        if (cat.includes("lacteo")) return "🥛";
+        if (cat.includes("carn")) return "🥩";
+        if (cat.includes("fruta") || cat.includes("verdura")) return "🥦";
+        if (cat.includes("panad")) return "🍞";
+        if (cat.includes("bebid")) return "🥤";
+        if (cat.includes("higien")) return "🧴";
+        if (cat.includes("limpi")) return "🧹";
+        if (cat.includes("arroz") || cat.includes("pasta")) return "🍝";
+        if (cat.includes("aceite") || cat.includes("vinagr")) return "🫒";
+        if (cat.includes("congel")) return "🧊";
+        if (cat.includes("conserva")) return "🥫";
+        if (cat.includes("desayuno")) return "☕";
+        if (cat.includes("huev")) return "🥚";
+        if (cat.includes("bebe")) return "👶";
+        if (cat.includes("mascota")) return "🐾";
+        if (cat.includes("encurtido")) return "🫒";
 
         return "🛒";
     }
@@ -253,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (product.emoji_sugerido) {
             emoji = product.emoji_sugerido;
         } else {
-            emoji = getProductEmoji(product.nombre);
+            emoji = getProductEmoji(product.nombre, product.categoria || product.categoria_normalizada);
         }
 
         const safeName = escapeHtml(product.nombre);

@@ -153,54 +153,103 @@ function normalizeIncomingProductCategories(prod) {
 }
 
 function emojiByProductName(name) {
-  const normalizedName = applySynonyms(normalizeText(name));
+  var n = applySynonyms(normalizeText(name));
 
-  if (normalizedName.includes("pepinillo") || normalizedName.includes("encurtido")) {
-    return "🥒";
-  }
-
-  if (normalizedName.includes("pepino") || normalizedName.includes("zanahoria") || normalizedName.includes("platano")) {
-    return "🥕";
-  }
-
-  if (normalizedName.includes("pollo") || normalizedName.includes("carne")) {
-    return "🍗";
-  }
-
-  if (normalizedName.includes("agua")) {
-    return "💧";
-  }
-
-  if (normalizedName.includes("papel") || normalizedName.includes("higienico")) {
-    return "🧻";
-  }
-
-  if (normalizedName.includes("lavavajillas")) {
-    return "🧽";
-  }
-
-  if (normalizedName.includes("leche") || normalizedName.includes("yogur") || normalizedName.includes("mantequilla")) {
+  if (n.includes("leche") || n.includes("yogur") || n.includes("nata") || n.includes("kefir") || n.includes("cuajada") || n.includes("batido")) {
     return "🥛";
   }
-
-  if (normalizedName.includes("pan") || normalizedName.includes("galleta")) {
+  if (n.includes("queso")) {
+    return "🧀";
+  }
+  if (n.includes("mantequilla") || n.includes("margarina")) {
+    return "🧈";
+  }
+  if (n.includes("pan") || n.includes("galleta") || n.includes("croissant") || n.includes("bolleria")) {
     return "🍞";
   }
-
-  if (normalizedName.includes("huevo")) {
+  if (n.includes("huevo")) {
     return "🥚";
   }
-
-  if (normalizedName.includes("arroz")) {
+  if (n.includes("manzana") || n.includes("pera") || n.includes("fruta")) {
+    return "🍎";
+  }
+  if (n.includes("naranja") || n.includes("zumo") || n.includes("mandarina") || n.includes("limon")) {
+    return "🍊";
+  }
+  if (n.includes("platano") || n.includes("banana")) {
+    return "🍌";
+  }
+  if (n.includes("arroz")) {
     return "🍚";
   }
-
-  if (normalizedName.includes("pasta")) {
+  if (n.includes("pasta") || n.includes("espagueti") || n.includes("fideo") || n.includes("macarron")) {
     return "🍝";
   }
-
-  if (normalizedName.includes("manzana") || normalizedName.includes("fruta") || normalizedName.includes("tomate") || normalizedName.includes("cebolla")) {
-    return "🍎";
+  if (n.includes("lenteja") || n.includes("garbanzo") || n.includes("alubia")) {
+    return "🫘";
+  }
+  if (n.includes("tomate") || n.includes("verdura") || n.includes("cebolla") || n.includes("zanahoria") || n.includes("patata") || n.includes("pimiento") || n.includes("lechuga") || n.includes("pepino") || n.includes("ajo") || n.includes("calabacin")) {
+    return "🥦";
+  }
+  if (n.includes("pollo") || n.includes("pavo") || n.includes("cerdo") || n.includes("ternera") || n.includes("carne") || n.includes("lomo") || n.includes("filete")) {
+    return "🥩";
+  }
+  if (n.includes("jamon") || n.includes("embutido") || n.includes("chorizo") || n.includes("salami")) {
+    return "🥓";
+  }
+  if (n.includes("salmon") || n.includes("atun") || n.includes("pescado") || n.includes("sardina")) {
+    return "🐟";
+  }
+  if (n.includes("agua")) {
+    return "💧";
+  }
+  if (n.includes("cerveza")) {
+    return "🍺";
+  }
+  if (n.includes("refresco") || n.includes("cola")) {
+    return "🥤";
+  }
+  if (n.includes("aceite")) {
+    return "🫒";
+  }
+  if (n.includes("vinagre")) {
+    return "🫙";
+  }
+  if (n.includes("sal")) {
+    return "🧂";
+  }
+  if (n.includes("azucar") || n.includes("mermelada") || n.includes("miel")) {
+    return "🍯";
+  }
+  if (n.includes("cafe") || n.includes("te")) {
+    return "☕";
+  }
+  if (n.includes("cereal")) {
+    return "🥣";
+  }
+  if (n.includes("detergente") || n.includes("lavavajillas") || n.includes("lejia") || n.includes("fregasuelos") || n.includes("limpieza")) {
+    return "🧹";
+  }
+  if (n.includes("champu") || n.includes("gel") || n.includes("desodorante") || n.includes("dentifrico") || n.includes("higiene")) {
+    return "🧴";
+  }
+  if (n.includes("papel")) {
+    return "🧻";
+  }
+  if (n.includes("congelado") || n.includes("pizza") || n.includes("helado")) {
+    return "🧊";
+  }
+  if (n.includes("conserva") || n.includes("lata")) {
+    return "🥫";
+  }
+  if (n.includes("aceituna") || n.includes("encurtido") || n.includes("pepinillo")) {
+    return "🥒";
+  }
+  if (n.includes("bebe") || n.includes("panal") || n.includes("papilla")) {
+    return "👶";
+  }
+  if (n.includes("mascota") || n.includes("pienso") || n.includes("perro") || n.includes("gato")) {
+    return "🐾";
   }
 
   return "🛒";
