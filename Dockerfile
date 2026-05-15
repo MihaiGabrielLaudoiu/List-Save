@@ -1,7 +1,7 @@
 FROM node:20-bookworm-slim AS deps
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev || npm install
 
 FROM node:20-bookworm-slim AS runner
 WORKDIR /app

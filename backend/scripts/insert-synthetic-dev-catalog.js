@@ -98,9 +98,10 @@ async function main() {
       if (ins.affectedRows > 0) {
         idProd = ins.insertId;
       } else {
-        var dup = await consultaDatos("SELECT id_producto FROM Productos WHERE clave_comparable = ? LIMIT 1", [p.clave]);
-        idProd = dup[0].id_producto;
+        var dup = await consultaDatos("SELECT id_producto FROM Productos WHERE clave_comparable = ? OR (nombre = ? AND marca = ?) LIMIT 1", [p.clave, p.nombre, p.marca]);
+        idProd = dup.length > 0 ? dup[0].id_producto : null;
       }
+      if (!idProd) continue;
       insertedProducts++;
     }
 
@@ -208,8 +209,8 @@ async function main() {
     var claveConMarca = sp.clave;
 
     var existingProd = await consultaDatos(
-      "SELECT id_producto FROM Productos WHERE clave_comparable = ? LIMIT 1",
-      [claveConMarca]
+      "SELECT id_producto FROM Productos WHERE clave_comparable = ? OR (nombre = ? AND marca = ?) LIMIT 1",
+      [claveConMarca, sp.nombre, sp.marca]
     );
     var idProd2;
     if (existingProd.length > 0) {
