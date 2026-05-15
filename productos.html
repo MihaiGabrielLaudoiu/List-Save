@@ -6,7 +6,7 @@
     <title>Productos - List & Save</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="scss/main.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <a href="#main-content" class="skip-to-main" title="Saltar al contenido principal"></a>
@@ -78,61 +78,46 @@
             </div>
         </section>
 
-        <section class="featured-products">
-            <div class="container">
-                <h2 class="section-title">Productos Destacados</h2>
-                <div class="featured-products__grid">
-                </div>
-            </div>
-        </section>
-
-        <section class="product-categories">
-            <div class="container">
-                <h2 class="section-title">Filtra por supermercado</h2>
-                <div class="product-categories__filter-bar" id="supermarket-filter-bar"></div>
-            </div>
-        </section>
-
         <section class="all-products">
             <div class="container">
-                <h2 class="section-title">Todos los Productos</h2>
-                
-                <div class="products-search" style="margin-bottom: 1rem;">
+                <div class="products-search">
                     <div class="products-search__wrapper products-search__wrapper--rows">
-                        <input type="text" class="products-search__input" placeholder="Buscar productos..." data-i18n-placeholder="products_page.search_placeholder">
-                        <div class="products-filters-row">
-                            <select class="products-search__category" id="category-filter">
-                                <option value="" data-i18n="products_page.all_categories">Todas las categorías</option>
-                            </select>
-                            <select id="subcategory-filter" class="products-search__category" title="Subcategoria">
-                                <option value="">Todas las subcategorias</option>
-                            </select>
-                            <select id="supermarket-filter" class="products-search__supermarket">
-                                <option value="">Todos los supermercados</option>
-                            </select>
-                            <select id="sort-filter" class="products-search__category">
-                                <option value="nombre">Orden: nombre</option>
-                                <option value="precio_asc">Precio: menor a mayor</option>
-                                <option value="precio_desc">Precio: mayor a menor</option>
-                                <option value="savings">Mayor ahorro entre tiendas</option>
-                            </select>
+                        <div class="products-search__bar">
+                            <i class="fas fa-search products-search__icon"></i>
+                            <input type="text" class="products-search__input" placeholder="Buscar productos, marcas, categorías..." data-i18n-placeholder="products_page.search_placeholder">
                         </div>
                         <div class="products-filters-row">
-                            <select id="marca-filter" class="products-search__category">
-                                <option value="">Todas las marcas</option>
+                            <select class="products-search__category" id="category-filter">
+                                <option value="" data-i18n="products_page.all_categories">Categoría</option>
                             </select>
-                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-min" placeholder="Precio min">
-                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-max" placeholder="Precio max">
+                            <select id="subcategory-filter" class="products-search__category" title="Subcategoria">
+                                <option value="">Subcategoría</option>
+                            </select>
+                            <select id="supermarket-filter" class="products-search__supermarket">
+                                <option value="">Supermercado</option>
+                            </select>
+                            <select id="sort-filter" class="products-search__category">
+                                <option value="nombre">Nombre</option>
+                                <option value="precio_asc">Precio ↑</option>
+                                <option value="precio_desc">Precio ↓</option>
+                                <option value="savings">Ahorro</option>
+                            </select>
+                        </div>
+                        <div class="products-filters-row products-filters-row--tight">
+                            <select id="marca-filter" class="products-search__category products-search__category--sm">
+                                <option value="">Marca</option>
+                            </select>
+                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-min" placeholder="€ min">
+                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-max" placeholder="€ max">
+                            <div class="all-products__filters all-products__filters--inline">
+                                <button class="filter-button active" data-filter="all">Todos</button>
+                                <button class="filter-button" data-filter="offers">Ofertas</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="products-skeleton" id="products-skeleton" hidden></div>
-
-                <div class="all-products__filters">
-                    <button class="filter-button active" data-filter="all">Todos</button>
-                    <button class="filter-button" data-filter="offers">Ofertas</button>
-                </div>
 
                 <div class="all-products__grid">
                 </div>
