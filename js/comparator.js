@@ -129,7 +129,15 @@ document.addEventListener("DOMContentLoaded", function () {
         emptyState.hidden = true;
         battleArea.hidden = false;
 
-        var variants = group.variantes.slice().sort(function (a, b) {
+        // One card per supermarket — pick cheapest variant per store
+        var bySuper = {};
+        group.variantes.forEach(function (v) {
+            var s = v.nombre_supermercado;
+            if (!bySuper[s] || Number(v.precio_actual) < Number(bySuper[s].precio_actual)) {
+                bySuper[s] = v;
+            }
+        });
+        var variants = Object.values(bySuper).sort(function (a, b) {
             return Number(a.precio_actual) - Number(b.precio_actual);
         });
 
@@ -190,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cardsHtml += '<div class="' + cardClass + '">' +
                 '<div class="comp-battle-card__head">' + logo +
                 '<span class="comp-battle-card__super">' + esc(v.nombre_supermercado) + "</span></div>" +
+                '<div class="comp-battle-card__product-name">' + esc(v.nombre) + "</div>" +
                 '<div class="comp-battle-card__format">' + fmtText(v) + "</div>" +
                 '<div class="comp-battle-card__price">' + fmtPrice(v.precio_actual) + " \u20AC</div>" +
                 unitHtml + offerHtml + diffHtml +
@@ -235,6 +244,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             if (activeCat && !catMatch(activeCat, g)) return false;
             return true;
+        }).sort(function (a, b) {
+            var sa = new Set(a.variantes.map(function(v){ return v.nombre_supermercado; })).size;
+            var sb = new Set(b.variantes.map(function(v){ return v.nombre_supermercado; })).size;
+            return sb - sa;
         }).slice(0, 8);
 
         if (groups.length === 0) {
@@ -245,9 +258,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         groups.forEach(function (g) {
             var minP = Math.min.apply(null, g.variantes.map(function (v) { return v.precio_actual; }));
+            var uniqueSupers = new Set(g.variantes.map(function (v) { return v.nombre_supermercado; })).size;
             var div = document.createElement("div");
             div.className = "comp-results__item";
-            div.innerHTML = '<strong>' + esc(g.nombre) + '</strong><span>En ' + g.variantes.length + ' supers \u00B7 Desde ' + minP.toFixed(2).replace(".", ",") + ' \u20AC</span>';
+            div.innerHTML = '<strong>' + esc(g.nombre) + '</strong><span>En ' + uniqueSupers + ' supers \u00B7 Desde ' + minP.toFixed(2).replace(".", ",") + ' \u20AC</span>';
             div.addEventListener("click", function () {
                 renderBattle(g);
                 resultsBox.hidden = true;
@@ -345,23 +359,24 @@ document.addEventListener("DOMContentLoaded", function () {
             allOptions = res.items || [];
             grouped = {};
             allOptions.forEach(function (p) {
-                var key = p.clave_comparable;
+                var subcat = (p.subcategoria || "").trim().toLowerCase();
+                var key = subcat || p.nombre_comparable || p.clave_comparable;
+                var displayName = subcat
+                    ? subcat.charAt(0).toUpperCase() + subcat.slice(1)
+                    : p.nombre_comparable;
                 if (!grouped[key]) {
                     grouped[key] = {
                         clave: key,
-                        nombre: p.nombre_comparable,
+                        nombre: displayName,
                         categoria: p.categoria || p.categoria_normalizada,
                         categoria_normalizada: p.categoria_normalizada,
-                        subcategoria: p.subcategoria || null,
+                        subcategoria: subcat || null,
                         imagen: p.imagen_resuelta,
                         emoji: p.emoji_sugerido,
                         variantes: []
                     };
                 }
                 grouped[key].variantes.push(p);
-                if (p.subcategoria && !grouped[key].subcategoria) {
-                    grouped[key].subcategoria = p.subcategoria;
-                }
             });
         } catch (e) {
             console.error("Error cargando opciones:", e);
