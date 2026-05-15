@@ -1042,7 +1042,6 @@ document.addEventListener("DOMContentLoaded", function () {
         await loadSources();
         await loadMetaFilters();
         await loadProducts(1);
-        await loadFeatured();
     }
 
     initPage();
