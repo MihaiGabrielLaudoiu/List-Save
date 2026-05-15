@@ -4840,6 +4840,13 @@ select {
   color: #334155;
 }
 
+.comp-battle-card__product-name {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+  font-style: italic;
+}
+
 .comp-battle-card__format {
   font-size: 0.78rem;
   color: #64748b;
@@ -5100,6 +5107,10 @@ select {
 [data-high-contrast=true] .comp-battle-card__super,
 [data-theme=dark] .comp-battle-card__super {
   color: #e2e8f0;
+}
+[data-high-contrast=true] .comp-battle-card__product-name,
+[data-theme=dark] .comp-battle-card__product-name {
+  color: #94a3b8;
 }
 [data-high-contrast=true] .comp-battle-card__format,
 [data-theme=dark] .comp-battle-card__format {

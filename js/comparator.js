@@ -129,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
         emptyState.hidden = true;
         battleArea.hidden = false;
 
-        // One card per supermarket — pick cheapest variant per store
         var bySuper = {};
         group.variantes.forEach(function (v) {
             var s = v.nombre_supermercado;
