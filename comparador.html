@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comparador - List & Save</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -34,23 +33,15 @@
             </a>
             <nav class="header__nav nav">
                 <ul class="nav__list">
-
-                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link" data-i18n="menu.my_list">Mi
-                            lista</a></li>
-                    <li class="nav__item"><a href="comparador.html" class="nav__link nav__link--active"
-                            data-i18n="menu.comparator">Comparador</a></li>
-                    <li class="nav__item"><a href="./productos.html" class="nav__link"
-                            data-i18n="menu.products">Productos</a></li>
-                    <li class="nav__item"><a href="./graficos.html" class="nav__link"
-                            data-i18n="menu.stats">Estadísticas</a></li>
-                    <li class="nav__item"><a href="./nosotros.html" class="nav__link"
-                            data-i18n="menu.about_us">Nosotros</a></li>
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link" data-i18n="menu.my_list">Mi lista</a></li>
+                    <li class="nav__item"><a href="comparador.html" class="nav__link nav__link--active" data-i18n="menu.comparator">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
+                    <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link" data-i18n="menu.about_us">Nosotros</a></li>
                 </ul>
             </nav>
-
             <div class="header__actions">
-                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste"
-                    title="Cambiar contraste">
+                <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
                     <i class="fas fa-adjust"></i>
                 </button>
                 <div class="header__user">
@@ -63,7 +54,7 @@
                 <div id="user-menu" style="display: none;" class="header__user-menu">
                     <div class="header__user-menu-content">
                         <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
-<div class="header__user-menu-buttons">
+                        <div class="header__user-menu-buttons">
                             <button class="header__user-button" onclick="window.location.href='ajustes.html'">
                                 <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
                             </button>
@@ -77,81 +68,53 @@
         </div>
     </header>
 
-    <main id="main-content">
-
+    <main id="main-content" class="comparator-page">
         <section class="page-hero page-hero--comparator">
             <div class="page-hero__inner">
                 <h1 class="page-hero__title" data-i18n="comparator.hero_title">Compara precios al instante</h1>
-                <p class="page-hero__subtitle" data-i18n="comparator.hero_subtitle">Selecciona una categoría o busca un producto</p>
-                <div class="page-hero__search-box comparator__search-wrapper">
-                    <input type="text" id="search-main" data-i18n-placeholder="comparator.search_placeholder" placeholder="¿Qué producto buscas? Ej: leche, pan, huevos..." autocomplete="off">
-                    <div class="comparator__search-results" id="results-main" hidden></div>
-                </div>
+                <p class="page-hero__subtitle" data-i18n="comparator.hero_subtitle">Busca un producto y te decimos donde sale mas barato</p>
             </div>
         </section>
 
-        <!-- Chips de categorías -->
-        <div class="comparator-cats" id="cat-chips">
-            <span class="cat-chip active" data-cat="">🔍 Todo</span>
-            <span class="cat-chip" data-cat="lacteos">🥛 Lácteos</span>
-            <span class="cat-chip" data-cat="carnes">🥩 Carnes</span>
-            <span class="cat-chip" data-cat="frutas">🍎 Frutas</span>
-            <span class="cat-chip" data-cat="verduras">🥦 Verduras</span>
-            <span class="cat-chip" data-cat="panaderia">🍞 Panadería</span>
-            <span class="cat-chip" data-cat="bebidas">🧃 Bebidas</span>
-            <span class="cat-chip" data-cat="higiene">🧴 Higiene</span>
-            <span class="cat-chip" data-cat="limpieza">🧹 Limpieza</span>
-        </div>
-
-        <!-- Barra de sync -->
-        <div class="comparator__sync">
-            <button class="button button--secondary" id="sync-prices">
-                <i class="fas fa-sync-alt"></i> <span id="sync-label" data-i18n="comparator.syncButton">Actualizar precios</span>
-            </button>
-            <span id="sync-status" class="comparator__sync-status" style="display:none;"></span>
-        </div>
-
-        <!-- Resultados de comparación -->
-        <div class="comparator-body">
-            <div id="subcat-store-view" class="comparator-subcat-view" hidden>
-                <div class="comparator-subcat-view__toolbar">
-                    <button type="button" class="button button--secondary" id="subcat-view-back" data-i18n="comparator.wizard_back_subs">Volver</button>
-                    <p class="comparator-subcat-view__title" id="subcat-view-title" aria-live="polite"></p>
+        <div class="comp-search-area">
+            <div class="comp-search-area__inner">
+                <div class="comp-search-bar">
+                    <div class="comp-search-bar__wrap">
+                        <i class="fas fa-search comp-search-bar__icon"></i>
+                        <input type="text" id="comp-search" class="comp-search-bar__input" placeholder="Busca leche, pan, yogur..." autocomplete="off">
+                    </div>
+                    <button id="comp-clear" class="comp-search-bar__clear" hidden><i class="fas fa-times"></i></button>
                 </div>
-                <div id="subcat-chips-row" class="comparator-cats" hidden></div>
-                <div id="subcat-store-grid" class="comparator-store-grid" role="list"></div>
-                <section id="subcat-winner" class="comparator-winner" aria-labelledby="subcat-winner-heading" hidden>
-                    <h3 id="subcat-winner-heading" class="visually-hidden">Ganador por precio unitario</h3>
-                    <i class="fas fa-trophy comparator-winner__icon" aria-hidden="true"></i>
-                    <div id="subcat-winner-body"></div>
-                </section>
-            </div>
-
-            <div id="price-table-container" hidden>
-                <div class="price-table__header">
-                    <div class="price-table__product-info" id="selected-product-info"></div>
-                    <button class="button button--secondary" id="clear-comparison">
-                        <i class="fas fa-times"></i> <span data-i18n="comparator.new_search">Nueva busqueda</span>
-                    </button>
-                </div>
-                <div class="price-table" id="price-table"></div>
-            </div>
-
-            <!-- Estado vacío -->
-            <div class="comparator__no-selection" id="no-selection">
-                <div class="empty-icon"><i class="fas fa-tags" style="color:#3b82f6;font-size:2rem;"></i></div>
-                <h3 data-i18n="comparator.empty_title">¿Que producto quieres comparar?</h3>
-                <p data-i18n="comparator.empty_subtitle">Elige categoría y subcategoría abajo, o escribe en el buscador</p>
-                <div class="empty-suggestions">
-                    <span class="empty-suggestion-chip" data-query="leche">🥛 Leche</span>
-                    <span class="empty-suggestion-chip" data-query="pan">🍞 Pan</span>
-                    <span class="empty-suggestion-chip" data-query="huevos">🥚 Huevos</span>
-                    <span class="empty-suggestion-chip" data-query="pollo">🍗 Pollo</span>
-                    <span class="empty-suggestion-chip" data-query="arroz">🍚 Arroz</span>
-                    <span class="empty-suggestion-chip" data-query="agua">💧 Agua</span>
-                </div>
+                <div id="comp-results" class="comp-results" hidden></div>
             </div>
         </div>
+
+        <div class="comp-chips" id="comp-chips">
+            <span class="comp-chip active" data-cat="">Todo</span>
+            <span class="comp-chip" data-cat="lacteos">Leche y yogur</span>
+            <span class="comp-chip" data-cat="carnes">Carnes</span>
+            <span class="comp-chip" data-cat="frutas">Frutas</span>
+            <span class="comp-chip" data-cat="verduras">Verduras</span>
+            <span class="comp-chip" data-cat="panaderia">Pan</span>
+            <span class="comp-chip" data-cat="bebidas">Bebidas</span>
+            <span class="comp-chip" data-cat="higiene">Higiene</span>
+            <span class="comp-chip" data-cat="limpieza">Limpieza</span>
+        </div>
+
+        <div id="comp-empty" class="comp-empty">
+            <i class="fas fa-balance-scale comp-empty__icon"></i>
+            <h3 class="comp-empty__title">Busca un producto para comparar</h3>
+            <p class="comp-empty__text">Escribe en el buscador o prueba una sugerencia:</p>
+            <div class="comp-empty__suggestions">
+                <span class="comp-empty__chip" data-q="leche">Leche</span>
+                <span class="comp-empty__chip" data-q="pan">Pan</span>
+                <span class="comp-empty__chip" data-q="huevos">Huevos</span>
+                <span class="comp-empty__chip" data-q="pollo">Pollo</span>
+                <span class="comp-empty__chip" data-q="arroz">Arroz</span>
+            </div>
+        </div>
+
+        <div id="comp-battle" class="comp-battle" hidden></div>
 
     </main>
 
@@ -162,13 +125,10 @@
                 <div class="footer__logo">
                     <img src="assets/images/logo.svg" alt="List & Save Logo">
                 </div>
-                <p class="footer__description" data-i18n="footer.description">
-                    La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.
-                </p>
+                <p class="footer__description" data-i18n="footer.description">La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.</p>
             </div>
-
             <div class="footer__column">
-                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rápidos</h3>
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rapidos</h3>
                 <ul class="footer__list">
                     <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
                     <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
@@ -176,23 +136,21 @@
                     <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
                 </ul>
             </div>
-
             <div class="footer__column">
                 <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
                 <ul class="footer__list">
-                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
-                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Términos y condiciones</a></li>
-                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Politica de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Terminos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Politica de cookies</a></li>
                 </ul>
             </div>
-
             <div class="footer__column">
-                <h3 class="footer__title" data-i18n="footer.social.title">Síguenos</h3>
+                <h3 class="footer__title" data-i18n="footer.social.title">Siguenos</h3>
                 <div class="footer__social">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook" data-i18n-title="footer.social.icons.facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter" data-i18n-title="footer.social.icons.twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram" data-i18n-title="footer.social.icons.instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin" data-i18n-title="footer.social.icons.linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
                 </div>
                 <p class="footer__contact">
                     <span data-i18n="footer.social.contact_info.email">Email: info@listandsave.com</span><br>
