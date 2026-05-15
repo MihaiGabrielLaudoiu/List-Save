@@ -5039,91 +5039,6 @@ select {
   width: 100%;
 }
 
-.price-table__row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  background: #fff;
-  border: 1.5px solid #e2e8f0;
-  margin-bottom: 0.5rem;
-  position: relative;
-  transition: box-shadow 0.15s;
-}
-.price-table__row:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-.price-table__row--best {
-  border-color: #22c55e;
-  background: linear-gradient(90deg, #f0fdf4, #fff);
-}
-
-.price-table__badge {
-  position: absolute;
-  top: -10px;
-  left: 12px;
-  background: #22c55e;
-  color: #fff;
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.price-table__super {
-  width: 90px;
-  flex-shrink: 0;
-}
-
-.price-table__logo {
-  height: 28px;
-  max-width: 80px;
-  object-fit: contain;
-}
-
-.price-table__emoji {
-  font-size: 1.4rem;
-}
-
-.price-table__super-name {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #475569;
-}
-
-.price-table__details {
-  flex: 1;
-  min-width: 0;
-}
-
-.price-table__format {
-  font-size: 0.88rem;
-  color: #334155;
-}
-
-.price-table__price-col {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.price-table__price {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #1e293b;
-}
-
-.price-table__ref {
-  font-size: 0.75rem;
-  color: #6366f1;
-}
-
-.price-table__action {
-  flex-shrink: 0;
-}
-
 .comparator__sync {
   display: flex;
   align-items: center;
@@ -5143,10 +5058,6 @@ select {
 .comparator__search-wrapper {
   position: relative;
   z-index: 30;
-}
-
-.comparator__search-input {
-  /* compatibilidad con marcado antiguo */
 }
 
 .comparator__variants {

@@ -63,14 +63,32 @@
                 <div id="user-menu" style="display: none;" class="header__user-menu">
                     <div class="header__user-menu-content">
                         <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
-                        <div class="header__user-menu-buttons">
+<div class="header__user-menu-buttons">
                             <button class="header__user-button" onclick="window.location.href='ajustes.html'">
                                 <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
                             </button>
                             <button class="header__user-button" onclick="cerrarSesion()">
                                 <i class="fas fa-sign-out-alt"></i> <span data-i18n="auth.logout">Cerrar sesión</span>
                             </button>
-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <section class="page-hero page-hero--comparator">
+            <div class="page-hero__inner">
+                <h1 class="page-hero__title" data-i18n="comparator.hero_title">Compara precios al instante</h1>
+                <p class="page-hero__subtitle" data-i18n="comparator.hero_subtitle">Selecciona una categoría o busca un producto</p>
+                <div class="page-hero__search-box comparator__search-wrapper">
+                    <input type="text" id="search-main" data-i18n-placeholder="comparator.search_placeholder" placeholder="¿Qué producto buscas? Ej: leche, pan, huevos..." autocomplete="off">
+                    <div class="comparator__search-results" id="results-main" hidden></div>
+                </div>
+            </div>
+        </section>
         </section>
                 </div>
             </div>
