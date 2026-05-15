@@ -66,8 +66,19 @@
 }
 
 .stores {
-    padding: var(--spacing-xl) var(--spacing-md);
-    background-color: var(--color-white);
+    padding: 3.5rem var(--spacing-md);
+    background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+    position: relative;
+}
+
+.stores::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.2), transparent);
 }
 
 /* Footer */

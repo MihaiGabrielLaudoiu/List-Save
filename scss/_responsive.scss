@@ -1193,99 +1193,62 @@ main {
 
 // Estilos para la página de productos
 .products-page {
-    padding: 0 0 var(--spacing-xl);
-
     @media screen and (max-width: $tablet-sm) {
-        padding: 0 0 var(--spacing-lg);
-    }
-
-    .section-title {
-        text-align: center;
-        margin-bottom: var(--spacing-md);
-        font-size: 2rem;
-        
-        @media screen and (max-width: $tablet-sm) {
-            font-size: 1.5rem;
-            margin-bottom: var(--spacing-sm);
+        .products-search__wrapper {
+            padding: 1rem;
+            border-radius: 16px;
         }
-    }
 
-    .section-subtitle {
-        text-align: center;
-        color: var(--color-text-light);
-        margin-bottom: var(--spacing-xl);
-        
-        @media screen and (max-width: $tablet-sm) {
-            margin-bottom: var(--spacing-lg);
-            font-size: 0.9rem;
+        .products-search__bar .products-search__input {
+            min-height: 46px;
+            font-size: 0.95rem;
+            padding-left: 2.5rem;
+        }
+
+        .products-search__icon {
+            left: 0.85rem;
+        }
+
+        .products-filters-row {
+            gap: 0.4rem;
+        }
+
+        .products-search__input--sm {
+            max-width: 100%;
+            flex: 1 1 70px;
         }
     }
 }
 
 
-// Buscador de productos
 .products-search {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--spacing-md);
-    
+    max-width: 100%;
+    margin: 0;
+
     &__wrapper {
-        display: flex;
-        gap: var(--spacing-md);
-        
         @media screen and (max-width: $tablet-sm) {
-            flex-direction: column;
-            gap: var(--spacing-sm);
+            padding: 1rem;
         }
     }
     
     &__input {
         flex: 1;
-        padding: var(--spacing-sm) var(--spacing-md);
-        border: 1px solid var(--color-border);
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        min-width: 200px;
-        
-        &:focus {
-            outline: none;
-            border-color: var(--color-primary);
+        min-width: 0;
+
+        @media screen and (max-width: $tablet-sm) {
+            min-width: 100%;
         }
     }
     
     &__category {
-        min-width: 200px;
-        padding: var(--spacing-sm) var(--spacing-md);
-        border: 1px solid var(--color-border);
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        background: var(--color-white);
-        
-        &:focus {
-            outline: none;
-            border-color: var(--color-primary);
+        @media screen and (max-width: $tablet-sm) {
+            flex: 1 1 110px;
+            min-width: 0;
         }
     }
 }
 
-// Grids de productos
-.featured-products,
-.product-categories,
-.all-products {
-    padding: var(--spacing-xl) 0;
-    
-    @media screen and (max-width: $tablet-sm) {
-        padding: var(--spacing-lg) 0;
-    }
-}
-
-.featured-products__grid,
-.product-categories__grid,
 .all-products__grid {
-    display: grid;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-lg);
-    
     @media screen and (min-width: $desktop) {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -1296,44 +1259,25 @@ main {
     
     @media screen and (max-width: $tablet) and (min-width: $mobile) {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
     
     @media screen and (max-width: $mobile) {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
 }
 
-// Filtros
 .all-products__filters {
-    display: flex;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-lg);
-    flex-wrap: wrap;
-    justify-content: center;
-    
     @media screen and (max-width: $tablet-sm) {
-        gap: var(--spacing-xs);
-        margin-bottom: var(--spacing-md);
+        flex-wrap: wrap;
     }
 }
 
 .filter-button {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    background: var(--color-white);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    
-    &:hover {
-        background: var(--color-background);
-        border-color: var(--color-primary);
-    }
-    
-    &.active {
-        background: var(--color-primary);
-        color: var(--color-white);
-        border-color: var(--color-primary);
+    @media screen and (max-width: $tablet-sm) {
+        padding: 0.45rem 0.75rem;
+        font-size: 0.8rem;
     }
 }
 
