@@ -9,7 +9,11 @@ const listsRoutes = require("./backend/modules/lists/lists.routes");
 const settingsRoutes = require("./backend/modules/settings/settings.routes");
 const statsRoutes = require("./backend/modules/stats/stats.routes");
 
+const logger = require("./backend/utils/logger");
+const sentry = require("./backend/utils/sentry");
+
 dotenv.config();
+sentry.init();
 
 const app = express();
 app.set("trust proxy", 1);
@@ -18,6 +22,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(logger.requestMiddleware);
 
 const publicRoot = path.join(__dirname);
 app.use(
@@ -46,11 +52,19 @@ app.use("/api/lists", listsRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/stats", statsRoutes);
 
+app.use(sentry.errorHandler);
+
 app.use(function (err, req, res, next) {
-  console.error("Error no controlado:", err);
+  logger.error("Error no controlado", {
+    message: err.message,
+    stack: err.stack,
+    path: req.originalUrl,
+    method: req.method
+  });
+  sentry.captureException(err, req);
   res.status(500).json({ message: "Error interno del servidor" });
 });
 
 app.listen(PORT, function () {
-  console.log("Servidor iniciado en http://localhost:" + PORT);
+  logger.info("Servidor iniciado", { port: PORT, env: process.env.NODE_ENV || "development" });
 });
