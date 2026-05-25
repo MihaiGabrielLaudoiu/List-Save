@@ -38,13 +38,6 @@
   --accent-lt: #1e3a5f;
 }
 
-/* ── WRAPPER ── */
-.notepad-wrapper {
-  max-width: 860px;
-  margin: 0 auto 3rem;
-  padding: 0 16px;
-}
-
 /* ── BLOC DE NOTAS ── */
 .notepad {
   position: relative;
@@ -461,6 +454,57 @@
 .btn-cancel { background: var(--chip-bg); color: var(--text); }
 .btn-danger { background: var(--danger); color: #fff; }
 .btn-cancel:focus-visible, .btn-danger:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ── MODAL CON INPUT ── */
+.modal-input {
+  display: block; width: 100%; box-sizing: border-box;
+  padding: 16px 20px; margin: 0 0 20px;
+  font-size: var(--base); font-family: inherit;
+  border: 2px solid var(--border); border-radius: 14px;
+  background: #fff; color: var(--text);
+  text-align: center;
+  transition: border-color .15s;
+}
+[data-high-contrast="true"] .modal-input { background: #334155; border-color: #475569; }
+.modal-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn-primary:hover { background: var(--accent-dk); }
+
+/* ── TOAST ── */
+.ls-toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1e293b; color: #fff;
+  padding: 14px 28px; border-radius: 14px;
+  font-size: 18px; font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  z-index: 2000; white-space: nowrap;
+  max-width: calc(100vw - 40px);
+  text-align: center; pointer-events: none;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+  opacity: 0;
+}
+.ls-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+[data-high-contrast="true"] .ls-toast { background: var(--accent); }
+
+/* ── ITEM ENTRADA ── */
+@keyframes itemIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.lista-item { animation: itemIn .22s ease; }
+.lista-item.item-new {
+  background: rgba(37,99,235,.06);
+  border-radius: 8px;
+}
+
+/* ── NOTEPAD CENTRADO ── */
+.notepad-wrapper {
+  max-width: 820px;
+  margin: 0 auto 4rem;
+  padding: 0 20px;
+}
 
 /* ── CONTRAST TOGGLE PRESSED STATE ── */
 #contrast-toggle[aria-pressed="true"],
@@ -893,6 +937,62 @@
     return -1;
   }
 
+  /* ─── TOAST ─────────────────────────────── */
+  var _toastTimer = null;
+  function showToast(msg) {
+    var t = document.querySelector('.ls-toast');
+    if (!t) { t = document.createElement('div'); t.className = 'ls-toast'; document.body.appendChild(t); }
+    t.textContent = msg;
+    clearTimeout(_toastTimer);
+    t.classList.remove('show');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        t.classList.add('show');
+        _toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2600);
+      });
+    });
+  }
+
+  /* ─── MODAL CON INPUT ──────────────────── */
+  function showInputModal(icon, title, placeholder, confirmLabel, onConfirm) {
+    var existing = document.querySelector('.modal-overlay');
+    if (existing) existing.remove();
+
+    var overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-labelledby', 'modal-ttl');
+    overlay.innerHTML =
+      '<div class="modal-box">' +
+      '<div class="modal-icon" aria-hidden="true">' + icon + '</div>' +
+      '<h3 class="modal-title" id="modal-ttl">' + esc(title) + '</h3>' +
+      '<input type="text" class="modal-input" id="modalInp" placeholder="' + esc(placeholder) + '" maxlength="40" autocomplete="off" aria-label="' + esc(title) + '">' +
+      '<div class="modal-actions">' +
+      '<button class="btn-cancel" id="mCancel">Cancelar</button>' +
+      '<button class="btn-primary" id="mConfirm">' + esc(confirmLabel) + '</button>' +
+      '</div></div>';
+    document.body.appendChild(overlay);
+
+    var inp = overlay.querySelector('#modalInp');
+    inp.focus();
+
+    function close(ok) {
+      var val = inp.value.trim();
+      overlay.remove();
+      document.removeEventListener('keydown', onKey);
+      if (ok && val && onConfirm) onConfirm(val);
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') close(false);
+      if (e.key === 'Enter') { e.preventDefault(); close(true); }
+    }
+    overlay.querySelector('#mCancel').addEventListener('click', function () { close(false); });
+    overlay.querySelector('#mConfirm').addEventListener('click', function () { close(true); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(false); });
+    document.addEventListener('keydown', onKey);
+  }
+
   /* ─── MODAL ─────────────────────────────── */
   function showModal(icon, title, msg, dangerLabel, onConfirm) {
     var existing = document.querySelector('.modal-overlay');
@@ -957,8 +1057,10 @@
 
   /* ─── CREAR LISTA ───────────────────────── */
   function promptNewList() {
-    var name = prompt('Nombre de la nueva lista:');
-    if (name && name.trim()) createList(name.trim());
+    showInputModal('📋', 'Nueva lista de la compra', 'Ej: Semana, Cumpleaños, Mercado…', 'Crear lista', function (name) {
+      createList(name);
+      showToast('✓ Lista "' + name + '" creada');
+    });
   }
 
   async function createList(name) {
@@ -1082,6 +1184,18 @@
     searchEl.value = '';
     hideSuggestions();
     render();
+
+    showToast('✓ ' + name + ' añadido');
+
+    /* Resalta brevemente el nuevo item (último de la lista filtrada) */
+    setTimeout(function () {
+      var items = itemsEl.querySelectorAll('.lista-item');
+      var last = items[items.length - 1];
+      if (last) {
+        last.classList.add('item-new');
+        setTimeout(function () { last.classList.remove('item-new'); }, 1200);
+      }
+    }, 40);
   }
 
   /* ─── ALTO CONTRASTE ────────────────────── */
