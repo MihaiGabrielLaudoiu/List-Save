@@ -1,4 +1,3 @@
-// Cliente Redis opcional (en Docker: REDIS_HOST=redis). Si no hay host, getRedis() devuelve null.
 const Redis = require("ioredis");
 
 let client = null;
@@ -11,6 +10,7 @@ function getRedis() {
     client = new Redis({
       host: process.env.REDIS_HOST,
       port: Number(process.env.REDIS_PORT || 6379),
+      password: process.env.REDIS_PASSWORD || undefined,
       maxRetriesPerRequest: 2,
       enableReadyCheck: true,
     });

@@ -3,21 +3,572 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="menu.my_list">Mi Lista de la Compra - L&S</title>
+    <title>Mi Lista de la Compra - L&S</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <!-- Hotjar Tracking Code for https://listandsave.laudoiu.com/ -->
-    <script>
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:5301097,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="084adb18-3e66-41fb-bbf6-d6fd0d0eca81"></script>
+=======
+    <style>
+:root {
+  --notebook-bg: #fdfcf7;
+  --notebook-line: #d6dff5;
+  --notebook-margin: #c0392b;
+  --notebook-shadow: 0 8px 32px rgba(0,0,0,0.07);
+  --notebook-radius: 6px;
+  --chip-bg: #eef2f7;
+  --chip-active: #2563eb;
+  --chip-active-text: #fff;
+  --text-on-notebook: #1e293b;
+  --text-muted: #64748b;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --line-height: 44px;
+}
+
+.notepad-wrapper {
+  max-width: 820px;
+  margin: 0 auto 2rem;
+  padding: 0 12px;
+}
+
+/* ── BLOC DE NOTAS ── */
+.notepad {
+  position: relative;
+  background: var(--notebook-bg);
+  border-radius: var(--notebook-radius);
+  box-shadow: var(--notebook-shadow);
+  padding: 28px 20px 20px 56px;
+  min-height: 340px;
+  overflow: hidden;
+}
+@media (min-width: 520px) {
+  .notepad { padding: 32px 28px 24px 64px; }
+}
+
+/* Líneas pautadas */
+.notepad::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 39px,
+    var(--notebook-line) 39px,
+    var(--notebook-line) 40px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Margen rojo izquierdo */
+.notepad::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 40px;
+  width: 3px; height: 100%;
+  background: var(--notebook-margin);
+  pointer-events: none;
+  z-index: 1;
+}
+@media (min-width: 520px) {
+  .notepad::after { left: 48px; }
+}
+
+/* Esquina doblada */
+.notepad .fold {
+  position: absolute;
+  top: 0; right: 0;
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.04) 50%);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 0 var(--notebook-radius) 0 0;
+}
+.notepad .fold::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 36px 36px 0;
+  border-color: transparent var(--notebook-bg) transparent transparent;
+  z-index: 3;
+  filter: drop-shadow(-2px 2px 3px rgba(0,0,0,0.06));
+}
+
+.notepad > * { position: relative; z-index: 4; }
+.fab-global { display: none !important; }
+
+/* ── TABS ── */
+.list-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 12px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+.list-tabs::-webkit-scrollbar { display: none; }
+.list-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.3;
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  min-height: 44px;
+  font-family: inherit;
+  color: inherit;
+}
+.list-tab:hover { background: #e2e8f0; }
+.list-tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.list-tab .close-tab {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: none; background: rgba(255,255,255,0.25);
+  color: inherit; font-size: 14px; cursor: pointer;
+  line-height: 1; padding: 0;
+  margin-left: 2px;
+}
+.list-tab.active .close-tab { background: rgba(255,255,255,0.3); }
+.list-tab .close-tab:hover { background: rgba(0,0,0,0.12); }
+.list-tab-add {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2px dashed #94a3b8;
+  background: transparent;
+  color: #64748b;
+  font-size: 22px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.list-tab-add:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── CHIPS ── */
+.chip-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 12px 0 10px;
+}
+.chip-row::-webkit-scrollbar { display: none; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  font-size: 15px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: var(--chip-bg);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s;
+  min-height: 40px;
+  font-family: inherit;
+  color: inherit;
+}
+.chip:hover { background: #e2e8f0; }
+.chip.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ── SEARCH ── */
+.search-wrap {
+  position: relative;
+  margin: 8px 0 4px;
+}
+.search-wrap input {
+  display: block;
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  font-size: 18px;
+  font-family: inherit;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  transition: border-color 0.15s;
+  min-height: 56px;
+}
+.search-wrap input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+.search-wrap .search-icon {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 20px;
+  pointer-events: none;
+}
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  z-index: 20;
+  max-height: 260px;
+  overflow-y: auto;
+  display: none;
+}
+.suggestions.show { display: block; }
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+.suggestion-item:hover,
+.suggestion-item:focus-visible {
+  background: #f1f5f9;
+  outline: none;
+}
+.suggestion-item .s-price { color: var(--accent); font-weight: 600; white-space: nowrap; }
+
+/* ── LISTA (notebook rows) ── */
+.lista-items {
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.lista-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--line-height);
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  font-size: 18px;
+  line-height: 1.4;
+}
+@media (min-width: 480px) {
+  .lista-item { font-size: 20px; gap: 12px; }
+}
+.lista-item:last-child { border-bottom: none; }
+
+
+
+.lista-item .item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  color: var(--text-on-notebook);
+}
+
+.lista-item .qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+.lista-item .qty-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-on-notebook);
+  font-family: inherit;
+  transition: background 0.1s;
+  padding: 0;
+  line-height: 1;
+}
+.lista-item .qty-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.lista-item .qty-btn:hover:not(:disabled) { background: #f1f5f9; }
+.lista-item .qty-btn:disabled { opacity: 0.3; cursor: default; }
+.lista-item .qty-btn.qty-minus {
+  border-radius: 8px 0 0 8px;
+}
+.lista-item .qty-btn.qty-plus {
+  border-radius: 0 8px 8px 0;
+}
+.lista-item .qty-val {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 40px;
+  border-top: 1px solid #cbd5e1;
+  border-bottom: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-on-notebook);
+  padding: 0 4px;
+}
+@media (min-width: 480px) {
+  .lista-item .qty-btn { width: 44px; height: 44px; font-size: 22px; }
+  .lista-item .qty-val { min-width: 40px; height: 44px; font-size: 20px; }
+}
+
+.lista-item .item-price {
+  text-align: right;
+  font-weight: 600;
+  color: var(--text-on-notebook);
+  flex-shrink: 0;
+  min-width: 72px;
+  white-space: nowrap;
+}
+@media (min-width: 480px) { .lista-item .item-price { min-width: 82px; } }
+
+.lista-item .item-store {
+  font-size: 14px;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-weight: 500;
+  display: none;
+}
+@media (min-width: 480px) { .lista-item .item-store { display: inline-block; } }
+
+.lista-item .item-del {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: all 0.1s;
+}
+.lista-item .item-del:hover,
+.lista-item .item-del:focus-visible {
+  color: var(--danger);
+  background: #fee2e2;
+  outline: none;
+}
+
+/* ── TOTAL ── */
+.total-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 4px;
+  margin-top: 4px;
+  border-top: 2px solid #334155;
+  font-size: 20px;
+}
+@media (min-width: 480px) { .total-row { font-size: 22px; } }
+.total-row .total-label { font-weight: 500; color: var(--text-muted); }
+.total-row .total-amount { font-weight: 700; color: var(--text-on-notebook); font-size: 1.2em; }
+
+/* ── ADD BAR ── */
+.add-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  align-items: stretch;
+}
+.add-bar .search-wrap { flex: 1; margin: 0; }
+.add-bar .search-wrap input { min-height: 56px; font-size: 18px; padding: 12px 16px 12px 44px; }
+.add-bar button {
+  min-height: 56px;
+  padding: 0 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.add-bar button:hover { background: #1d4ed8; }
+.add-bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state p { font-size: 18px; margin: 0; }
+
+/* ── SELLO DE TOTAL ── */
+.total-stamp {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 374px) {
+  .notepad { padding: 20px 12px 16px 38px; }
+  .notepad::after { left: 24px; }
+  .notepad::before { background: repeating-linear-gradient(transparent,transparent 39px,var(--notebook-line) 39px,var(--notebook-line) 40px); }
+  .lista-item { font-size: 16px; gap: 4px; }
+  .lista-item .qty-btn { width: 34px; height: 36px; font-size: 17px; }
+  .lista-item .qty-val { min-width: 30px; height: 36px; font-size: 16px; }
+  .lista-item .item-price { min-width: 60px; font-size: 15px; }
+  .add-bar { flex-direction: column; }
+  .add-bar button { width: 100%; }
+}
+
+@media (min-width: 375px) and (max-width: 479px) {
+  .lista-item { font-size: 17px; }
+  .lista-item .qty-btn { width: 36px; height: 38px; }
+  .lista-item .qty-val { min-width: 32px; height: 38px; }
+  .add-bar { flex-direction: column; }
+  .add-bar button { width: 100%; }
+  .notepad { padding: 24px 14px 18px 44px; }
+  .notepad::after { left: 32px; }
+}
+
+@media (min-width: 768px) {
+  .notepad { padding: 36px 36px 28px 72px; }
+  .notepad::after { left: 56px; }
+  .add-bar { flex-direction: row; }
+  .add-bar button { width: auto; }
+}
+
+/* ── ALTO CONTRASTE ── */
+[data-high-contrast="true"] .notepad {
+  background: #1a1a2e;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+[data-high-contrast="true"] .notepad::before {
+  background: repeating-linear-gradient(
+    transparent, transparent 39px,
+    rgba(124,180,255,0.15) 39px,
+    rgba(124,180,255,0.15) 40px
+  );
+}
+[data-high-contrast="true"] .notepad::after { background: #ff6b6b; }
+[data-high-contrast="true"] .fold::before { border-color: transparent #1a1a2e transparent transparent; }
+[data-high-contrast="true"] .lista-item .item-name { color: #f1f5f9; }
+[data-high-contrast="true"] .lista-item .item-price { color: #f1f5f9; }
+[data-high-contrast="true"] .lista-item .qty-btn,
+[data-high-contrast="true"] .lista-item .qty-val { background: #16213e; border-color: #334155; color: #f1f5f9; }
+[data-high-contrast="true"] .lista-item .item-store { background: #1e3a5f; color: #7cb4ff; }
+[data-high-contrast="true"] .total-row { border-top-color: #475569; }
+[data-high-contrast="true"] .total-amount { color: #f1f5f9; }
+[data-high-contrast="true"] .list-tab { background: #1e293b; border-color: #334155; color: #f1f5f9; }
+[data-high-contrast="true"] .list-tab.active { background: #7cb4ff; color: #0f172a; }
+[data-high-contrast="true"] .list-tab-add { border-color: #475569; color: #94a3b8; }
+[data-high-contrast="true"] .chip { background: #1e293b; border-color: #334155; color: #f1f5f9; }
+[data-high-contrast="true"] .chip.active { background: #7cb4ff; color: #0f172a; }
+[data-high-contrast="true"] .search-wrap input { background: #1e293b; border-color: #475569; color: #f1f5f9; }
+[data-high-contrast="true"] .suggestions { background: #1e293b; border-color: #475569; }
+[data-high-contrast="true"] .suggestion-item:hover { background: #334155; }
+[data-high-contrast="true"] .suggestion-item .s-price { color: #7cb4ff; }
+[data-high-contrast="true"] .add-bar button { background: #7cb4ff; color: #0f172a; }
+
+/* ── MODAL INLINE ── */
+.inline-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.inline-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px 20px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  text-align: center;
+}
+.inline-modal h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--text-on-notebook);
+}
+.inline-modal p {
+  margin: 0 0 20px;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.inline-modal .modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.inline-modal .modal-actions button {
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  min-width: 100px;
+}
+.inline-modal .modal-actions .btn-cancel {
+  background: #f1f5f9;
+  color: #334155;
+}
+.inline-modal .modal-actions .btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+[data-high-contrast="true"] .inline-modal { background: #1e293b; }
+[data-high-contrast="true"] .inline-modal h3 { color: #f1f5f9; }
+[data-high-contrast="true"] .inline-modal .modal-actions .btn-cancel { background: #334155; color: #f1f5f9; }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -42,7 +593,6 @@
             </a>
             <nav class="header__nav nav">
                 <ul class="nav__list">
-                    
                     <li class="nav__item"><a href="./mi-lista.html" class="nav__link nav__link--active" data-i18n="menu.my_list">Mi lista</a></li>
                     <li class="nav__item"><a href="./comparador.html" class="nav__link" data-i18n="menu.comparator">Comparador</a></li>
                     <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
@@ -75,79 +625,58 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </header>
 
-    <main id="main-content" class="list-page-main">
+    <main id="main-content">
         <section class="page-hero">
             <div class="page-hero__inner">
                 <h1 class="page-hero__title" data-i18n="my_list_page.hero_title">Mis listas de la compra</h1>
-                <p class="page-hero__subtitle" data-i18n="my_list_page.hero_subtitle">Varias listas con nombre y la tienda donde sale más barato</p>
+                <p class="page-hero__subtitle" data-i18n="my_list_page.hero_subtitle">Varias listas con nombre y la tienda donde sale m&aacute;s barato</p>
             </div>
         </section>
 
-        <div class="shopping-list shopping-list--notepad">
-            <div class="list-tabs" id="list-tabs" role="tablist" aria-label="Listas"></div>
+        <div class="notepad-wrapper">
+            <div class="notepad" role="region" aria-label="Lista de la compra">
+                <div class="fold"></div>
 
-            <div class="list-controls">
-                <h2 class="list-title" id="list-title">Mi lista</h2>
-                <div class="list-controls__actions">
-                    <button type="button" class="button button--secondary" id="btn-rename-list" data-i18n="my_list_page.rename_list">Renombrar</button>
-                    <button type="button" class="button button--primary" id="btn-new-list" data-i18n="my_list_page.new_list">Nueva lista</button>
-                    <button type="button" class="button button--secondary" id="btn-delete-list" data-i18n="my_list_page.delete_list">Eliminar lista</button>
+                <div class="list-tabs" id="listTabs" role="tablist" aria-label="Tus listas"></div>
+
+                <div class="chip-row" id="chipRow" role="tablist" aria-label="Filtrar por categoría">
+                    <button class="chip active" data-cat="" role="tab" aria-selected="true">🔍 Todo</button>
+                    <button class="chip" data-cat="lacteos" role="tab">🥛 Lácteos</button>
+                    <button class="chip" data-cat="carnes" role="tab">🥩 Carnes</button>
+                    <button class="chip" data-cat="huevos" role="tab">🥚 Huevos</button>
+                    <button class="chip" data-cat="fruta-verdura" role="tab">🍎 Fruta/Verdura</button>
+                    <button class="chip" data-cat="panaderia" role="tab">🍞 Panadería</button>
+                    <button class="chip" data-cat="bebidas" role="tab">🧃 Bebidas</button>
+                    <button class="chip" data-cat="arroces-pasta" role="tab">🍚 Arroz/Pasta</button>
+                    <button class="chip" data-cat="aceites" role="tab">🫒 Aceites</button>
+                    <button class="chip" data-cat="higiene" role="tab">🧴 Higiene</button>
+                    <button class="chip" data-cat="limpieza" role="tab">🧹 Limpieza</button>
                 </div>
-            </div>
 
-            <div class="list-add-wizard" id="list-add-wizard">
-                <p class="list-add-wizard__title" data-i18n="my_list_page.wizard_title">Añadir por categoría (mejor precio)</p>
-                <div id="list-wizard-step-label" class="list-add-wizard__title" style="font-weight:600;font-size:0.85rem;"></div>
-                <div class="list-add-wizard__tiles" id="list-wizard-tiles" aria-live="polite"></div>
-                <button type="button" class="button button--secondary" id="list-wizard-reset" data-i18n="my_list_page.wizard_reset">Empezar de nuevo</button>
-            </div>
-
-            <table class="shopping-table">
-                <thead>
-                    <tr>
-                        <th data-i18n="my_list_page.col_product">Producto</th>
-                        <th data-i18n="my_list_page.col_qty">Cantidad</th>
-                        <th data-i18n="my_list_page.col_brand">Marca</th>
-                        <th data-i18n="my_list_page.col_unit_price">Precio unit.</th>
-                        <th data-i18n="my_list_page.col_line_total">Total</th>
-                        <th data-i18n="my_list_page.col_best_store">Comprar en</th>
-                        <th data-i18n="my_list_page.col_actions">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody id="list-tbody">
-                    <tr><td colspan="7" class="shopping-table__empty">…</td></tr>
-                </tbody>
-                <tfoot id="list-tfoot" class="shopping-table__tfoot" hidden>
-                    <tr class="shopping-table__total-row">
-                        <td colspan="4" data-i18n="my_list_page.total_label">Total lista</td>
-                        <td id="list-total-amount" colspan="1">—</td>
-                        <td colspan="2"></td>
-                    </tr>
-                </tfoot>
-            </table>
-
-            <div class="list-cats" id="list-cats">
-                <span class="cat-chip active" data-cat="">🔍 Todo</span>
-                <span class="cat-chip" data-cat="lacteos">🥛 Lácteos</span>
-                <span class="cat-chip" data-cat="carnes">🥩 Carnes</span>
-                <span class="cat-chip" data-cat="frutas">🍎 Frutas</span>
-                <span class="cat-chip" data-cat="verduras">🥦 Verduras</span>
-                <span class="cat-chip" data-cat="panaderia">🍞 Panadería</span>
-                <span class="cat-chip" data-cat="bebidas">🧃 Bebidas</span>
-                <span class="cat-chip" data-cat="higiene">🧴 Higiene</span>
-                <span class="cat-chip" data-cat="limpieza">🧹 Limpieza</span>
-            </div>
-
-            <div class="add-item">
-                <div class="add-item__search">
-                    <input type="text" id="add-item-input" data-i18n="my_list_page.add_placeholder" placeholder="Busca un producto para añadir..." autocomplete="off">
-                    <div class="add-item__suggestions" id="add-item-suggestions" hidden></div>
+                <div class="add-bar">
+                    <div class="search-wrap">
+                        <span class="search-icon"><i class="fas fa-search"></i></span>
+                        <input type="text" id="searchInput" placeholder="Buscar producto para añadir..." autocomplete="off" aria-label="Buscar producto">
+                        <div class="suggestions" id="suggestions"></div>
+                    </div>
+                    <button type="button" id="addBtn" aria-label="Añadir producto">Añadir</button>
                 </div>
-                <button type="button" class="button button--primary" id="add-item-btn" data-i18n="my_list_page.add_btn">Incluir</button>
+
+                <div id="listaContainer">
+                    <ul class="lista-items" id="listaItems"></ul>
+                    <div class="total-row" id="totalRow">
+                        <span class="total-label">Total:</span>
+                        <span class="total-amount" id="totalAmount">0,00 €</span>
+                    </div>
+                </div>
+
+                <div class="empty-state" id="emptyState" hidden>
+                    <div class="empty-icon">📋</div>
+                    <p>Tu lista está vacía. Añade productos desde el buscador o la categorías.</p>
+                </div>
             </div>
         </div>
     </main>
@@ -163,9 +692,8 @@
                     La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.
                 </p>
             </div>
-            
             <div class="footer__column">
-                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rápidos</h3>
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces r&aacute;pidos</h3>
                 <ul class="footer__list">
                     <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
                     <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
@@ -173,24 +701,21 @@
                     <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
                 </ul>
             </div>
-            
             <div class="footer__column">
                 <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
                 <ul class="footer__list">
-                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
-                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Términos y condiciones</a></li>
-                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Pol&iacute;tica de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">T&eacute;rminos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Pol&iacute;tica de cookies</a></li>
                 </ul>
             </div>
-            
             <div class="footer__column">
-                <h3 class="footer__title" data-i18n="footer.social.title">Síguenos</h3>
+                <h3 class="footer__title" data-i18n="footer.social.title">S&iacute;guenos</h3>
                 <div class="footer__social">
                     <a href="#" class="social-icon"><i class="fab fa-facebook" data-i18n-title="footer.social.icons.facebook"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-twitter" data-i18n-title="footer.social.icons.twitter"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-instagram" data-i18n-title="footer.social.icons.instagram"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-linkedin" data-i18n-title="footer.social.icons.linkedin"></i></a>
-
                 </div>
                 <p class="footer__contact">
                     <span data-i18n="footer.social.contact_info.email">Email: info@listandsave.com</span><br>
@@ -202,7 +727,7 @@
             <p data-i18n="footer.copyright">&copy; List & Save. Todos los derechos reservados.</p>
         </div>
     </footer>
-    
+
     <script src="js/api.js"></script>
     <script src="js/session.js"></script>
     <script src="js/translations.js"></script>
@@ -213,7 +738,577 @@
     <script src="js/animations.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/fab-global.js"></script>
-    <script src="js/list-context.js"></script>
-    <script src="js/mi-lista.js"></script>
-</body>
-</html> 
+    <script src="js/demo.js"></script>
+
+    <script>
+(function () {
+  'use strict';
+
+  /* ── DEMO DATA ── */
+  var DEMO_LISTS = [
+    { id: 1, name: 'Mi lista', items: [
+      { name: 'Leche entera', qty: 2, price: 0.95, store: 'Mercadona', cat: 'lacteos', emoji: '🥛' },
+      { name: 'Pan de molde', qty: 1, price: 1.30, store: 'Mercadona', cat: 'panaderia', emoji: '🍞' },
+      { name: 'Huevos talla M', qty: 1, price: 2.35, store: 'Mercadona', cat: 'huevos', emoji: '🥚' },
+      { name: 'Tomate pera', qty: 3, price: 1.85, store: 'Mercadona', cat: 'fruta-verdura', emoji: '🍅' },
+      { name: 'Yogur natural', qty: 2, price: 1.25, store: 'Carrefour', cat: 'lacteos', emoji: '🥛' },
+      { name: 'Arroz redondo', qty: 1, price: 1.20, store: 'Mercadona', cat: 'arroces-pasta', emoji: '🍚' },
+      { name: 'Aceite oliva V.E.', qty: 1, price: 8.95, store: 'Carrefour', cat: 'aceites', emoji: '🫒' },
+      { name: 'Pechuga pollo', qty: 2, price: 3.45, store: 'Mercadona', cat: 'carnes', emoji: '🍗' },
+      { name: 'Agua mineral', qty: 2, price: 0.45, store: 'Eroski', cat: 'bebidas', emoji: '💧' },
+      { name: 'Papel higiénico', qty: 1, price: 3.20, store: 'Mercadona', cat: 'higiene', emoji: '🧻' },
+    ]},
+    { id: 2, name: 'Despensa', items: [
+      { name: 'Arroz redondo', qty: 2, price: 1.20, store: 'Mercadona', cat: 'arroces-pasta', emoji: '🍚' },
+      { name: 'Aceite oliva V.E.', qty: 1, price: 8.95, store: 'Carrefour', cat: 'aceites', emoji: '🫒' },
+      { name: 'Pasta espaguetis', qty: 3, price: 0.85, store: 'Mercadona', cat: 'arroces-pasta', emoji: '🍝' },
+      { name: 'Lentejas', qty: 2, price: 1.10, store: 'Mercadona', cat: 'arroces-pasta', emoji: '🫘' },
+    ]},
+    { id: 3, name: 'Limpieza', items: [
+      { name: 'Lavavajillas past.', qty: 1, price: 6.50, store: 'Eroski', cat: 'limpieza', emoji: '🧹' },
+      { name: 'Detergente ropa', qty: 1, price: 4.95, store: 'Mercadona', cat: 'limpieza', emoji: '🧺' },
+      { name: 'Limpiador cristales', qty: 2, price: 2.30, store: 'Carrefour', cat: 'limpieza', emoji: '🪟' },
+    ]}
+  ];
+
+  var DEMO_CATALOG = [
+    { name: 'Leche entera', cat: 'lacteos', price: 0.95, store: 'Mercadona', emoji: '🥛' },
+    { name: 'Leche semidesnatada', cat: 'lacteos', price: 0.89, store: 'Mercadona', emoji: '🥛' },
+    { name: 'Yogur natural', cat: 'lacteos', price: 1.25, store: 'Mercadona', emoji: '🥛' },
+    { name: 'Yogur natural', cat: 'lacteos', price: 1.45, store: 'Carrefour', emoji: '🥛' },
+    { name: 'Mantequilla con sal', cat: 'lacteos', price: 2.85, store: 'Mercadona', emoji: '🧈' },
+    { name: 'Queso semicurado', cat: 'lacteos', price: 3.45, store: 'Mercadona', emoji: '🧀' },
+    { name: 'Pan de molde', cat: 'panaderia', price: 1.30, store: 'Mercadona', emoji: '🍞' },
+    { name: 'Pan de molde', cat: 'panaderia', price: 1.45, store: 'Carrefour', emoji: '🍞' },
+    { name: 'Galletas maría', cat: 'panaderia', price: 1.49, store: 'Mercadona', emoji: '🍪' },
+    { name: 'Croissant', cat: 'panaderia', price: 1.89, store: 'Mercadona', emoji: '🥐' },
+    { name: 'Huevos talla M', cat: 'huevos', price: 2.35, store: 'Mercadona', emoji: '🥚' },
+    { name: 'Huevos talla M', cat: 'huevos', price: 2.49, store: 'Eroski', emoji: '🥚' },
+    { name: 'Tomate pera', cat: 'fruta-verdura', price: 1.85, store: 'Mercadona', emoji: '🍅' },
+    { name: 'Tomate pera', cat: 'fruta-verdura', price: 1.99, store: 'Carrefour', emoji: '🍅' },
+    { name: 'Tomate pera', cat: 'fruta-verdura', price: 2.10, store: 'Eroski', emoji: '🍅' },
+    { name: 'Cebolla', cat: 'fruta-verdura', price: 0.99, store: 'Mercadona', emoji: '🧅' },
+    { name: 'Cebolla', cat: 'fruta-verdura', price: 1.15, store: 'Carrefour', emoji: '🧅' },
+    { name: 'Plátano Canarias', cat: 'fruta-verdura', price: 1.75, store: 'Mercadona', emoji: '🍌' },
+    { name: 'Patata', cat: 'fruta-verdura', price: 1.19, store: 'Mercadona', emoji: '🥔' },
+    { name: 'Pechuga pollo', cat: 'carnes', price: 3.45, store: 'Mercadona', emoji: '🍗' },
+    { name: 'Arroz redondo', cat: 'arroces-pasta', price: 1.20, store: 'Mercadona', emoji: '🍚' },
+    { name: 'Pasta espaguetis', cat: 'arroces-pasta', price: 0.85, store: 'Mercadona', emoji: '🍝' },
+    { name: 'Lentejas', cat: 'arroces-pasta', price: 1.10, store: 'Mercadona', emoji: '🫘' },
+    { name: 'Aceite oliva V.E.', cat: 'aceites', price: 8.95, store: 'Carrefour', emoji: '🫒' },
+    { name: 'Aceite oliva V.E.', cat: 'aceites', price: 7.50, store: 'Mercadona', emoji: '🫒' },
+    { name: 'Agua mineral', cat: 'bebidas', price: 0.45, store: 'Eroski', emoji: '💧' },
+    { name: 'Agua mineral', cat: 'bebidas', price: 0.55, store: 'Mercadona', emoji: '💧' },
+    { name: 'Papel higiénico', cat: 'higiene', price: 3.20, store: 'Mercadona', emoji: '🧻' },
+    { name: 'Detergente ropa', cat: 'limpieza', price: 4.95, store: 'Mercadona', emoji: '🧺' },
+    { name: 'Lavavajillas past.', cat: 'limpieza', price: 6.50, store: 'Eroski', emoji: '🧹' },
+    { name: 'Limpiador cristales', cat: 'limpieza', price: 2.30, store: 'Carrefour', emoji: '🪟' },
+  ];
+
+  var CAT_EMOJI = {
+    lacteos: '🥛', carnes: '🥩', huevos: '🥚', 'fruta-verdura': '🍎',
+    panaderia: '🍞', bebidas: '🧃', 'arroces-pasta': '🍚', aceites: '🫒',
+    higiene: '🧴', limpieza: '🧹'
+  };
+
+  var CAT_CHIP_MAP = {
+    lacteos: '🥛 Lácteos', carnes: '🥩 Carnes', huevos: '🥚 Huevos',
+    'fruta-verdura': '🍎 Fruta/Verdura', panaderia: '🍞 Panadería',
+    bebidas: '🧃 Bebidas', 'arroces-pasta': '🍚 Arroz/Pasta',
+    aceites: '🫒 Aceites', higiene: '🧴 Higiene', limpieza: '🧹 Limpieza'
+  };
+
+  /* ── STATE ── */
+  var lists = [];
+  var activeListId = null;
+  var activeCat = '';
+  var isDemo = false;
+
+  /* ── DOM REFS (assigned in init) ── */
+  var $ = function (id) { return document.getElementById(id); };
+  var tabsEl, chipRow, itemsEl, totalEl, emptyEl, searchInput, suggestionsEl, addBtn, listaContainer;
+
+  /* ── HELPERS ── */
+  function fmtEuro(n) {
+    if (n == null || isNaN(n)) return '—';
+    return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+  }
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function nextId() {
+    return Date.now() + Math.floor(Math.random() * 1000);
+  }
+
+  /* ── DEMO / API LOAD ── */
+  function loadDemo() {
+    isDemo = true;
+    lists = DEMO_LISTS.map(function (l) {
+      return { id: l.id, name: l.name, items: l.items.map(function (it) { return Object.assign({}, it); }) };
+    });
+    activeListId = lists.length > 0 ? lists[0].id : null;
+    render();
+  }
+
+  async function loadFromApi() {
+    try {
+      if (typeof ApiClient === 'undefined' || !ApiClient.get) {
+        loadDemo();
+        return;
+      }
+      var data = await ApiClient.get('/api/lists/cabeceras');
+      var cabeceras = data.cabeceras || [];
+      if (cabeceras.length === 0) { loadDemo(); return; }
+
+      isDemo = false;
+      lists = [];
+      for (var i = 0; i < cabeceras.length; i++) {
+        var c = cabeceras[i];
+        var itemsData = await ApiClient.get('/api/lists/mine?cabecera_id=' + c.cabecera_id);
+        var apiItems = (itemsData.items || []).map(function (it) {
+          var cat = it.categoria || '';
+          return {
+            name: it.nombre || 'Producto',
+            qty: Number(it.cantidad) || 1,
+            price: Number(it.mejor_precio) || 0,
+            store: it.mejor_tienda || '—',
+            cat: cat,
+            emoji: CAT_EMOJI[cat] || '🛒',
+            _listId: it.list_id,
+            _apiMode: true
+          };
+        });
+        lists.push({ id: c.cabecera_id, name: c.nombre, cabecera_id: c.cabecera_id, items: apiItems });
+      }
+      activeListId = lists.length > 0 ? lists[0].id : null;
+      render();
+    } catch (e) {
+      loadDemo();
+    }
+  }
+
+  /* ── RENDER ── */
+  function render() {
+    renderTabs();
+    renderList();
+  }
+
+  function renderTabs() {
+    if (!tabsEl) return;
+    var html = '';
+    for (var i = 0; i < lists.length; i++) {
+      var l = lists[i];
+      var active = l.id === activeListId;
+      html += '<button class="list-tab' + (active ? ' active' : '') + '" data-list-id="' + l.id + '" role="tab" aria-selected="' + active + '">';
+      html += esc(l.name);
+      if (lists.length > 1) {
+        html += '<span class="close-tab" data-list-id="' + l.id + '" aria-label="Eliminar lista">&times;</span>';
+      }
+      html += '</button>';
+    }
+    html += '<button class="list-tab-add" id="addListBtn" aria-label="Crear nueva lista">+</button>';
+    tabsEl.innerHTML = html;
+
+    tabsEl.querySelectorAll('.list-tab').forEach(function (tab) {
+      tab.addEventListener('click', function (e) {
+        if (e.target.closest('.close-tab')) return;
+        var id = Number(tab.getAttribute('data-list-id'));
+        if (id === activeListId) return;
+        activeListId = id;
+        render();
+      });
+    });
+
+    tabsEl.querySelectorAll('.close-tab').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var id = Number(btn.getAttribute('data-list-id'));
+        confirmDeleteList(id);
+      });
+    });
+
+    var addBtn_ = $('addListBtn');
+    if (addBtn_) {
+      addBtn_.addEventListener('click', function () {
+        var name = prompt('Nombre de la nueva lista:');
+        if (name && name.trim()) {
+          createList(name.trim());
+        }
+      });
+    }
+  }
+
+  function getActiveList() {
+    for (var i = 0; i < lists.length; i++) {
+      if (lists[i].id === activeListId) return lists[i];
+    }
+    return null;
+  }
+
+  function renderList() {
+    var list = getActiveList();
+    if (!list || !list.items || list.items.length === 0) {
+      itemsEl.innerHTML = '';
+      totalEl.textContent = '0,00 €';
+      if (emptyEl) { emptyEl.hidden = false; }
+      if (listaContainer) { listaContainer.style.display = 'none'; }
+      return;
+    }
+    if (emptyEl) { emptyEl.hidden = true; }
+    if (listaContainer) { listaContainer.style.display = 'block'; }
+
+    var filtered = list.items;
+    if (activeCat) {
+      filtered = [];
+      for (var i = 0; i < list.items.length; i++) {
+        var item = list.items[i];
+        if (item.cat && item.cat.indexOf(activeCat) !== -1) {
+          filtered.push(item);
+        }
+      }
+    }
+
+    if (filtered.length === 0) {
+      itemsEl.innerHTML = '<li class="empty-state" style="list-style:none;padding:30px 0;text-align:center;color:#94a3b8;font-size:17px">No hay productos en esta categoría</li>';
+      totalEl.textContent = '0,00 €';
+      return;
+    }
+
+    var sum = 0;
+    var rows = '';
+    for (var j = 0; j < filtered.length; j++) {
+      var it = filtered[j];
+      var lineTotal = (Number(it.price) || 0) * (Number(it.qty) || 1);
+      sum += lineTotal;
+      rows += '<li class="lista-item" data-idx="' + j + '">';
+      rows += '<span class="item-name">' + esc(it.name) + '</span>';
+
+      rows += '<span class="qty-controls">';
+      var minusDisabled = it.qty <= 1 ? ' disabled' : '';
+      rows += '<button type="button" class="qty-btn qty-minus" data-cat="' + esc(activeCat) + '"' + minusDisabled + ' aria-label="Reducir cantidad">−</button>';
+      rows += '<span class="qty-val">' + it.qty + '</span>';
+      rows += '<button type="button" class="qty-btn qty-plus" data-cat="' + esc(activeCat) + '" aria-label="Aumentar cantidad">+</button>';
+      rows += '</span>';
+
+      rows += '<span class="item-price">' + fmtEuro(lineTotal) + '</span>';
+      rows += '<span class="item-store">' + esc(it.store) + '</span>';
+      rows += '<button type="button" class="item-del" aria-label="Eliminar ' + esc(it.name) + '"><i class="fas fa-trash-alt"></i></button>';
+      rows += '</li>';
+    }
+    itemsEl.innerHTML = rows;
+    totalEl.textContent = fmtEuro(sum);
+
+    /* Bind qty */
+    var cats = activeCat;
+    itemsEl.querySelectorAll('.qty-plus').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var li = btn.closest('.lista-item');
+        if (!li) return;
+        var idx = parseInt(li.getAttribute('data-idx'), 10);
+        if (isNaN(idx)) return;
+        var l = getActiveList();
+        if (!l) return;
+        var actualCtx = activeCat;
+        var realIdx = resolveRealIndex(l, idx, actualCtx);
+        if (realIdx === -1) return;
+        l.items[realIdx].qty = (l.items[realIdx].qty || 1) + 1;
+        persistQty(l, realIdx);
+        renderList();
+      });
+    });
+
+    itemsEl.querySelectorAll('.qty-minus').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var li = btn.closest('.lista-item');
+        if (!li) return;
+        var idx = parseInt(li.getAttribute('data-idx'), 10);
+        if (isNaN(idx)) return;
+        var l = getActiveList();
+        if (!l) return;
+        var actualCtx = activeCat;
+        var realIdx = resolveRealIndex(l, idx, actualCtx);
+        if (realIdx === -1) return;
+        if (l.items[realIdx].qty <= 1) return;
+        l.items[realIdx].qty = (l.items[realIdx].qty || 1) - 1;
+        persistQty(l, realIdx);
+        renderList();
+      });
+    });
+
+    itemsEl.querySelectorAll('.item-del').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var li = btn.closest('.lista-item');
+        if (!li) return;
+        var idx = parseInt(li.getAttribute('data-idx'), 10);
+        if (isNaN(idx)) return;
+        var l = getActiveList();
+        if (!l) return;
+        var actualCtx = activeCat;
+        var realIdx = resolveRealIndex(l, idx, actualCtx);
+        if (realIdx === -1) return;
+        confirmDeleteItem(l, realIdx);
+      });
+    });
+  }
+
+  function resolveRealIndex(list, filteredIdx, catFilter) {
+    if (!catFilter) return filteredIdx;
+    var count = 0;
+    for (var i = 0; i < list.items.length; i++) {
+      var it = list.items[i];
+      if (it.cat && it.cat.indexOf(catFilter) !== -1) {
+        if (count === filteredIdx) return i;
+        count++;
+      }
+    }
+    return -1;
+  }
+
+  /* ── PERSIST ── */
+  function persistQty(list, itemIdx) {
+    if (!isDemo && list._apiMode && typeof ApiClient !== 'undefined') {
+      var item = list.items[itemIdx];
+      if (item._listId) {
+        ApiClient.put('/api/lists/mine/' + item._listId, { cantidad: item.qty }).catch(function () {});
+      }
+    }
+  }
+
+  function deleteItemFromApi(list, itemIdx) {
+    if (!isDemo && list._apiMode && typeof ApiClient !== 'undefined') {
+      var item = list.items[itemIdx];
+      if (item._listId) {
+        ApiClient.delete('/api/lists/mine/' + item._listId).catch(function () {});
+      }
+    }
+  }
+
+  /* ── CONFIRM MODAL ── */
+  function showConfirmModal(title, msg, dangerLabel, cb) {
+    var overlay = document.createElement('div');
+    overlay.className = 'inline-modal-overlay';
+    overlay.innerHTML =
+      '<div class="inline-modal" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">' +
+      '<h3 id="confirm-title">' + esc(title) + '</h3>' +
+      '<p>' + esc(msg) + '</p>' +
+      '<div class="modal-actions">' +
+      '<button class="btn-cancel" id="modalCancel">Cancelar</button>' +
+      '<button class="btn-danger" id="modalConfirm">' + esc(dangerLabel) + '</button>' +
+      '</div></div>';
+    document.body.appendChild(overlay);
+
+    var confirmed = false;
+    function close() {
+      document.body.removeChild(overlay);
+      if (confirmed && cb) cb();
+    }
+
+    overlay.querySelector('#modalCancel').addEventListener('click', function () { close(); });
+    overlay.querySelector('#modalConfirm').addEventListener('click', function () { confirmed = true; close(); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+
+    var confirmBtn = overlay.querySelector('#modalConfirm');
+    confirmBtn.focus();
+
+    function keyHandler(e) {
+      if (e.key === 'Escape') close();
+      if (e.key === 'Enter') { confirmed = true; close(); }
+    }
+    document.addEventListener('keydown', keyHandler);
+
+    var origClose = close;
+    close = function () {
+      document.removeEventListener('keydown', keyHandler);
+      origClose();
+    };
+  }
+
+  function confirmDeleteItem(list, idx) {
+    var item = list.items[idx];
+    showConfirmModal(
+      'Eliminar producto',
+      '\u00bfQuieres eliminar "' + item.name + '" de tu lista?',
+      'Eliminar',
+      function () {
+        list.items.splice(idx, 1);
+        deleteItemFromApi(list, idx);
+        render();
+      }
+    );
+  }
+
+  function confirmDeleteList(listId) {
+    var list = null;
+    for (var i = 0; i < lists.length; i++) {
+      if (lists[i].id === listId) { list = lists[i]; break; }
+    }
+    if (!list) return;
+    showConfirmModal(
+      'Eliminar lista',
+      '\u00bfBorrar "' + list.name + '" y todos sus productos?',
+      'Eliminar lista',
+      async function () {
+        if (!isDemo && typeof ApiClient !== 'undefined' && list.cabecera_id) {
+          try { await ApiClient.delete('/api/lists/cabeceras/' + list.cabecera_id); } catch (e) {}
+        }
+        var idx = -1;
+        for (var j = 0; j < lists.length; j++) {
+          if (lists[j].id === listId) { idx = j; break; }
+        }
+        if (idx !== -1) lists.splice(idx, 1);
+        if (activeListId === listId) {
+          activeListId = lists.length > 0 ? lists[0].id : null;
+        }
+        render();
+      }
+    );
+  }
+
+  /* ── CREATE LIST ── */
+  async function createList(name) {
+    if (!isDemo && typeof ApiClient !== 'undefined') {
+      try {
+        var created = await ApiClient.post('/api/lists/cabeceras', { nombre: name });
+        lists.push({ id: created.cabecera_id, name: name, cabecera_id: created.cabecera_id, items: [] });
+        activeListId = created.cabecera_id;
+        render();
+        return;
+      } catch (e) {}
+    }
+    var newId = nextId();
+    lists.push({ id: newId, name: name, items: [] });
+    activeListId = newId;
+    render();
+  }
+
+  /* ── CHIPS ── */
+  chipRow.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    chipRow.querySelectorAll('.chip').forEach(function (c) {
+      c.classList.remove('active');
+      c.setAttribute('aria-selected', 'false');
+    });
+    chip.classList.add('active');
+    chip.setAttribute('aria-selected', 'true');
+    activeCat = chip.getAttribute('data-cat') || '';
+    renderList();
+  });
+
+  /* ── SEARCH ── */
+  var searchTimer = null;
+
+  searchInput.addEventListener('input', function () {
+    var q = searchInput.value.trim().toLowerCase();
+    if (searchTimer) clearTimeout(searchTimer);
+    searchTimer = setTimeout(function () {
+      if (!q) { suggestionsEl.classList.remove('show'); return; }
+      var results = [];
+      for (var i = 0; i < DEMO_CATALOG.length; i++) {
+        var p = DEMO_CATALOG[i];
+        if (p.name.toLowerCase().indexOf(q) !== -1) {
+          results.push(p);
+        }
+      }
+      if (results.length === 0) {
+        suggestionsEl.innerHTML = '<div class="suggestion-item" style="color:#94a3b8;cursor:default">Sin resultados</div>';
+      } else {
+        var bestBy = {};
+        for (var j = 0; j < results.length; j++) {
+          var p = results[j];
+          if (!bestBy[p.name] || p.price < bestBy[p.name].price) {
+            bestBy[p.name] = p;
+          }
+        }
+        var unique = [];
+        for (var k in bestBy) { unique.push(bestBy[k]); }
+        suggestionsEl.innerHTML = unique.slice(0, 6).map(function (p) {
+          return '<button type="button" class="suggestion-item" data-name="' + esc(p.name) + '" data-price="' + p.price + '" data-store="' + esc(p.store) + '" data-cat="' + esc(p.cat) + '">' +
+            '<span>' + esc(p.name) + '</span>' +
+            '<span class="s-price">' + fmtEuro(p.price) + '</span></button>';
+        }).join('');
+      }
+      suggestionsEl.classList.add('show');
+    }, 200);
+  });
+
+  suggestionsEl.addEventListener('click', function (e) {
+    var btn = e.target.closest('.suggestion-item');
+    if (!btn) return;
+    var name = btn.getAttribute('data-name');
+    var price = parseFloat(btn.getAttribute('data-price'));
+    var store = btn.getAttribute('data-store');
+    var cat = btn.getAttribute('data-cat');
+    if (!name) return;
+
+    var list = getActiveList();
+    if (!list) {
+      if (lists.length === 0) {
+        createList('Mi lista');
+        list = getActiveList();
+        if (!list) return;
+      } else {
+        return;
+      }
+    }
+
+    list.items.push({
+      name: name,
+      qty: 1,
+      price: price,
+      store: store,
+      cat: cat,
+      emoji: ''
+    });
+
+    if (!isDemo && list._apiMode && list.cabecera_id && typeof ApiClient !== 'undefined') {
+      ApiClient.post('/api/lists/mine', {
+        product_id: null,
+        cantidad: 1,
+        cabecera_id: list.cabecera_id
+      }).catch(function () {});
+    }
+
+    searchInput.value = '';
+    suggestionsEl.classList.remove('show');
+    render();
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!searchInput.contains(e.target) && !suggestionsEl.contains(e.target)) {
+      suggestionsEl.classList.remove('show');
+    }
+  });
+
+  searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      var first = suggestionsEl.querySelector('.suggestion-item');
+      if (first) { first.click(); }
+    }
+  });
+
+  addBtn.addEventListener('click', function () {
+    searchInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+  });
+
+  /* ── INIT ── */
+  async function init() {
+    tabsEl = $('listTabs');
+    chipRow = $('chipRow');
+    itemsEl = $('listaItems');
+    totalEl = $('totalAmount');
+    emptyEl = $('emptyState');
+    searchInput = $('searchInput');
+    suggestionsEl = $('suggestions');
+    addBtn = $('addBtn');
+    listaContainer = $('listaContainer');
+    if (typeof SessionManager !== 'undefined' && SessionManager.refreshSession) {
+      try {
+        var user = await SessionManager.refreshSession();
+        if (user) {
+          await loadFromApi();
+          return;
