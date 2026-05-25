@@ -7,7 +7,598 @@
     <title>Comparador - List & Save</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="084adb18-3e66-41fb-bbf6-d6fd0d0eca81"></script>
+    <style>
+/* ── Variables locales del comparador ─────────────────────── */
+:root {
+  --c-bg:       #fdfcf7;
+  --c-accent:   #2563eb;
+  --c-accent-dk:#1d4ed8;
+  --c-green:    #16a34a;
+  --c-green-lt: #dcfce7;
+  --c-red:      #dc2626;
+  --c-red-lt:   #fef2f2;
+  --c-text:     #1e293b;
+  --c-muted:    #64748b;
+  --c-border:   #e2e8f0;
+  --c-touch:    52px;
+  --c-base:     20px;
+}
+
+/* ── Página base ────────────────────────────────────────────── */
+.comparator-page {
+  background: var(--c-bg);
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.page-hero--comparator {
+  background: linear-gradient(160deg, #1e3a8a 0%, #1d4ed8 55%, #3b82f6 100%);
+  padding: 2.5rem 1rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero--comparator::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 70% 50%, rgba(255,255,255,.07) 0%, transparent 65%),
+                    radial-gradient(circle at 20% 80%, rgba(255,255,255,.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.page-hero__inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.page-hero--comparator .page-hero__title {
+  font-family: 'Kalam', cursive;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 .5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.page-hero--comparator .page-hero__subtitle {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,.88);
+  margin: 0;
+}
+
+/* ── Área de búsqueda ──────────────────────────────────────── */
+.comp-search-area {
+  background: #fff;
+  padding: 1.5rem 1rem 0;
+  box-shadow: 0 4px 24px rgba(37,99,235,.07);
+}
+
+.comp-search-area__inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.comp-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.comp-search-bar__wrap {
+  flex: 1;
+  position: relative;
+}
+
+.comp-search-bar__icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-accent);
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.comp-search-bar__input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 20px 14px 52px;
+  font-size: var(--c-base);
+  font-family: 'Nunito', sans-serif;
+  min-height: var(--c-touch);
+  border: 2px solid var(--c-border);
+  border-radius: 16px;
+  background: #f8fafc;
+  color: var(--c-text);
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+
+.comp-search-bar__input::placeholder { color: #94a3b8; }
+
+.comp-search-bar__input:focus {
+  outline: none;
+  border-color: var(--c-accent);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+}
+
+.comp-search-bar__clear {
+  min-height: var(--c-touch);
+  min-width: var(--c-touch);
+  border: 2px solid var(--c-border);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--c-muted);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comp-search-bar__clear:hover {
+  border-color: var(--c-red);
+  color: var(--c-red);
+  background: var(--c-red-lt);
+}
+
+/* ── Dropdown resultados ───────────────────────────────────── */
+.comp-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #fff;
+  border: 2px solid var(--c-border);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.14);
+  max-height: 380px;
+  overflow-y: auto;
+  z-index: 300;
+}
+
+.comp-result-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background .1s;
+}
+
+.comp-result-item:last-child { border-bottom: none; }
+.comp-result-item:hover { background: #eff6ff; }
+
+.comp-result-item__emoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.comp-result-item__info { flex: 1; min-width: 0; }
+
+.comp-result-item__name {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: var(--c-base);
+  color: var(--c-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.comp-result-item__meta {
+  font-size: .875rem;
+  color: var(--c-muted);
+  margin-top: 2px;
+}
+
+/* ── Chips de categoría ────────────────────────────────────── */
+.comp-chips {
+  display: flex;
+  gap: 8px;
+  padding: .75rem 1rem 1.25rem;
+  overflow-x: auto;
+  background: #fff;
+  max-width: 680px;
+  margin: 0 auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.comp-chips::-webkit-scrollbar { display: none; }
+
+.comp-chip {
+  flex-shrink: 0;
+  padding: 9px 18px;
+  border: 2px solid var(--c-border);
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+  background: #fff;
+  color: var(--c-text);
+  white-space: nowrap;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.comp-chip:hover {
+  border-color: var(--c-accent);
+  background: #eff6ff;
+  color: var(--c-accent);
+}
+
+.comp-chip.active {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #fff;
+}
+
+/* ── Estado vacío ──────────────────────────────────────────── */
+.comp-empty {
+  max-width: 560px;
+  margin: 2.5rem auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.comp-empty__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  border-radius: 50%;
+  font-size: 2rem;
+  color: var(--c-accent);
+  margin-bottom: 1.25rem;
+}
+
+.comp-empty__title {
+  font-family: 'Kalam', cursive;
+  font-size: 1.7rem;
+  color: var(--c-text);
+  margin: 0 0 .5rem;
+}
+
+.comp-empty__text {
+  font-family: 'Nunito', sans-serif;
+  font-size: var(--c-base);
+  color: var(--c-muted);
+  margin: 0 0 1.5rem;
+}
+
+.comp-empty__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.comp-empty__chip {
+  padding: 11px 22px;
+  border: 2px solid var(--c-accent);
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-size: var(--c-base);
+  font-weight: 700;
+  color: var(--c-accent);
+  cursor: pointer;
+  transition: all .15s;
+  background: #fff;
+}
+
+.comp-empty__chip:hover {
+  background: var(--c-accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ── Vista batalla ─────────────────────────────────────────── */
+.comp-battle {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  animation: battleIn .3s ease both;
+}
+
+@keyframes battleIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.comp-battle__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.comp-battle__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 2px solid var(--c-border);
+  border-radius: 12px;
+  background: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  color: var(--c-text);
+  flex-shrink: 0;
+  min-height: 48px;
+}
+
+.comp-battle__back:hover {
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+  background: #eff6ff;
+}
+
+.comp-battle__product-name {
+  font-family: 'Kalam', cursive;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--c-text);
+  line-height: 1.2;
+  margin: 0 0 4px;
+}
+
+.comp-battle__product-meta {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: var(--c-muted);
+  margin: 0;
+}
+
+/* Resumen */
+.comp-battle__summary {
+  background: linear-gradient(135deg, #f8fafc, #eff6ff);
+  border: 1.5px solid rgba(37,99,235,.12);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.comp-battle__summary-item { text-align: center; }
+
+.comp-battle__summary-item .label {
+  font-family: 'Nunito', sans-serif;
+  font-size: .875rem;
+  color: var(--c-muted);
+  margin-bottom: 4px;
+}
+
+.comp-battle__summary-item .value {
+  font-family: 'Kalam', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.comp-battle__summary-item .value.green { color: var(--c-green); }
+
+/* Cards */
+.comp-battle__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .comp-battle__cards {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+.comp-battle-card {
+  background: #fff;
+  border: 2px solid var(--c-border);
+  border-radius: 20px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  position: relative;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.comp-battle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(0,0,0,.1);
+}
+
+.comp-battle-card--cheap {
+  border-color: var(--c-green);
+  background: linear-gradient(170deg, #f0fdf4 0%, #fff 55%);
+}
+
+.comp-battle-card--expensive {
+  border-color: #fca5a5;
+  background: linear-gradient(170deg, #fff8f8 0%, #fff 55%);
+}
+
+.comp-battle-card__badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: 'Nunito', sans-serif;
+  font-size: .8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 1rem;
+}
+
+.comp-battle-card--cheap .comp-battle-card__badge {
+  background: var(--c-green);
+  color: #fff;
+}
+
+.comp-battle-card--expensive .comp-battle-card__badge {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.comp-battle-card__img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 6px;
+}
+
+.comp-battle-card__store {
+  display: flex;
+  align-items: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--c-text);
+  margin-bottom: .75rem;
+  gap: 4px;
+}
+
+.comp-battle-card__price {
+  font-family: 'Kalam', cursive;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--c-text);
+  line-height: 1;
+  margin-bottom: .2rem;
+}
+
+.comp-battle-card--cheap .comp-battle-card__price { color: var(--c-green); }
+
+.comp-battle-card__oferta {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: var(--c-muted);
+  text-decoration: line-through;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.comp-battle-card__unit {
+  font-family: 'Nunito', sans-serif;
+  font-size: .9rem;
+  color: #4f46e5;
+  font-weight: 700;
+  margin-bottom: .75rem;
+}
+
+.comp-battle-card__format {
+  font-family: 'Nunito', sans-serif;
+  font-size: .9rem;
+  color: var(--c-muted);
+  margin-bottom: 1rem;
+}
+
+.comp-battle-card__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.comp-battle-card__actions button {
+  flex: 1;
+  min-height: 48px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  background: var(--c-accent);
+  color: #fff;
+  padding: 10px 16px;
+}
+
+.comp-battle-card__actions button:hover {
+  background: var(--c-accent-dk);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(37,99,235,.25);
+}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+.toast-ok {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-140%);
+  background: #1e293b;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: var(--c-base);
+  font-weight: 700;
+  z-index: 9999;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+  opacity: 0;
+}
+
+.toast-ok--show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ── Contraste alto / dark ─────────────────────────────────── */
+[data-high-contrast="true"] .comparator-page,
+[data-theme="dark"] .comparator-page { background: #0f172a; }
+
+[data-high-contrast="true"] .comp-search-area,
+[data-high-contrast="true"] .comp-chips,
+[data-theme="dark"] .comp-search-area,
+[data-theme="dark"] .comp-chips { background: #1e293b; }
+
+[data-high-contrast="true"] .comp-search-bar__input,
+[data-theme="dark"] .comp-search-bar__input { background: #0f172a; color: #f8fafc; border-color: #334155; }
+
+[data-high-contrast="true"] .comp-battle-card,
+[data-theme="dark"] .comp-battle-card { background: #1e293b; border-color: #334155; }
+
+[data-high-contrast="true"] .comp-results,
+[data-theme="dark"] .comp-results { background: #1e293b; border-color: #334155; }
+
+[data-high-contrast="true"] .comp-result-item:hover,
+[data-theme="dark"] .comp-result-item:hover { background: #0f172a; }
+
+[data-high-contrast="true"] .comp-result-item,
+[data-theme="dark"] .comp-result-item { border-color: #334155; }
+
+[data-high-contrast="true"] .comp-empty__title,
+[data-theme="dark"] .comp-empty__title { color: #f8fafc; }
+    </style>
 </head>
 
 <body>
@@ -82,7 +673,7 @@
                 <div class="comp-search-bar">
                     <div class="comp-search-bar__wrap">
                         <i class="fas fa-search comp-search-bar__icon"></i>
-                        <input type="text" id="comp-search" class="comp-search-bar__input" placeholder="Busca leche, pan, yogur..." autocomplete="off">
+                        <input type="text" id="comp-search" class="comp-search-bar__input" placeholder="Busca leche, pan, yogur…" autocomplete="off">
                     </div>
                     <button id="comp-clear" class="comp-search-bar__clear" hidden><i class="fas fa-times"></i></button>
                 </div>
@@ -92,26 +683,26 @@
 
         <div class="comp-chips" id="comp-chips">
             <span class="comp-chip active" data-cat="">Todo</span>
-            <span class="comp-chip" data-cat="lacteos">Leche y yogur</span>
-            <span class="comp-chip" data-cat="carnes">Carnes</span>
-            <span class="comp-chip" data-cat="frutas">Frutas</span>
-            <span class="comp-chip" data-cat="verduras">Verduras</span>
-            <span class="comp-chip" data-cat="panaderia">Pan</span>
-            <span class="comp-chip" data-cat="bebidas">Bebidas</span>
-            <span class="comp-chip" data-cat="higiene">Higiene</span>
-            <span class="comp-chip" data-cat="limpieza">Limpieza</span>
+            <span class="comp-chip" data-cat="lacteos">🥛 Leche y yogur</span>
+            <span class="comp-chip" data-cat="carnes">🍗 Carnes</span>
+            <span class="comp-chip" data-cat="frutas">🍎 Frutas</span>
+            <span class="comp-chip" data-cat="verduras">🥦 Verduras</span>
+            <span class="comp-chip" data-cat="panaderia">🍞 Pan</span>
+            <span class="comp-chip" data-cat="bebidas">🥤 Bebidas</span>
+            <span class="comp-chip" data-cat="higiene">🧴 Higiene</span>
+            <span class="comp-chip" data-cat="limpieza">🧹 Limpieza</span>
         </div>
 
         <div id="comp-empty" class="comp-empty">
-            <i class="fas fa-balance-scale comp-empty__icon"></i>
-            <h3 class="comp-empty__title">Busca un producto para comparar</h3>
+            <div class="comp-empty__icon"><i class="fas fa-balance-scale"></i></div>
+            <h3 class="comp-empty__title">¿Qué buscamos hoy?</h3>
             <p class="comp-empty__text">Escribe en el buscador o prueba una sugerencia:</p>
             <div class="comp-empty__suggestions">
-                <span class="comp-empty__chip" data-q="leche">Leche</span>
-                <span class="comp-empty__chip" data-q="pan">Pan</span>
-                <span class="comp-empty__chip" data-q="huevos">Huevos</span>
-                <span class="comp-empty__chip" data-q="pollo">Pollo</span>
-                <span class="comp-empty__chip" data-q="arroz">Arroz</span>
+                <span class="comp-empty__chip" data-q="leche">🥛 Leche</span>
+                <span class="comp-empty__chip" data-q="pan">🍞 Pan</span>
+                <span class="comp-empty__chip" data-q="huevos">🥚 Huevos</span>
+                <span class="comp-empty__chip" data-q="pollo">🍗 Pollo</span>
+                <span class="comp-empty__chip" data-q="arroz">🍚 Arroz</span>
             </div>
         </div>
 
@@ -175,7 +766,7 @@
     <script src="js/responsive.js"></script>
     <script src="js/fab-global.js"></script>
     <script src="js/comparator.js"></script>
-  <script src="js/demo.js"></script>
+    <script src="js/demo.js"></script>
 </body>
 
 </html>

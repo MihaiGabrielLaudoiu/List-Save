@@ -203,7 +203,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding: 14px 16px 14px 48px;
+  padding: 14px 16px;
   font-size: var(--base);
   font-family: inherit;
   min-height: var(--touch);
@@ -219,14 +219,6 @@
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(37,99,235,.15);
 }
-.search-icon {
-  position: absolute;
-  left: 15px; top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8; font-size: 19px;
-  pointer-events: none;
-}
-
 .suggestions {
   position: absolute;
   top: 100%; left: 0; right: 0;
@@ -602,9 +594,8 @@
 
         <div class="add-bar">
           <div class="search-wrap">
-            <span class="search-icon" aria-hidden="true"><i class="fas fa-search"></i></span>
             <input type="text" id="searchInput"
-              placeholder="Buscar producto para añadir…"
+              placeholder="🔍 Buscar producto para añadir…"
               autocomplete="off"
               aria-label="Buscar producto"
               aria-autocomplete="list"
@@ -612,7 +603,7 @@
             <div class="suggestions" id="suggestions" role="listbox" aria-label="Sugerencias de productos"></div>
           </div>
           <button type="button" class="add-btn" id="addBtn" aria-label="Añadir producto seleccionado">
-            <i class="fas fa-plus" aria-hidden="true"></i> Añadir
+            + Añadir
           </button>
         </div>
 
