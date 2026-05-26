@@ -1,0 +1,39 @@
+{
+  "features": [
+    {
+      "id": 1,
+      "task": "Aumentar tamaño de fuente base global a 18-20px (actualmente ~16px en body de main.css)",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "task": "Revisar y arreglar footer en todas las páginas: tamaños de texto, espaciado, consistencia",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "task": "Crear suite de tests básica para backend (endpoints de API: /api/lists, /api/products, /api/auth)",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "task": "Añadir script npm test real al package.json que ejecute los tests del backend",
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "task": "Revisar accesibilidad: contraste de texto en modo normal en todas las secciones del index",
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "task": "Mejorar la página de productos: cards más grandes, fuente 18px+, botón añadir a lista visible",
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "task": "Añadir estado vacío con mensaje amigable cuando la lista de la compra está vacía en mi-lista.html",
+      "status": "pending"
+    }
+  ]
+}
