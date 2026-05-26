@@ -26,9 +26,9 @@ else
 fi
 
 # 4. Verificar que el CSS compilado existe
-if [ ! -f "scss/main.css" ]; then
+if [ ! -f "css/main.css" ]; then
   echo "⚠️  main.css no existe, compilando SCSS..."
-  pnpm dlx sass scss/main.scss scss/main.css --no-source-map
+  npx sass scss/main.scss css/main.css --no-source-map
 fi
 
 echo "✅ Todo en orden. Listo para programar."
