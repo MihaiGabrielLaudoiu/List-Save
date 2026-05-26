@@ -24,4 +24,23 @@
 - `init.sh` — script de inicialización y verificación de entorno
 - `progress/history.md` — este fichero (memoria externa del agente)
 
-**Próxima tarea:** feature #1 — aumentar fuente base global
+---
+
+## 2026-05-26 — Feature #1 + Rediseño mi-lista + Fix CTA
+
+**Feature #1 completada:** `html { font-size: 18px }` en `_normalize.scss`, body hereda vía `1rem`.
+
+**Fix texto gris CTA:** Eliminado duplicado `.cta__text { color: #4a5568 }` en `_components.scss` que sobreescribía el blanco correcto en la sección azul de index.html.
+
+**Rediseño mi-lista.html:**
+- Creado `scss/_milista.scss` — diseño bloc de notas con Nunito, fondo crema, líneas azules, margen rojo, esquina doblada
+- Eliminadas 499 líneas de CSS inline del HTML (norma del proyecto)
+- Añadido a `scss/main.scss` con `@use 'milista'`
+- Compilado correcto a `css/main.css` (fix: antes se compilaba a `scss/main.css`)
+- Corregido `init.sh` para compilar al destino correcto
+
+**Ficheros alterados:** `scss/_milista.scss` (nuevo), `scss/main.scss`, `css/main.css`, `mi-lista.html`, `init.sh`
+
+**Deploy:** servidor 192.168.1.128 → git reset --hard + docker compose restart ✓
+
+**Próxima tarea:** feature #2 — revisar y arreglar footer en todas las páginas
