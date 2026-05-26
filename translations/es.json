@@ -206,7 +206,8 @@
         "mission_title": "Mision",
         "mission_text": "Queremos que ahorres en tus compras diarias. Asi de simple. Te mostramos los precios reales de los supermercados para que decidas donde comprar.",
         "vision_title": "Vision",
-        "vision_text": "Queremos ser tu aliado de confianza cuando vas a hacer la compra."
+        "vision_text": "Queremos ser tu aliado de confianza cuando vas a hacer la compra.",
+        "hero_cta": "Comparar precios"
     },
     "register": {
         "title": "Crear una cuenta",

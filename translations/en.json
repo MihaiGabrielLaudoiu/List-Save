@@ -199,7 +199,8 @@
         "mission_title": "Mission",
         "mission_text": "We want you to save on everyday shopping. We show real supermarket prices so you can choose where to buy.",
         "vision_title": "Vision",
-        "vision_text": "We want to be your trusted ally when you go grocery shopping."
+        "vision_text": "We want to be your trusted ally when you go grocery shopping.",
+        "hero_cta": "Compare prices"
     },
     "auth": {
         "login": "Log In",

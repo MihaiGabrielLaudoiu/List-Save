@@ -199,7 +199,8 @@
         "mission_title": "Missio",
         "mission_text": "Volem que estalviis en la compra diaria. Et mostrem preus reals perque triis on comprar.",
         "vision_title": "Visio",
-        "vision_text": "Volem ser el teu aliat de confianca quan fas la compra."
+        "vision_text": "Volem ser el teu aliat de confianca quan fas la compra.",
+        "hero_cta": "Comparar preus"
     },
     "auth": {
         "login": "Iniciar Sessió",
