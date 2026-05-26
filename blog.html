@@ -53,12 +53,12 @@
         </div>
         <nav class="menuppal">
             <ul>
-                <li><a href="/">Inicio</a></li>
-                <li><a href="./mi-lista.html">Mi lista</a></li>
-                <li><a href="./comparador.html">Comparador</a></li>
-                <li><a href="./productos.html">Productos</a></li>
+                <li><a href="/" data-i18n="menu.home">Inicio</a></li>
+                <li><a href="./mi-lista.html" data-i18n="menu.my_list">Mi lista</a></li>
+                <li><a href="./comparador.html" data-i18n="menu.comparator">Comparador</a></li>
+                <li><a href="./productos.html" data-i18n="menu.products">Productos</a></li>
                 <li><a href="./graficos.html" data-i18n="menu.stats">Estadísticas</a></li>
-                <li><a href="./nosotros.html">Nosotros</a></li>
+                <li><a href="./nosotros.html" data-i18n="menu.about_us">Nosotros</a></li>
             </ul>
         </nav>
         <div class="header__container">
@@ -67,33 +67,33 @@
             </a>
             <nav class="header__nav nav">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link">Mi lista</a></li>
-                    <li class="nav__item"><a href="./comparador.html" class="nav__link">Comparador</a></li>
-                    <li class="nav__item"><a href="./productos.html" class="nav__link">Productos</a></li>
+                    <li class="nav__item"><a href="./mi-lista.html" class="nav__link" data-i18n="menu.my_list">Mi lista</a></li>
+                    <li class="nav__item"><a href="./comparador.html" class="nav__link" data-i18n="menu.comparator">Comparador</a></li>
+                    <li class="nav__item"><a href="./productos.html" class="nav__link" data-i18n="menu.products">Productos</a></li>
                     <li class="nav__item"><a href="./graficos.html" class="nav__link" data-i18n="menu.stats">Estadísticas</a></li>
-                    <li class="nav__item"><a href="./nosotros.html" class="nav__link">Nosotros</a></li>
+                    <li class="nav__item"><a href="./nosotros.html" class="nav__link" data-i18n="menu.about_us">Nosotros</a></li>
                 </ul>
             </nav>
             <div class="header__actions">
                 <button id="contrast-toggle" class="contrast-toggle" aria-label="Cambiar contraste" title="Cambiar contraste">
                     <i class="fas fa-adjust"></i>
                 </button>
-                <div id="auth-buttons">
-                    <a href="login.html" class="button button--secondary">Iniciar Sesión</a>
-                    <a href="register.html" class="button button--primary">Registrarse</a>
-                </div>
                 <div class="header__user">
                     <img src="assets/images/user.svg" alt="Icono de usuario" class="header__user-img">
                 </div>
+                <div id="auth-buttons" class="auth-buttons">
+                    <a href="login.html" class="button button--secondary" data-i18n="auth.login">Iniciar Sesión</a>
+                    <a href="register.html" class="button button--primary" data-i18n="auth.register">Registrarse</a>
+                </div>
                 <div id="user-menu" style="display: none;" class="header__user-menu">
                     <div class="header__user-menu-content">
-                        <span class="header__user-name">Mi cuenta</span>
+                        <span class="header__user-name" data-i18n="auth.my_account">Mi cuenta</span>
                         <div class="header__user-menu-buttons">
                             <button class="header__user-button" onclick="window.location.href='ajustes.html'">
-                                <i class="fas fa-cog"></i> Ajustes
+                                <i class="fas fa-cog"></i> <span data-i18n="auth.settings">Ajustes</span>
                             </button>
                             <button class="header__user-button" onclick="cerrarSesion()">
-                                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                                <i class="fas fa-sign-out-alt"></i> <span data-i18n="auth.logout">Cerrar sesión</span>
                             </button>
                         </div>
                     </div>
@@ -134,76 +134,58 @@
         </div>
     </main>
 
-    <footer class="footer" itemscope itemtype="https://schema.org/Organization">
+    <footer class="footer">
         <div class="footer__container">
             <div class="footer__column">
-                <h3 class="footer__title" itemprop="name">List & Save</h3>
+                <h3 class="footer__title">List &amp; Save</h3>
                 <div class="footer__logo">
-                    <img itemprop="logo" src="assets/images/logo.svg" alt="List & Save Logo">
+                    <img src="assets/images/logo.svg" alt="List &amp; Save Logo">
                 </div>
-                <p class="footer__description" itemprop="description">
-                    Te ayudamos a ahorrar en tus compras. Así de fácil.
-                </p>
+                <p class="footer__description" data-i18n="footer.description">La mejor plataforma para comparar precios y ahorrar en tus compras del supermercado.</p>
             </div>
-
             <div class="footer__column">
-                <div itemscope itemtype="https://schema.org/ContactPoint">
-                    <h3 class="footer__title">Contacto</h3>
-                    <p class="footer__contact">
-                        Email: <span itemprop="email">info@listandsave.com</span><br>
-                        Tel: <span itemprop="telephone">+34 900 123 456</span><br>
-                        <span itemprop="contactType">Atención al cliente</span>
-                    </p>
-                    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                        <span itemprop="streetAddress">Calle Principal 123</span><br>
-                        <span itemprop="postalCode">28001</span>
-                        <span itemprop="addressLocality">Madrid</span>,
-                        <span itemprop="addressCountry">España</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer__column">
-                <h3 class="footer__title">Enlaces rápidos</h3>
+                <h3 class="footer__title" data-i18n="footer.quick_links.title">Enlaces rapidos</h3>
                 <ul class="footer__list">
-                    <li><a href="./nosotros.html">Sobre nosotros</a></li>
-                    <li><a href="./contacto.html">Contacto</a></li>
-                    <li><a href="./blog.html">Blog</a></li>
-                    <li><a href="./faq.html">FAQ</a></li>
+                    <li><a href="./nosotros.html" data-i18n="footer.quick_links.about">Sobre nosotros</a></li>
+                    <li><a href="./contacto.html" data-i18n="footer.quick_links.contact">Contacto</a></li>
+                    <li><a href="./blog.html" data-i18n="footer.quick_links.blog">Blog</a></li>
+                    <li><a href="./faq.html" data-i18n="footer.quick_links.faq">FAQ</a></li>
                 </ul>
             </div>
-
             <div class="footer__column">
-                <h3 class="footer__title">Legal</h3>
+                <h3 class="footer__title" data-i18n="footer.legal.title">Legal</h3>
                 <ul class="footer__list">
-                    <li><a href="./privacidad.html">Política de privacidad</a></li>
-                    <li><a href="./terminos.html">Términos y condiciones</a></li>
-                    <li><a href="./cookies.html">Política de cookies</a></li>
+                    <li><a href="./privacidad.html" data-i18n="footer.legal.privacy">Politica de privacidad</a></li>
+                    <li><a href="./terminos.html" data-i18n="footer.legal.terms">Terminos y condiciones</a></li>
+                    <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Politica de cookies</a></li>
                 </ul>
             </div>
-
             <div class="footer__column">
-                <h3 class="footer__title">Síguenos</h3>
+                <h3 class="footer__title" data-i18n="footer.social.title">Siguenos</h3>
                 <div class="footer__social">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook" title="Facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter" title="Twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram" title="Instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin" title="LinkedIn"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
                 </div>
+                <p class="footer__contact">
+                    <span data-i18n="footer.social.contact_info.email">Email: info@listandsave.com</span><br>
+                    <span data-i18n="footer.social.contact_info.phone">Tel: +34 900 123 456</span>
+                </p>
             </div>
         </div>
         <div class="footer__bottom">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> List & Save. Todos los derechos reservados.</p>
+            <p data-i18n="footer.copyright">&copy; List &amp; Save. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script src="js/api.js"></script>
+    <script src="js/session.js"></script>
     <script src="js/translations.js"></script>
     <script src="js/cookie-consent.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/session.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/fab-global.js"></script>
-  <script src="js/demo.js"></script>
+    <script src="js/demo.js"></script>
 </body>
 </html>
