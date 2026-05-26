@@ -4483,6 +4483,7 @@ select {
   align-items: center;
   gap: 10px;
   margin-bottom: 1rem;
+  position: relative;
 }
 .comp-search-bar__wrap {
   flex: 1;
@@ -4544,7 +4545,7 @@ select {
 
 .comp-results {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
   background: #fff;

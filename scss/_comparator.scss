@@ -85,6 +85,7 @@ $c-font-hand: 'Kalam', cursive;
   align-items: center;
   gap: 10px;
   margin-bottom: 1rem;
+  position: relative;
 
   &__wrap {
     flex: 1;
@@ -153,7 +154,7 @@ $c-font-hand: 'Kalam', cursive;
 // El JS genera divs con clase "comp-results__item" dentro de #comp-results
 .comp-results {
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
   background: #fff;
