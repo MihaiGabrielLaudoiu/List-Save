@@ -10,7 +10,9 @@
     "check": "node -e \"console.log('OK')\"",
     "sync:mercados": "node backend/run-sync-cli.js",
     "seed:synthetic": "node backend/scripts/insert-synthetic-dev-catalog.js",
-    "docker:config": "docker compose config"
+    "docker:config": "docker compose config",
+    "test": "node backend/tests/api.test.js",
+    "test:server": "TEST_BASE_URL=http://192.168.1.128:8888 node backend/tests/api.test.js"
   },
   "keywords": [
     "nodejs",

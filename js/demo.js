@@ -7,61 +7,61 @@
     'index.html': [
       {
         icon: '<i class="fas fa-search" style="color:#2563eb"></i>',
-        title: 'Buscador Inteligente',
+        title: 'Buscador de productos',
         desc: 'Busca cualquier producto y encuentra el precio más barato entre Mercadona, Carrefour y Eroski al instante.',
-        selector: '#home-search-form, .search-container, [class*="search"]',
+        selector: '#search-product',
+        action: 'highlight'
+      },
+      {
+        icon: '<i class="fas fa-check-circle" style="color:#2563eb"></i>',
+        title: '¿Por qué List & Save?',
+        desc: 'Descubre las ventajas: comparación en tiempo real, lista de la compra inteligente y accesible para todos.',
+        selector: '.why-us',
         action: 'scroll'
       },
       {
         icon: '<i class="fas fa-store" style="color:#2563eb"></i>',
-        title: 'Supermercados Destacados',
-        desc: 'Acceso directo a los productos de Mercadona, Carrefour y Eroski. Compara precios entre todos ellos.',
-        selector: '.stores-section, .home-stores, [class*="store"]',
+        title: 'Supermercados',
+        desc: 'Cubrimos Mercadona, Carrefour y Eroski. Más cadenas próximamente.',
+        selector: '.stores',
         action: 'scroll'
       },
       {
-        icon: '<i class="fas fa-chart-line" style="color:#2563eb"></i>',
-        title: 'Productos en Oferta',
-        desc: 'Descubre los productos con mejores precios y ofertas destacadas de la semana.',
-        selector: '.offers-section, [class*="offer"], [class*="destacado"]',
+        icon: '<i class="fas fa-list-alt" style="color:#2563eb"></i>',
+        title: 'Empieza gratis',
+        desc: 'Regístrate en segundos y crea tu primera lista de la compra con comparación de precios incluida.',
+        selector: '.cta',
         action: 'scroll'
-      },
-      {
-        icon: '<i class="fas fa-arrow-right" style="color:#2563eb"></i>',
-        title: 'Navegación Completa',
-        desc: 'Accede a todas las secciones: Mi lista, Comparador, Productos y Estadísticas desde el menú superior.',
-        selector: '.nav__list, .header__nav',
-        action: 'highlight'
       }
     ],
 
     'comparador.html': [
       {
+        icon: '<i class="fas fa-search" style="color:#2563eb"></i>',
+        title: 'Buscador inteligente',
+        desc: 'Escribe el nombre de un producto y el comparador busca en Mercadona, Carrefour y Eroski al instante.',
+        selector: '#comp-search',
+        action: 'highlight'
+      },
+      {
+        icon: '<i class="fas fa-tags" style="color:#2563eb"></i>',
+        title: 'Filtros por categoría',
+        desc: 'Filtra por lácteos, carnes, frutas, verduras y más. Los chips de categoría agrupan los resultados.',
+        selector: '#comp-chips',
+        action: 'highlight'
+      },
+      {
         icon: '<i class="fas fa-balance-scale" style="color:#2563eb"></i>',
-        title: 'Comparador de Precios',
-        desc: 'Compara precios de productos entre Mercadona, Carrefour y Eroski en una sola vista.',
-        selector: '.comparator-container, .comparator, [class*="comparator"]',
+        title: 'Vista de comparación',
+        desc: 'Al seleccionar un producto verás las cards de cada supermercado con el más barato resaltado en verde.',
+        selector: '#comp-empty',
         action: 'scroll'
       },
       {
-        icon: '<i class="fas fa-search-plus" style="color:#2563eb"></i>',
-        title: 'Buscador de Productos',
-        desc: 'Escribe el nombre de un producto y el comparador busca automáticamente en todos los supermercados.',
-        selector: '#search-product, [class*="search"]',
-        action: 'scroll'
-      },
-      {
-        icon: '<i class="fas fa-table" style="color:#2563eb"></i>',
-        title: 'Tabla Comparativa',
-        desc: 'Resultados ordenados por precio con colores: verde para el más barato, rojo para el más caro.',
-        selector: '.comparison-table, .results-table, [class*="table"]',
-        action: 'scroll'
-      },
-      {
-        icon: '<i class="fas fa-sync-alt" style="color:#2563eb"></i>',
-        title: 'Sincronizar Precios',
-        desc: 'Actualiza los precios desde las APIs oficiales de los supermercados con un clic.',
-        selector: '[class*="sync"], [id*="sync"]',
+        icon: '<i class="fas fa-plus-circle" style="color:#2563eb"></i>',
+        title: 'Añadir a tu lista',
+        desc: 'Desde la vista de comparación puedes añadir el producto más barato a tu lista de la compra.',
+        selector: '#comp-empty',
         action: 'scroll'
       }
     ],
@@ -69,31 +69,31 @@
     'mi-lista.html': [
       {
         icon: '<i class="fas fa-list" style="color:#2563eb"></i>',
-        title: 'Tu Lista de la Compra',
-        desc: 'Crea y gestiona listas de compra personalizadas. Añade productos y cantidades fácilmente.',
-        selector: '.lists-container, .shopping-list, [class*="list"]',
-        action: 'scroll'
+        title: 'Tu bloc de notas',
+        desc: 'La lista tiene diseño de bloc de notas. Cada pestaña es una lista diferente — crea las que necesites.',
+        selector: '.list-tabs',
+        action: 'highlight'
       },
       {
         icon: '<i class="fas fa-plus-circle" style="color:#2563eb"></i>',
-        title: 'Añadir Productos',
-        desc: 'Añade productos a tu lista con cantidad y observaciones. Todo guardado automáticamente.',
-        selector: '#add-product-form, [class*="add"], [class*="new-item"]',
+        title: 'Añadir productos',
+        desc: 'Escribe en el buscador o usa el campo de añadir para incluir cualquier producto con cantidad.',
+        selector: '.add-bar',
+        action: 'highlight'
+      },
+      {
+        icon: '<i class="fas fa-sort-amount-up" style="color:#2563eb"></i>',
+        title: 'Controla cantidades',
+        desc: 'Toca los botones + y – para ajustar la cantidad de cada producto. El total se actualiza al instante.',
+        selector: '.notepad',
         action: 'scroll'
       },
       {
-        icon: '<i class="fas fa-euro-sign" style="color:#2563eb"></i>',
-        title: 'Precios en tu Lista',
-        desc: 'Cada producto muestra el precio más bajo disponible. Sabes cuánto gastarás antes de ir a comprar.',
-        selector: '.list-items, .items-container, [class*="item"]',
-        action: 'scroll'
-      },
-      {
-        icon: '<i class="fas fa-trash-alt" style="color:#2563eb"></i>',
-        title: 'Gestiona tus Listas',
-        desc: 'Edita el nombre, duplica o elimina listas. Organiza tus compras por supermercado o día.',
-        selector: '.list-actions, [class*="actions"]',
-        action: 'scroll'
+        icon: '<i class="fas fa-calculator" style="color:#2563eb"></i>',
+        title: 'Total estimado',
+        desc: 'La zona inferior muestra el coste estimado de tu lista usando los precios mínimos del comparador.',
+        selector: '.total-row',
+        action: 'highlight'
       }
     ],
 
@@ -123,24 +123,31 @@
 
     'graficos.html': [
       {
-        icon: '<i class="fas fa-chart-bar" style="color:#2563eb"></i>',
-        title: 'Estadísticas de Precios',
-        desc: 'Visualiza la evolución de precios y encuentra los momentos más baratos para comprar.',
-        selector: '.charts-container, .graficos, [class*="chart"]',
-        action: 'scroll'
+        icon: '<i class="fas fa-tachometer-alt" style="color:#2563eb"></i>',
+        title: 'KPIs del catálogo',
+        desc: 'Totales de productos, precios registrados y supermercados activos actualizados en tiempo real.',
+        selector: '.stats-kpis',
+        action: 'highlight'
       },
       {
         icon: '<i class="fas fa-chart-pie" style="color:#2563eb"></i>',
-        title: 'Comparativa por Supermercado',
-        desc: 'Gráficos que comparan los precios medios de cada supermercado. ¿Cuál es más barato?',
-        selector: '.store-chart, [class*="store"], [class*="supermarket"]',
+        title: 'Distribución por categoría',
+        desc: 'Gráfico circular con la proporción de productos por categoría en el catálogo.',
+        selector: '#chart-categorias',
         action: 'scroll'
       },
       {
-        icon: '<i class="fas fa-chart-line" style="color:#2563eb"></i>',
-        title: 'Evolución Temporal',
-        desc: 'Sigue cómo cambian los precios con el tiempo. Detecta tendencias y ahorra.',
-        selector: '.trend-chart, [class*="trend"], [class*="timeline"]',
+        icon: '<i class="fas fa-chart-bar" style="color:#2563eb"></i>',
+        title: 'Cobertura por supermercado',
+        desc: 'Cuántos productos tiene precio disponible en Mercadona, Carrefour y Eroski.',
+        selector: '#chart-supermercados',
+        action: 'scroll'
+      },
+      {
+        icon: '<i class="fas fa-trophy" style="color:#2563eb"></i>',
+        title: 'Top productos más baratos',
+        desc: 'Los 10 productos con el precio mínimo más bajo en todo el catálogo.',
+        selector: '#chart-baratos',
         action: 'scroll'
       }
     ],
@@ -148,16 +155,16 @@
     'login.html': [
       {
         icon: '<i class="fas fa-sign-in-alt" style="color:#2563eb"></i>',
-        title: 'Inicio de Sesión',
-        desc: 'Accede a tu cuenta para gestionar tus listas y ajustes personalizados.',
-        selector: '.login-form, form, [class*="login"]',
-        action: 'scroll'
+        title: 'Inicio de sesión',
+        desc: 'Introduce tu correo y contraseña para acceder a tus listas y al comparador personalizado.',
+        selector: '#login-form',
+        action: 'highlight'
       },
       {
-        icon: '<i class="fas fa-user-plus" style="color:#2563eb"></i>',
-        title: 'Registro',
-        desc: '¿No tienes cuenta? Regístrate gratis y empieza a ahorrar en tus compras.',
-        selector: '[href*="register"], [class*="register"]',
+        icon: '<i class="fas fa-play-circle" style="color:#2563eb"></i>',
+        title: 'Acceso demo',
+        desc: 'Pulsa el botón de acceso demo para entrar con una cuenta de prueba y explorar todas las funciones.',
+        selector: '#btn-demo',
         action: 'highlight'
       }
     ],
