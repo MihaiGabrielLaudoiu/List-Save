@@ -4840,14 +4840,15 @@ select {
 }
 
 .comp-battle__cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 @media (min-width: 600px) {
   .comp-battle__cards {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
   }
 }
 
@@ -4856,19 +4857,21 @@ select {
   align-items: center;
   justify-content: center;
   font-family: "Kalam", cursive;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #64748b;
-  padding: 0.25rem;
+  padding: 0.25rem 0;
 }
 @media (min-width: 600px) {
   .comp-battle__vs {
-    align-self: center;
-    padding: 0 0.5rem;
+    flex-shrink: 0;
+    padding: 0 0.75rem;
   }
 }
 
 .comp-battle-card {
+  flex: 1;
+  min-width: 0;
   background: #fff;
   border: 2px solid #e2e8f0;
   border-radius: 20px;

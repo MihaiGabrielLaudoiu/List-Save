@@ -463,18 +463,17 @@ $c-font-hand: 'Kalam', cursive;
   }
 }
 
-// Grid de cards
+// Contenedor de cards + separadores VS
+// Flexbox: en móvil columna, en desktop fila. Los VS dividers no rompen el layout.
 .comp-battle__cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   @media (min-width: 600px) {
-    // vs separators entre cards — si hay 2 supers: 1fr auto 1fr
-    // Para N cards, el JS alterna card y .comp-battle__vs
-    // Con CSS grid y auto-fill funciona bien en columnas
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
   }
 }
 
@@ -484,20 +483,21 @@ $c-font-hand: 'Kalam', cursive;
   align-items: center;
   justify-content: center;
   font-family: $c-font-hand;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: $c-muted;
-  padding: .25rem;
+  padding: .25rem 0;
 
   @media (min-width: 600px) {
-    // En desktop el VS queda entre cards en la misma fila
-    align-self: center;
-    padding: 0 .5rem;
+    flex-shrink: 0;
+    padding: 0 .75rem;
   }
 }
 
 // ── Cards de supermercado ───────────────────────────────────
 .comp-battle-card {
+  flex: 1;
+  min-width: 0;
   background: #fff;
   border: 2px solid $c-border;
   border-radius: 20px;
