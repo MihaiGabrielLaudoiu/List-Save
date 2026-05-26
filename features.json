@@ -3,7 +3,7 @@
     {
       "id": 1,
       "task": "Aumentar tamaño de fuente base global a 18-20px (actualmente ~16px en body de main.css)",
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "id": 2,
