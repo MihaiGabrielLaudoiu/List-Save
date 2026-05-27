@@ -2290,15 +2290,12 @@ input[type=number]::-webkit-inner-spin-button {
     margin: 0;
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(100%);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: none;
+    transform: translateY(8px);
     background-color: var(--color-white);
     z-index: 1050;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 .header__user-menu.is-visible {
@@ -2306,6 +2303,11 @@ input[type=number]::-webkit-inner-spin-button {
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
+}
+@media screen and (max-width: 768px) {
+  .header__user-menu.is-visible {
+    transform: translateY(0);
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -3604,6 +3606,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 .product-card--catalog {
   position: relative;
+  min-height: 400px;
 }
 
 .featured-card:hover,

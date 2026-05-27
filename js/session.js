@@ -115,11 +115,11 @@ function updateUIForLoggedUser() {
         }
 
         if (userMenu) {
-            userMenu.style.display = "block";
+            userMenu.style.removeProperty("display");
         }
 
         if (userIcon) {
-            userIcon.style.display = "block";
+            userIcon.style.removeProperty("display");
         }
 
         if (userName) {
