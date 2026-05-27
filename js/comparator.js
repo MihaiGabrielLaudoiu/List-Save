@@ -333,11 +333,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    var urlQ = null, urlSubcat = null;
+    var urlQ = null, urlSubcat = null, urlCat = null;
     try {
         var _params = new URLSearchParams(window.location.search);
         urlQ = _params.get("q");
         urlSubcat = _params.get("subcategoria");
+        urlCat = _params.get("cat");
         if (urlQ && urlQ.trim()) {
             searchInput.value = urlQ.trim();
             clearBtn.hidden = false;
@@ -435,6 +436,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 renderBattle(group);
                 searchInput.value = group.nombre;
                 clearBtn.hidden = false;
+                return;
+            }
+        }
+        if (urlCat) {
+            var dummyGroup = { categoria: urlCat, categoria_normalizada: urlCat, nombre: urlCat };
+            var matchingChip = null;
+            chipsContainer.querySelectorAll(".comp-chip").forEach(function (chip) {
+                if (!matchingChip && chip.dataset.cat && catMatch(chip.dataset.cat, dummyGroup)) {
+                    matchingChip = chip;
+                }
+            });
+            if (matchingChip) {
+                chipsContainer.querySelectorAll(".comp-chip").forEach(function (c) { c.classList.remove("active"); });
+                matchingChip.classList.add("active");
+                activeCat = matchingChip.dataset.cat;
+                renderSearch("");
                 return;
             }
         }

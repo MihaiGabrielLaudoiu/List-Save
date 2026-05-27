@@ -741,7 +741,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 formatoLine +
                 "<div class=\"product-card__actions\">" +
                 "<button class=\"button button--primary add-list-button\" data-product-id=\"" + product.id_producto + "\" data-i18n=\"products_page.add_to_list\">Añadir a mi lista</button>" +
-                "<a href=\"comparador.html?" + (product.subcategoria ? "subcategoria=" + encodeURIComponent(product.subcategoria) : "q=" + encodeURIComponent(product.nombre)) + "\" class=\"product-card__compare-btn\" data-i18n=\"products_page.compare_prices\">Comparar precios</a>" +
+                "<a href=\"comparador.html?" + (product.subcategoria ? "subcategoria=" + encodeURIComponent(product.subcategoria) : product.categoria ? "cat=" + encodeURIComponent(product.categoria) : "") + "\" class=\"product-card__compare-btn\" data-i18n=\"products_page.compare_prices\">Comparar precios</a>" +
                 "</div>" +
                 "</div>" +
                 "</article>";
