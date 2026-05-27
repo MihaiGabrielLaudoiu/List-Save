@@ -23,16 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateMenuVisibility() {
         const isLargeScreen = window.innerWidth >= 1024;
+        // Always clear inline overrides — let CSS media queries control display
         headerNav.style.display = "";
         hamburger.style.display = "";
-        if (isLargeScreen) {
-            menuPpal.classList.remove("is_active");
-            hamburger.classList.remove("is-active");
-        }
+        // Always close the mobile overlay on any visibility update
+        menuPpal.classList.remove("is_active");
+        hamburger.classList.remove("is-active");
+        const layers = hamburger.querySelectorAll("._layer");
+        layers.forEach((layer) => layer.classList.remove("active"));
     }
 
     updateMenuVisibility();
     window.addEventListener("resize", updateMenuVisibility);
+    // Close menu when page is restored from bfcache (browser back button)
+    window.addEventListener("pageshow", function (e) {
+        if (e.persisted) updateMenuVisibility();
+    });
     hamburger.addEventListener("click", toggleMenu);
 
     function closeMenu() {

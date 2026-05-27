@@ -230,11 +230,10 @@ $c-font-hand: 'Kalam', cursive;
 }
 
 // ── Chips de categoría ──────────────────────────────────────
-// Viven dentro de .comp-search-area__inner (max-width: 680px ya aplicado)
 .comp-chips {
   display: flex;
   gap: 8px;
-  padding: 0 0 1.25rem;
+  padding: 0 1rem 1.25rem;
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
