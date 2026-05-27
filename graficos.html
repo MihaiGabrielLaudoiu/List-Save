@@ -75,20 +75,20 @@
 
     <section class="page-hero">
         <div class="page-hero__inner">
-            <h1 class="page-hero__title">📊 Estadísticas del catálogo</h1>
-            <p class="page-hero__subtitle">Datos reales de precios, supermercados y categorías</p>
+            <h1 class="page-hero__title">📊 <span data-i18n="stats.hero_title">Estadísticas del catálogo</span></h1>
+            <p class="page-hero__subtitle" data-i18n="stats.hero_subtitle">Datos reales de precios, supermercados y categorías</p>
         </div>
     </section>
 
         <div class="graficos-loading" id="graficos-loading">
             <div class="spinner"></div>
-            <p>Cargando datos del catálogo…</p>
+            <p data-i18n="stats.loading">Cargando datos del catálogo…</p>
         </div>
 
         <div class="graficos-error" id="graficos-error" style="display:none;">
             <i class="fas fa-exclamation-circle"></i>
-            <p>No se pudieron cargar las estadísticas. Comprueba que el servidor está activo.</p>
-            <button type="button" class="button button--primary" onclick="initGraficos()">Reintentar</button>
+            <p data-i18n="stats.error">No se pudieron cargar las estadísticas. Comprueba que el servidor está activo.</p>
+            <button type="button" class="button button--primary" onclick="initGraficos()" data-i18n="stats.retry">Reintentar</button>
         </div>
 
         <div id="graficos-content" style="display:none;">
@@ -96,67 +96,67 @@
             <div class="stats-kpis">
                 <div class="stats-kpi">
                     <div class="stats-kpi__value" id="kpi-productos">—</div>
-                    <div class="stats-kpi__label">Productos</div>
+                    <div class="stats-kpi__label" data-i18n="stats.kpi_products">Productos</div>
                 </div>
                 <div class="stats-kpi">
                     <div class="stats-kpi__value" id="kpi-precios">—</div>
-                    <div class="stats-kpi__label">Precios registrados</div>
+                    <div class="stats-kpi__label" data-i18n="stats.kpi_prices">Precios registrados</div>
                 </div>
                 <div class="stats-kpi">
                     <div class="stats-kpi__value" id="kpi-supers">—</div>
-                    <div class="stats-kpi__label">Supermercados</div>
+                    <div class="stats-kpi__label" data-i18n="stats.kpi_stores">Supermercados</div>
                 </div>
                 <div class="stats-kpi">
                     <div class="stats-kpi__value" id="kpi-sin-precio">—</div>
-                    <div class="stats-kpi__label">Sin precio aún</div>
+                    <div class="stats-kpi__label" data-i18n="stats.kpi_no_price">Sin precio aún</div>
                 </div>
             </div>
 
             <div class="graficos-grid">
 
                 <div class="chart-card">
-                    <h2 class="chart-card__title"><span>🗂️</span> Productos por categoría</h2>
-                    <p class="chart-card__subtitle">Distribución del catálogo por tipo de producto</p>
+                    <h2 class="chart-card__title"><span>🗂️</span> <span data-i18n="stats.chart_by_cat">Productos por categoría</span></h2>
+                    <p class="chart-card__subtitle" data-i18n="stats.chart_by_cat_sub">Distribución del catálogo por tipo de producto</p>
                     <div class="chart-card__canvas-wrap" style="max-height:320px;">
                         <canvas id="chart-categorias"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
-                    <h2 class="chart-card__title"><span>🏬</span> Cobertura por supermercado</h2>
-                    <p class="chart-card__subtitle">Productos con precio disponible en cada cadena</p>
+                    <h2 class="chart-card__title"><span>🏬</span> <span data-i18n="stats.chart_by_store">Cobertura por supermercado</span></h2>
+                    <p class="chart-card__subtitle" data-i18n="stats.chart_by_store_sub">Productos con precio disponible en cada cadena</p>
                     <div class="chart-card__canvas-wrap" style="max-height:320px;">
                         <canvas id="chart-supermercados"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
-                    <h2 class="chart-card__title"><span>💶</span> Distribución de precios</h2>
-                    <p class="chart-card__subtitle">Cuántos productos hay en cada rango de precio (mínimo por producto)</p>
+                    <h2 class="chart-card__title"><span>💶</span> <span data-i18n="stats.chart_price_range">Distribución de precios</span></h2>
+                    <p class="chart-card__subtitle" data-i18n="stats.chart_price_range_sub">Cuántos productos hay en cada rango de precio (mínimo por producto)</p>
                     <div class="chart-card__canvas-wrap" style="max-height:320px;">
                         <canvas id="chart-rangos"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
-                    <h2 class="chart-card__title"><span>📈</span> Precio medio por supermercado</h2>
-                    <p class="chart-card__subtitle">Media del precio actual de todas las referencias con precio</p>
+                    <h2 class="chart-card__title"><span>📈</span> <span data-i18n="stats.chart_avg_price">Precio medio por supermercado</span></h2>
+                    <p class="chart-card__subtitle" data-i18n="stats.chart_avg_price_sub">Media del precio actual de todas las referencias con precio</p>
                     <div class="chart-card__canvas-wrap" style="max-height:320px;">
                         <canvas id="chart-precio-medio"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card chart-card--wide">
-                    <h2 class="chart-card__title"><span>🏆</span> Top 10 productos más baratos</h2>
-                    <p class="chart-card__subtitle">Precio mínimo encontrado en el catálogo actual</p>
+                    <h2 class="chart-card__title"><span>🏆</span> <span data-i18n="stats.chart_cheapest">Top 10 productos más baratos</span></h2>
+                    <p class="chart-card__subtitle" data-i18n="stats.chart_cheapest_sub">Precio mínimo encontrado en el catálogo actual</p>
                     <div class="chart-card__canvas-wrap" style="max-height:400px;">
                         <canvas id="chart-baratos"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card chart-card--wide">
-                    <h2 class="chart-card__title"><span>🔍</span> Subcategorías más completas</h2>
-                    <p class="chart-card__subtitle">Top 10 subcategorías con más productos en el catálogo</p>
+                    <h2 class="chart-card__title"><span>🔍</span> <span data-i18n="stats.chart_subcats">Subcategorías más completas</span></h2>
+                    <p class="chart-card__subtitle" data-i18n="stats.chart_subcats_sub">Top 10 subcategorías con más productos en el catálogo</p>
                     <div class="chart-card__canvas-wrap" style="max-height:340px;">
                         <canvas id="chart-subcats"></canvas>
                     </div>

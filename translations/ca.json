@@ -100,6 +100,29 @@
         },
         "copyright": "List & Save. Tots els drets reservats."
     },
+    "stats": {
+        "hero_title": "Estadístiques del catàleg",
+        "hero_subtitle": "Dades reals de preus, supermercats i categories",
+        "loading": "Carregant dades del catàleg…",
+        "error": "No s'han pogut carregar les estadístiques. Comprova que el servidor està actiu.",
+        "retry": "Torna-ho a provar",
+        "kpi_products": "Productes",
+        "kpi_prices": "Preus registrats",
+        "kpi_stores": "Supermercats",
+        "kpi_no_price": "Sense preu encara",
+        "chart_by_cat": "Productes per categoria",
+        "chart_by_cat_sub": "Distribució del catàleg per tipus de producte",
+        "chart_by_store": "Cobertura per supermercat",
+        "chart_by_store_sub": "Productes amb preu disponible a cada cadena",
+        "chart_price_range": "Distribució de preus",
+        "chart_price_range_sub": "Quants productes hi ha a cada rang de preu (mínim per producte)",
+        "chart_avg_price": "Preu mitjà per supermercat",
+        "chart_avg_price_sub": "Mitjana del preu actual de totes les referències amb preu",
+        "chart_cheapest": "Top 10 productes més barats",
+        "chart_cheapest_sub": "Preu mínim trobat al catàleg actual",
+        "chart_subcats": "Subcategories més completes",
+        "chart_subcats_sub": "Top 10 subcategories amb més productes al catàleg"
+    },
     "comparator": {
         "title": "Comparador de Productes",
         "subtitle": "Compara preus i característiques de diferents productes per trobar la millor opció",
@@ -135,7 +158,18 @@
         "summary_best": "Millor preu",
         "summary_save": "Estalvi maxim",
         "comparison_title": "Comparativa entre supermercats",
-        "add_to_list": "Afegir a la meva llista"
+        "add_to_list": "Afegir a la meva llista",
+        "chips": {
+            "all": "Tot",
+            "dairy": "Llet i iogurt",
+            "meat": "Carns",
+            "fruits": "Fruites",
+            "vegetables": "Verdures",
+            "bread": "Pa",
+            "drinks": "Begudes",
+            "hygiene": "Higiene",
+            "cleaning": "Neteja"
+        }
     },
     "products_page": {
         "pagination_prev": "Anterior",

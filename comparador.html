@@ -85,7 +85,7 @@
                 <div class="comp-search-bar">
                     <div class="comp-search-bar__wrap">
                         <i class="fas fa-search comp-search-bar__icon" aria-hidden="true"></i>
-                        <input type="text" id="comp-search" class="comp-search-bar__input" placeholder="Busca leche, pan, yogur…" autocomplete="off" aria-label="Buscar producto para comparar precios">
+                        <input type="text" id="comp-search" class="comp-search-bar__input" placeholder="Busca leche, pan, yogur…" data-i18n-placeholder="comparator.search_placeholder" autocomplete="off" aria-label="Buscar producto para comparar precios" data-i18n-aria-label="comparator.hero_subtitle">
                     </div>
                     <button id="comp-clear" class="comp-search-bar__clear" hidden aria-label="Borrar búsqueda"><i class="fas fa-times" aria-hidden="true"></i></button>
                     <div id="comp-results" class="comp-results" hidden></div>
@@ -94,21 +94,21 @@
         </div>
 
         <div class="comp-chips" id="comp-chips">
-            <span class="comp-chip active" data-cat="">Todo</span>
-            <span class="comp-chip" data-cat="lacteos">🥛 Leche y yogur</span>
-            <span class="comp-chip" data-cat="carnes">🍗 Carnes</span>
-            <span class="comp-chip" data-cat="frutas">🍎 Frutas</span>
-            <span class="comp-chip" data-cat="verduras">🥦 Verduras</span>
-            <span class="comp-chip" data-cat="panaderia">🍞 Pan</span>
-            <span class="comp-chip" data-cat="bebidas">🥤 Bebidas</span>
-            <span class="comp-chip" data-cat="higiene">🧴 Higiene</span>
-            <span class="comp-chip" data-cat="limpieza">🧹 Limpieza</span>
+            <span class="comp-chip active" data-cat="" data-i18n="comparator.chips.all">Todo</span>
+            <span class="comp-chip" data-cat="lacteos">🥛 <span data-i18n="comparator.chips.dairy">Leche y yogur</span></span>
+            <span class="comp-chip" data-cat="carnes">🍗 <span data-i18n="comparator.chips.meat">Carnes</span></span>
+            <span class="comp-chip" data-cat="frutas">🍎 <span data-i18n="comparator.chips.fruits">Frutas</span></span>
+            <span class="comp-chip" data-cat="verduras">🥦 <span data-i18n="comparator.chips.vegetables">Verduras</span></span>
+            <span class="comp-chip" data-cat="panaderia">🍞 <span data-i18n="comparator.chips.bread">Pan</span></span>
+            <span class="comp-chip" data-cat="bebidas">🥤 <span data-i18n="comparator.chips.drinks">Bebidas</span></span>
+            <span class="comp-chip" data-cat="higiene">🧴 <span data-i18n="comparator.chips.hygiene">Higiene</span></span>
+            <span class="comp-chip" data-cat="limpieza">🧹 <span data-i18n="comparator.chips.cleaning">Limpieza</span></span>
         </div>
 
         <div id="comp-empty" class="comp-empty">
             <div class="comp-empty__icon"><i class="fas fa-balance-scale"></i></div>
-            <h3 class="comp-empty__title">¿Qué buscamos hoy?</h3>
-            <p class="comp-empty__text">Escribe en el buscador o prueba una sugerencia:</p>
+            <h3 class="comp-empty__title" data-i18n="comparator.empty_title">¿Qué buscamos hoy?</h3>
+            <p class="comp-empty__text" data-i18n="comparator.empty_subtitle">Escribe en el buscador o prueba una sugerencia:</p>
             <div class="comp-empty__suggestions">
                 <span class="comp-empty__chip" data-q="leche">🥛 Leche</span>
                 <span class="comp-empty__chip" data-q="pan">🍞 Pan</span>

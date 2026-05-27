@@ -100,6 +100,29 @@
         },
         "copyright": "List & Save. All rights reserved."
     },
+    "stats": {
+        "hero_title": "Catalog Statistics",
+        "hero_subtitle": "Real prices, supermarkets and categories data",
+        "loading": "Loading catalog data…",
+        "error": "Could not load statistics. Make sure the server is running.",
+        "retry": "Try again",
+        "kpi_products": "Products",
+        "kpi_prices": "Registered prices",
+        "kpi_stores": "Supermarkets",
+        "kpi_no_price": "No price yet",
+        "chart_by_cat": "Products by category",
+        "chart_by_cat_sub": "Catalog distribution by product type",
+        "chart_by_store": "Coverage by supermarket",
+        "chart_by_store_sub": "Products with available price in each chain",
+        "chart_price_range": "Price distribution",
+        "chart_price_range_sub": "How many products are in each price range (minimum per product)",
+        "chart_avg_price": "Average price by supermarket",
+        "chart_avg_price_sub": "Average current price of all references with a price",
+        "chart_cheapest": "Top 10 cheapest products",
+        "chart_cheapest_sub": "Minimum price found in the current catalog",
+        "chart_subcats": "Most complete subcategories",
+        "chart_subcats_sub": "Top 10 subcategories with the most products in the catalog"
+    },
     "comparator": {
         "title": "Product Comparator",
         "subtitle": "Compare prices and features of different products to find the best option",
@@ -135,7 +158,18 @@
         "summary_best": "Best price",
         "summary_save": "Top savings",
         "comparison_title": "Supermarket comparison",
-        "add_to_list": "Add to my list"
+        "add_to_list": "Add to my list",
+        "chips": {
+            "all": "All",
+            "dairy": "Milk & yogurt",
+            "meat": "Meat",
+            "fruits": "Fruits",
+            "vegetables": "Vegetables",
+            "bread": "Bread",
+            "drinks": "Drinks",
+            "hygiene": "Hygiene",
+            "cleaning": "Cleaning"
+        }
     },
     "products_page": {
         "pagination_prev": "Previous",

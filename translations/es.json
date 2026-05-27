@@ -118,6 +118,29 @@
             "create_account": "Crear cuenta nueva"
         }
     },
+    "stats": {
+        "hero_title": "Estadísticas del catálogo",
+        "hero_subtitle": "Datos reales de precios, supermercados y categorías",
+        "loading": "Cargando datos del catálogo…",
+        "error": "No se pudieron cargar las estadísticas. Comprueba que el servidor está activo.",
+        "retry": "Reintentar",
+        "kpi_products": "Productos",
+        "kpi_prices": "Precios registrados",
+        "kpi_stores": "Supermercados",
+        "kpi_no_price": "Sin precio aún",
+        "chart_by_cat": "Productos por categoría",
+        "chart_by_cat_sub": "Distribución del catálogo por tipo de producto",
+        "chart_by_store": "Cobertura por supermercado",
+        "chart_by_store_sub": "Productos con precio disponible en cada cadena",
+        "chart_price_range": "Distribución de precios",
+        "chart_price_range_sub": "Cuántos productos hay en cada rango de precio (mínimo por producto)",
+        "chart_avg_price": "Precio medio por supermercado",
+        "chart_avg_price_sub": "Media del precio actual de todas las referencias con precio",
+        "chart_cheapest": "Top 10 productos más baratos",
+        "chart_cheapest_sub": "Precio mínimo encontrado en el catálogo actual",
+        "chart_subcats": "Subcategorías más completas",
+        "chart_subcats_sub": "Top 10 subcategorías con más productos en el catálogo"
+    },
     "comparator": {
         "title": "Comparador de Productos",
         "subtitle": "Compara precios y características de diferentes productos para encontrar la mejor opción",
@@ -153,7 +176,18 @@
         "summary_best": "Mejor precio",
         "summary_save": "Ahorro maximo",
         "comparison_title": "Comparativa entre supermercados",
-        "add_to_list": "Anadir a mi lista"
+        "add_to_list": "Anadir a mi lista",
+        "chips": {
+            "all": "Todo",
+            "dairy": "Leche y yogur",
+            "meat": "Carnes",
+            "fruits": "Frutas",
+            "vegetables": "Verduras",
+            "bread": "Pan",
+            "drinks": "Bebidas",
+            "hygiene": "Higiene",
+            "cleaning": "Limpieza"
+        }
     },
     "products_page": {
         "pagination_prev": "Anterior",
