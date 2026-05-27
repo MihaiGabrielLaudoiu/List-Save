@@ -207,7 +207,18 @@
         "register": "Registrar-se",
         "my_account": "El meu compte",
         "settings": "Configuració",
-        "logout": "Tancar sessió"
+        "logout": "Tancar sessió",
+        "login_page": {
+            "title": "Accedeix al teu compte",
+            "subtitle": "Gestiona les teves llistes i compara preus",
+            "email_label": "Adreça electrònica",
+            "password_label": "Contrasenya",
+            "remember": "Mantenir la sessió activa",
+            "submit": "Entrar",
+            "demo": "Accés demo ràpid",
+            "no_account": "Primera vegada aquí?",
+            "create_account": "Crear un compte nou"
+        }
     },
     "register": {
         "title": "Crear un compte",

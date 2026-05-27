@@ -280,9 +280,11 @@ document.addEventListener("DOMContentLoaded", function () {
         clearBtn.hidden = true;
     }
 
+    var _searchTimer = null;
     searchInput.addEventListener("input", function () {
         clearBtn.hidden = !searchInput.value;
-        renderSearch(searchInput.value);
+        clearTimeout(_searchTimer);
+        _searchTimer = setTimeout(function () { renderSearch(searchInput.value); }, 280);
     });
 
     searchInput.addEventListener("keydown", function (e) {
@@ -352,10 +354,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    var DEMO_OPTIONS = [
+        { nombre_comparable:"leche-entera", nombre:"Leche Entera 1L",    categoria:"lacteos",       categoria_normalizada:"lacteos",       subcategoria:null, emoji_sugerido:"🥛", imagen_resuelta:null, precio_actual:0.72, nombre_supermercado:"Mercadona",  id_producto:1,  formato:"1 L",   cantidad_unidad:1,   unidad_medida:"L",  precio_oferta:null, precio_referencia:0.72, unidad_referencia:"L" },
+        { nombre_comparable:"leche-entera", nombre:"Leche Entera 1L",    categoria:"lacteos",       categoria_normalizada:"lacteos",       subcategoria:null, emoji_sugerido:"🥛", imagen_resuelta:null, precio_actual:0.79, nombre_supermercado:"Carrefour", id_producto:1,  formato:"1 L",   cantidad_unidad:1,   unidad_medida:"L",  precio_oferta:0.69, precio_referencia:0.79, unidad_referencia:"L" },
+        { nombre_comparable:"leche-entera", nombre:"Leche Entera 1L",    categoria:"lacteos",       categoria_normalizada:"lacteos",       subcategoria:null, emoji_sugerido:"🥛", imagen_resuelta:null, precio_actual:0.85, nombre_supermercado:"Eroski",    id_producto:1,  formato:"1 L",   cantidad_unidad:1,   unidad_medida:"L",  precio_oferta:null, precio_referencia:0.85, unidad_referencia:"L" },
+        { nombre_comparable:"huevos-l",     nombre:"Huevos L x12",       categoria:"huevos",        categoria_normalizada:"huevos",        subcategoria:null, emoji_sugerido:"🥚", imagen_resuelta:null, precio_actual:2.35, nombre_supermercado:"Mercadona",  id_producto:3,  formato:"12 ud", cantidad_unidad:12,  unidad_medida:"ud", precio_oferta:null, precio_referencia:0.20, unidad_referencia:"ud" },
+        { nombre_comparable:"huevos-l",     nombre:"Huevos L x12",       categoria:"huevos",        categoria_normalizada:"huevos",        subcategoria:null, emoji_sugerido:"🥚", imagen_resuelta:null, precio_actual:2.59, nombre_supermercado:"Carrefour", id_producto:3,  formato:"12 ud", cantidad_unidad:12,  unidad_medida:"ud", precio_oferta:2.29, precio_referencia:0.22, unidad_referencia:"ud" },
+        { nombre_comparable:"huevos-l",     nombre:"Huevos L x12",       categoria:"huevos",        categoria_normalizada:"huevos",        subcategoria:null, emoji_sugerido:"🥚", imagen_resuelta:null, precio_actual:2.49, nombre_supermercado:"Eroski",    id_producto:3,  formato:"12 ud", cantidad_unidad:12,  unidad_medida:"ud", precio_oferta:null, precio_referencia:0.21, unidad_referencia:"ud" },
+        { nombre_comparable:"pan-molde",    nombre:"Pan de Molde Integral",categoria:"panaderia",    categoria_normalizada:"panaderia",     subcategoria:null, emoji_sugerido:"🍞", imagen_resuelta:null, precio_actual:1.29, nombre_supermercado:"Mercadona",  id_producto:2,  formato:"600 g", cantidad_unidad:600, unidad_medida:"g",  precio_oferta:null, precio_referencia:2.15, unidad_referencia:"kg" },
+        { nombre_comparable:"pan-molde",    nombre:"Pan de Molde Integral",categoria:"panaderia",    categoria_normalizada:"panaderia",     subcategoria:null, emoji_sugerido:"🍞", imagen_resuelta:null, precio_actual:1.45, nombre_supermercado:"Carrefour", id_producto:2,  formato:"600 g", cantidad_unidad:600, unidad_medida:"g",  precio_oferta:1.19, precio_referencia:2.42, unidad_referencia:"kg" },
+        { nombre_comparable:"pan-molde",    nombre:"Pan de Molde Integral",categoria:"panaderia",    categoria_normalizada:"panaderia",     subcategoria:null, emoji_sugerido:"🍞", imagen_resuelta:null, precio_actual:1.55, nombre_supermercado:"Eroski",    id_producto:2,  formato:"600 g", cantidad_unidad:600, unidad_medida:"g",  precio_oferta:null, precio_referencia:2.58, unidad_referencia:"kg" },
+        { nombre_comparable:"pechuga-pollo",nombre:"Pechuga de Pollo 1kg",categoria:"carnes",        categoria_normalizada:"carnes",        subcategoria:null, emoji_sugerido:"🍗", imagen_resuelta:null, precio_actual:3.45, nombre_supermercado:"Mercadona",  id_producto:4,  formato:"1 kg",  cantidad_unidad:1,   unidad_medida:"kg", precio_oferta:null, precio_referencia:3.45, unidad_referencia:"kg" },
+        { nombre_comparable:"pechuga-pollo",nombre:"Pechuga de Pollo 1kg",categoria:"carnes",        categoria_normalizada:"carnes",        subcategoria:null, emoji_sugerido:"🍗", imagen_resuelta:null, precio_actual:3.79, nombre_supermercado:"Carrefour", id_producto:4,  formato:"1 kg",  cantidad_unidad:1,   unidad_medida:"kg", precio_oferta:3.49, precio_referencia:3.79, unidad_referencia:"kg" },
+        { nombre_comparable:"pechuga-pollo",nombre:"Pechuga de Pollo 1kg",categoria:"carnes",        categoria_normalizada:"carnes",        subcategoria:null, emoji_sugerido:"🍗", imagen_resuelta:null, precio_actual:3.65, nombre_supermercado:"Eroski",    id_producto:4,  formato:"1 kg",  cantidad_unidad:1,   unidad_medida:"kg", precio_oferta:null, precio_referencia:3.65, unidad_referencia:"kg" },
+        { nombre_comparable:"arroz-largo",  nombre:"Arroz Largo 1kg",    categoria:"arroces-pasta", categoria_normalizada:"arroces-pasta", subcategoria:null, emoji_sugerido:"🍚", imagen_resuelta:null, precio_actual:1.05, nombre_supermercado:"Mercadona",  id_producto:5,  formato:"1 kg",  cantidad_unidad:1,   unidad_medida:"kg", precio_oferta:null, precio_referencia:1.05, unidad_referencia:"kg" },
+        { nombre_comparable:"arroz-largo",  nombre:"Arroz Largo 1kg",    categoria:"arroces-pasta", categoria_normalizada:"arroces-pasta", subcategoria:null, emoji_sugerido:"🍚", imagen_resuelta:null, precio_actual:1.19, nombre_supermercado:"Carrefour", id_producto:5,  formato:"1 kg",  cantidad_unidad:1,   unidad_medida:"kg", precio_oferta:0.99, precio_referencia:1.19, unidad_referencia:"kg" },
+        { nombre_comparable:"arroz-largo",  nombre:"Arroz Largo 1kg",    categoria:"arroces-pasta", categoria_normalizada:"arroces-pasta", subcategoria:null, emoji_sugerido:"🍚", imagen_resuelta:null, precio_actual:1.25, nombre_supermercado:"Eroski",    id_producto:5,  formato:"1 kg",  cantidad_unidad:1,   unidad_medida:"kg", precio_oferta:null, precio_referencia:1.25, unidad_referencia:"kg" }
+    ];
+
     async function loadOptions() {
         try {
             var res = await ApiClient.get("/api/products/comparator-options");
             allOptions = res.items || [];
+            if (!allOptions.length) throw new Error("empty");
             grouped = {};
             allOptions.forEach(function (p) {
                 var subcat = (p.subcategoria || "").trim().toLowerCase();
@@ -378,7 +399,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 grouped[key].variantes.push(p);
             });
         } catch (e) {
-            console.error("Error cargando opciones:", e);
+            console.warn("API no disponible, usando datos de demo:", e.message);
+            allOptions = DEMO_OPTIONS;
+            grouped = {};
+            DEMO_OPTIONS.forEach(function (p) {
+                var key = p.nombre_comparable;
+                var displayName = p.nombre;
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        clave: key,
+                        nombre: displayName,
+                        categoria: p.categoria_normalizada,
+                        categoria_normalizada: p.categoria_normalizada,
+                        subcategoria: null,
+                        imagen: null,
+                        emoji: p.emoji_sugerido,
+                        variantes: []
+                    };
+                }
+                grouped[key].variantes.push(p);
+            });
         }
     }
 

@@ -12,6 +12,7 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="084adb18-3e66-41fb-bbf6-d6fd0d0eca81"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-main" title="Saltar al contenido principal"></a>
     <header class="header">
         <div class="header__container">
             <a href="/" class="header__logo" aria-label="List &amp; Save — Inicio">
@@ -28,12 +29,12 @@
             <form class="form form--login" id="login-form" novalidate>
                 <div class="form__brand">
                     <img src="assets/images/logo.svg" alt="" aria-hidden="true" class="form__brand-logo">
-                    <h1 class="form__title">Accede a tu cuenta</h1>
-                    <p class="form__subtitle">Gestiona tus listas y compara precios</p>
+                    <h1 class="form__title" data-i18n="auth.login_page.title">Accede a tu cuenta</h1>
+                    <p class="form__subtitle" data-i18n="auth.login_page.subtitle">Gestiona tus listas y compara precios</p>
                 </div>
 
                 <div class="form__group">
-                    <label class="form__label" for="login-email">
+                    <label class="form__label" for="login-email" data-i18n="auth.login_page.email_label">
                         <i class="fas fa-envelope" aria-hidden="true"></i> Correo electrónico
                     </label>
                     <input type="email" id="login-email" name="email" class="form__input"
@@ -43,7 +44,7 @@
                 </div>
 
                 <div class="form__group">
-                    <label class="form__label" for="login-password">
+                    <label class="form__label" for="login-password" data-i18n="auth.login_page.password_label">
                         <i class="fas fa-lock" aria-hidden="true"></i> Contraseña
                     </label>
                     <div class="form__input-wrap">
@@ -60,19 +61,19 @@
 
                 <div class="form__group form__group--checkbox">
                     <input type="checkbox" id="remember" name="remember" class="form__checkbox">
-                    <label for="remember" class="form__label--checkbox">Mantener sesión activa</label>
+                    <label for="remember" class="form__label--checkbox" data-i18n="auth.login_page.remember">Mantener sesión activa</label>
                 </div>
 
-                <button type="submit" class="button button--primary button--full button--lg">
+                <button type="submit" class="button button--primary button--full button--lg" data-i18n="auth.login_page.submit">
                     <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Entrar
                 </button>
 
-                <button type="button" id="btn-demo" class="button button--secondary button--full" style="margin-top:.5rem;opacity:.85;">
+                <button type="button" id="btn-demo" class="button button--secondary button--full" style="margin-top:.5rem;opacity:.85;" data-i18n="auth.login_page.demo">
                     <i class="fas fa-play-circle" aria-hidden="true"></i> Acceso demo rápido
                 </button>
 
                 <p class="form__footer">
-                    ¿Primera vez aquí?&nbsp;<a href="register.html" class="form__link">Crear cuenta nueva</a>
+                    <span data-i18n="auth.login_page.no_account">¿Primera vez aquí?</span>&nbsp;<a href="register.html" class="form__link" data-i18n="auth.login_page.create_account">Crear cuenta nueva</a>
                 </p>
             </form>
         </div>

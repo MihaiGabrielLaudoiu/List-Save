@@ -207,7 +207,18 @@
         "register": "Sign Up",
         "my_account": "My Account",
         "settings": "Settings",
-        "logout": "Log Out"
+        "logout": "Log Out",
+        "login_page": {
+            "title": "Sign in to your account",
+            "subtitle": "Manage your lists and compare prices",
+            "email_label": "Email address",
+            "password_label": "Password",
+            "remember": "Keep me signed in",
+            "submit": "Sign in",
+            "demo": "Quick demo access",
+            "no_account": "New here?",
+            "create_account": "Create a new account"
+        }
     },
     "register": {
         "title": "Create an Account",

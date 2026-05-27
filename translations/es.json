@@ -105,7 +105,18 @@
         "register": "Registrarse",
         "my_account": "Mi cuenta",
         "settings": "Ajustes",
-        "logout": "Cerrar sesión"
+        "logout": "Cerrar sesión",
+        "login_page": {
+            "title": "Accede a tu cuenta",
+            "subtitle": "Gestiona tus listas y compara precios",
+            "email_label": "Correo electrónico",
+            "password_label": "Contraseña",
+            "remember": "Mantener sesión activa",
+            "submit": "Entrar",
+            "demo": "Acceso demo rápido",
+            "no_account": "¿Primera vez aquí?",
+            "create_account": "Crear cuenta nueva"
+        }
     },
     "comparator": {
         "title": "Comparador de Productos",
