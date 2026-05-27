@@ -49,7 +49,7 @@
   box-shadow: var(--nb-shadow);
   padding: 1.75rem 1.25rem 2rem 3.25rem;
   min-height: 380px;
-  overflow: hidden;
+  overflow: visible;
   transition: background .2s;
 
   @media (min-width: 480px) { padding: 2rem 2rem 2rem 4.25rem; }
@@ -61,6 +61,8 @@
   content: '';
   position: absolute;
   inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
   background: repeating-linear-gradient(
     transparent, transparent 38px,
     var(--nb-line) 38px, var(--nb-line) 40px
@@ -289,6 +291,8 @@
   flex-direction: column;
   gap: 8px;
   margin: 6px 0 22px;
+  position: relative;
+  z-index: 20;
 
   @media (min-width: 520px) { flex-direction: row; }
 }

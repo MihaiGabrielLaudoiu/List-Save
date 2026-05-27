@@ -333,8 +333,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    var urlQ = null, urlSubcat = null;
     try {
-        var urlQ = new URLSearchParams(window.location.search).get("q");
+        var _params = new URLSearchParams(window.location.search);
+        urlQ = _params.get("q");
+        urlSubcat = _params.get("subcategoria");
         if (urlQ && urlQ.trim()) {
             searchInput.value = urlQ.trim();
             clearBtn.hidden = false;
@@ -425,6 +428,16 @@ document.addEventListener("DOMContentLoaded", function () {
     async function init() {
         await loadSources();
         await loadOptions();
+        if (urlSubcat) {
+            var key = urlSubcat.trim().toLowerCase();
+            var group = grouped[key];
+            if (group) {
+                renderBattle(group);
+                searchInput.value = group.nombre;
+                clearBtn.hidden = false;
+                return;
+            }
+        }
         if (searchInput.value.trim()) {
             renderSearch(searchInput.value);
         }
