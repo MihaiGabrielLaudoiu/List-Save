@@ -23,14 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateMenuVisibility() {
         const isLargeScreen = window.innerWidth >= 1024;
+        headerNav.style.display = "";
+        hamburger.style.display = "";
         if (isLargeScreen) {
-            headerNav.style.display = "block";
-            hamburger.style.display = "none";
             menuPpal.classList.remove("is_active");
             hamburger.classList.remove("is-active");
-        } else {
-            headerNav.style.display = "none";
-            hamburger.style.display = "block";
         }
     }
 
@@ -73,11 +70,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
             if (isLargeScreen) {
-                authButtons.style.display = "flex";
+                authButtons.style.display = "";
                 mobileAuthButtons.style.display = "none";
             } else {
                 authButtons.style.display = "none";
-                mobileAuthButtons.style.display = "flex";
+                mobileAuthButtons.style.display = "";
             }
         }
         updateAuthButtonsVisibility();
