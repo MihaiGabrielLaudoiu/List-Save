@@ -52,6 +52,64 @@
     return { labels: labels, values: values };
   }
 
+  var DEMO_STATS = {
+    kpis: { productos: 1009, precios_registrados: 2847, supermercados: 3, sin_precio: 163 },
+    por_categoria: [
+      { etiqueta: "Lácteos",          n: 228 },
+      { etiqueta: "Fruta y verdura",  n: 147 },
+      { etiqueta: "Carnes",           n: 104 },
+      { etiqueta: "Bebidas",          n: 98  },
+      { etiqueta: "Panadería",        n: 98  },
+      { etiqueta: "Aceites y salsas", n: 88  },
+      { etiqueta: "Arroces y pasta",  n: 74  },
+      { etiqueta: "Desayuno",         n: 41  },
+      { etiqueta: "Limpieza",         n: 36  },
+      { etiqueta: "Otros",            n: 95  }
+    ],
+    por_supermercado: [
+      { etiqueta: "Mercadona", n: 689 },
+      { etiqueta: "Carrefour", n: 584 },
+      { etiqueta: "Eroski",    n: 421 }
+    ],
+    rangos_precio: [
+      { etiqueta: "< 0,50 €",   n: 34  },
+      { etiqueta: "0,50-1 €",   n: 87  },
+      { etiqueta: "1-2 €",      n: 213 },
+      { etiqueta: "2-5 €",      n: 389 },
+      { etiqueta: "5-10 €",     n: 198 },
+      { etiqueta: "> 10 €",     n: 88  }
+    ],
+    precio_medio_super: [
+      { etiqueta: "Mercadona", media: 2.84 },
+      { etiqueta: "Carrefour", media: 3.21 },
+      { etiqueta: "Eroski",    media: 3.08 }
+    ],
+    top_baratos: [
+      { etiqueta: "Agua mineral 1,5L",    precio: 0.29 },
+      { etiqueta: "Sal fina 1kg",          precio: 0.32 },
+      { etiqueta: "Harina trigo 1kg",      precio: 0.39 },
+      { etiqueta: "Azúcar blanco 1kg",     precio: 0.42 },
+      { etiqueta: "Vinagre vino blanco",   precio: 0.45 },
+      { etiqueta: "Arroz redondo 1kg",     precio: 0.55 },
+      { etiqueta: "Espaguetis 500g",       precio: 0.55 },
+      { etiqueta: "Tomate triturado 400g", precio: 0.59 },
+      { etiqueta: "Cebolla 1kg",           precio: 0.65 },
+      { etiqueta: "Patata 2kg",            precio: 0.69 }
+    ],
+    top_subcats: [
+      { etiqueta: "Pollo",           n: 35 },
+      { etiqueta: "Cerdo",           n: 32 },
+      { etiqueta: "Otras verduras",  n: 21 },
+      { etiqueta: "Queso curado",    n: 20 },
+      { etiqueta: "Agua sin gas",    n: 14 },
+      { etiqueta: "Macarrones",      n: 14 },
+      { etiqueta: "Tomate",          n: 13 },
+      { etiqueta: "Aceitunas",       n: 13 },
+      { etiqueta: "Galletas",        n: 13 },
+      { etiqueta: "Arroz",           n: 15 }
+    ]
+  };
+
   window.initGraficos = async function initGraficos() {
     const loading = document.getElementById("graficos-loading");
     const errBox = document.getElementById("graficos-error");
@@ -69,8 +127,14 @@
 
     destroyCharts();
 
+    var data;
     try {
-      const data = await ApiClient.get("/api/stats/catalog");
+      data = await ApiClient.get("/api/stats/catalog");
+      if (!data || !data.kpis) throw new Error("empty");
+    } catch (e) {
+      console.warn("API no disponible, usando datos demo:", e.message);
+      data = DEMO_STATS;
+    }
 
       const k = data.kpis || {};
       const elP = document.getElementById("kpi-productos");
