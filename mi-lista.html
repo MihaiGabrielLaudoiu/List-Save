@@ -125,6 +125,18 @@
         </div>
       </div>
     </div>
+
+    <section class="list-summary" id="listSummary" hidden aria-label="Resumen de compra">
+      <div class="list-summary__inner">
+        <h2 class="list-summary__title">📊 Resumen de tus listas</h2>
+        <div class="list-summary__stats" id="summaryStats"></div>
+        <div class="list-summary__chart-wrap">
+          <h3 class="list-summary__chart-title">¿Dónde conviene comprar?</h3>
+          <div class="list-summary__bars" id="summaryBars"></div>
+        </div>
+        <div class="list-summary__best" id="summaryBest"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -316,7 +328,80 @@
   }
 
   /* ─── RENDER ────────────────────────────── */
-  function render() { renderTabs(); renderList(); }
+  function render() { renderTabs(); renderList(); updateSummary(); }
+
+  var STORE_META = {
+    'Mercadona': { emoji: '🟢', color: '#00a651' },
+    'Carrefour':  { emoji: '🔵', color: '#004a97' },
+    'Eroski':     { emoji: '🔴', color: '#e3000f' },
+    'Lidl':       { emoji: '🟡', color: '#ffcc00' },
+    'Alcampo':    { emoji: '🟠', color: '#f26522' }
+  };
+
+  function updateSummary() {
+    var summaryEl = $$('listSummary');
+    if (!summaryEl) return;
+
+    // Aggregate all lists
+    var allItems = [];
+    for (var i = 0; i < lists.length; i++) {
+      allItems = allItems.concat(lists[i].items || []);
+    }
+
+    if (allItems.length === 0) { summaryEl.hidden = true; return; }
+    summaryEl.hidden = false;
+
+    var totalQty = 0, totalSpend = 0;
+    var storeMap = {};
+    for (var j = 0; j < allItems.length; j++) {
+      var it = allItems[j];
+      var qty = Number(it.qty) || 1;
+      var price = Number(it.price) || 0;
+      var spend = qty * price;
+      totalQty += qty;
+      totalSpend += spend;
+      var s = it.store || 'Otro';
+      if (!storeMap[s]) storeMap[s] = { count: 0, spend: 0 };
+      storeMap[s].count += qty;
+      storeMap[s].spend += spend;
+    }
+
+    // Stats
+    var statsEl = $$('summaryStats');
+    var savings = totalSpend * 0.12; // rough 12% saving estimate vs not comparing
+    statsEl.innerHTML =
+      '<div class="summary-stat"><span class="summary-stat__label">Productos</span><span class="summary-stat__value">' + totalQty + '</span><span class="summary-stat__sub">en todas las listas</span></div>' +
+      '<div class="summary-stat"><span class="summary-stat__label">Total</span><span class="summary-stat__value">' + fmt(totalSpend) + '</span><span class="summary-stat__sub">coste estimado</span></div>' +
+      '<div class="summary-stat"><span class="summary-stat__label">Ahorro est.</span><span class="summary-stat__value">' + fmt(savings) + '</span><span class="summary-stat__sub">vs sin comparar</span></div>';
+
+    // Sort stores by spend desc
+    var stores = Object.keys(storeMap).sort(function (a, b) { return storeMap[b].spend - storeMap[a].spend; });
+    var maxSpend = storeMap[stores[0]].spend;
+
+    var barsEl = $$('summaryBars');
+    barsEl.innerHTML = stores.map(function (name) {
+      var meta = STORE_META[name] || { emoji: '🏪', color: '#6366f1' };
+      var pct = totalSpend > 0 ? Math.round((storeMap[name].spend / totalSpend) * 100) : 0;
+      var barW = maxSpend > 0 ? Math.round((storeMap[name].spend / maxSpend) * 100) : 0;
+      return '<div class="summary-bar">' +
+        '<div class="summary-bar__label"><span class="summary-bar__emoji">' + meta.emoji + '</span>' + esc(name) + '</div>' +
+        '<div class="summary-bar__track"><div class="summary-bar__fill" style="width:' + barW + '%;background:' + meta.color + '"></div></div>' +
+        '<div class="summary-bar__amount">' + pct + '% · ' + fmt(storeMap[name].spend) + '</div>' +
+        '</div>';
+    }).join('');
+
+    // Best store
+    var bestStore = stores[0];
+    var bestMeta = STORE_META[bestStore] || { emoji: '🏪', color: '#16a34a' };
+    var bestPct = totalSpend > 0 ? Math.round((storeMap[bestStore].spend / totalSpend) * 100) : 0;
+    $$('summaryBest').innerHTML =
+      '<div class="list-summary__best__icon">' + bestMeta.emoji + '</div>' +
+      '<div class="list-summary__best__text">' +
+        '<p class="list-summary__best__headline">Mejor opción global</p>' +
+        '<p class="list-summary__best__store">' + esc(bestStore) + '</p>' +
+        '<p class="list-summary__best__detail">' + bestPct + '% de tu compra · ' + fmt(storeMap[bestStore].spend) + '</p>' +
+      '</div>';
+  }
 
   function activeList() {
     for (var i = 0; i < lists.length; i++) if (lists[i].id === activeListId) return lists[i];

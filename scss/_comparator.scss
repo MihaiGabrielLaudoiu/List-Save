@@ -116,6 +116,7 @@ $c-font-hand: 'Kalam', cursive;
     background: #f8fafc;
     color: $c-text;
     transition: border-color .15s, box-shadow .15s, background .15s;
+    max-width: none;
 
     &::placeholder { color: #94a3b8; }
 
@@ -126,6 +127,28 @@ $c-font-hand: 'Kalam', cursive;
       box-shadow: 0 0 0 4px rgba(37,99,235,.12);
     }
   }
+}
+
+// ID override needed: global input:not(×3) has (0,3,1) specificity > (0,1,0) class
+#comp-search {
+  padding: 14px 20px 14px 52px !important;
+  font-size: $c-base;
+  min-height: $c-touch;
+  max-width: none;
+  border: 2px solid $c-border;
+  border-radius: 16px;
+  background: #f8fafc;
+  color: $c-text;
+
+  &:focus {
+    border-color: $c-accent;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+    outline: none;
+  }
+}
+
+.comp-search-bar {
 
   &__clear {
     min-height: $c-touch;
@@ -207,14 +230,12 @@ $c-font-hand: 'Kalam', cursive;
 }
 
 // ── Chips de categoría ──────────────────────────────────────
+// Viven dentro de .comp-search-area__inner (max-width: 680px ya aplicado)
 .comp-chips {
   display: flex;
   gap: 8px;
-  padding: .75rem 1rem 1.25rem;
+  padding: 0 0 1.25rem;
   overflow-x: auto;
-  background: #fff;
-  max-width: 680px;
-  margin: 0 auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
 
@@ -690,7 +711,7 @@ $c-font-hand: 'Kalam', cursive;
   .comp-battle { padding: 1rem .75rem 2rem; }
   .comp-battle__header { gap: .75rem; }
   .comp-battle__summary { padding: .75rem 1rem; gap: .75rem; }
-  .comp-chips { padding: .6rem .75rem 1rem; }
+  .comp-chips { padding: 0 0 1rem; }
 
   .comp-chip {
     padding: .5rem 14px;
@@ -705,8 +726,7 @@ $c-font-hand: 'Kalam', cursive;
 [data-theme="dark"] {
   .comparator-page { background: #0f172a; }
 
-  .comp-search-area,
-  .comp-chips {
+  .comp-search-area {
     background: #1e293b;
   }
 
