@@ -136,6 +136,7 @@
       data = DEMO_STATS;
     }
 
+    try {
       const k = data.kpis || {};
       const elP = document.getElementById("kpi-productos");
       const elPr = document.getElementById("kpi-precios");
