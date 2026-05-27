@@ -642,10 +642,23 @@
           '</button>';
       }).join('');
     }
+    var rect = searchEl.getBoundingClientRect();
+    suggestEl.style.position = 'fixed';
+    suggestEl.style.top = (rect.bottom) + 'px';
+    suggestEl.style.left = rect.left + 'px';
+    suggestEl.style.width = rect.width + 'px';
+    suggestEl.style.borderRadius = '0 0 16px 16px';
+    suggestEl.style.zIndex = '9999';
     suggestEl.classList.add('open');
   }
 
-  function hideSuggestions() { suggestEl.classList.remove('open'); }
+  function hideSuggestions() {
+    suggestEl.classList.remove('open');
+    suggestEl.style.position = '';
+    suggestEl.style.top = '';
+    suggestEl.style.left = '';
+    suggestEl.style.width = '';
+  }
 
   function pickFirst() {
     var first = suggestEl.querySelector('.sug-item');

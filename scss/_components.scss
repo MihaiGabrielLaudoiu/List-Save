@@ -2835,8 +2835,37 @@ input[type="number"]::-webkit-inner-spin-button {
 .product-card__content {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 0.65rem;
     padding: 0 1.25rem 1.25rem;
+}
+
+.product-card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.product-card__compare-btn {
+    width: 100%;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.7rem 1rem;
+    text-align: center;
+    display: block;
+    background: transparent;
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--color-primary);
+        color: #fff;
+    }
 }
 
 .product-card__media {
@@ -2957,7 +2986,6 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .add-list-button {
-    margin-top: auto;
     width: 100%;
     border-radius: 12px;
     font-weight: 600;

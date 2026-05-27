@@ -200,7 +200,9 @@
         "list_add_err": "No se pudo anadir el producto",
         "from_price": "Desde {{price}} €",
         "pack_price": "{{price}} €",
-        "unit_price_line": "{{price}} € / {{unit}}"
+        "unit_price_line": "{{price}} € / {{unit}}",
+        "add_to_list": "Añadir a mi lista",
+        "compare_prices": "Comparar precios"
     },
     "my_list_page": {
         "hero_title": "Mis listas de la compra",

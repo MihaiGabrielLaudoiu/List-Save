@@ -182,7 +182,9 @@
         "list_add_err": "Could not add the product",
         "from_price": "From {{price}} €",
         "pack_price": "{{price}} €",
-        "unit_price_line": "{{price}} € / {{unit}}"
+        "unit_price_line": "{{price}} € / {{unit}}",
+        "add_to_list": "Add to my list",
+        "compare_prices": "Compare prices"
     },
     "my_list_page": {
         "hero_title": "My shopping lists",

@@ -739,7 +739,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 "<p class=\"product-card__brand\">" + safeBrand + "</p>" +
                 categoryMarkup +
                 formatoLine +
-                "<button class=\"button button--primary add-list-button\" data-product-id=\"" + product.id_producto + "\">Añadir a mi lista</button>" +
+                "<div class=\"product-card__actions\">" +
+                "<button class=\"button button--primary add-list-button\" data-product-id=\"" + product.id_producto + "\" data-i18n=\"products_page.add_to_list\">Añadir a mi lista</button>" +
+                "<a href=\"comparador.html?q=" + encodeURIComponent(product.nombre) + "\" class=\"product-card__compare-btn\" data-i18n=\"products_page.compare_prices\">Comparar precios</a>" +
+                "</div>" +
                 "</div>" +
                 "</article>";
         }).join("");

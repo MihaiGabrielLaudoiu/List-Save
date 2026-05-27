@@ -182,7 +182,9 @@
         "list_add_err": "No s'ha pogut afegir el producte",
         "from_price": "Des de {{price}} €",
         "pack_price": "{{price}} €",
-        "unit_price_line": "{{price}} € / {{unit}}"
+        "unit_price_line": "{{price}} € / {{unit}}",
+        "add_to_list": "Afegir a la meva llista",
+        "compare_prices": "Comparar preus"
     },
     "my_list_page": {
         "hero_title": "Les meves llistes de la compra",
