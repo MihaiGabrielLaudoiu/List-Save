@@ -702,14 +702,14 @@ body {
         border-radius: 20px 20px 0 0;
         box-shadow: 0 -16px 36px rgba(15, 23, 42, 0.18);
         transform: translateY(100%);
-        opacity: 1;
-        visibility: visible;
+        opacity: 0;
+        visibility: hidden;
         pointer-events: none;
         background-color: var(--color-white);
         z-index: 1050;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0.3s ease;
     }
 
     &.is-visible {
