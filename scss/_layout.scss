@@ -63,6 +63,16 @@
     grid-template-columns: repeat(4, 1fr);
     gap: var(--spacing-xl);
     padding: 0 var(--spacing-md);
+
+    @media (max-width: 1023px) and (min-width: 769px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
 }
 
 .stores {
