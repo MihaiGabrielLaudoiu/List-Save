@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateMenuVisibility() {
-        const isLargeScreen = window.innerWidth >= 1441;
+        const isLargeScreen = window.innerWidth >= 1024;
         if (isLargeScreen) {
             headerNav.style.display = "block";
             hamburger.style.display = "none";
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
             menuPpal.parentNode.insertBefore(mobileAuthButtons, menuPpal.nextSibling);
         }
         function updateAuthButtonsVisibility() {
-            const isLargeScreen = window.innerWidth >= 1441;
+            const isLargeScreen = window.innerWidth >= 1024;
             const isLoggedIn = SessionManager.checkSession();
             if (isLoggedIn) {
                 authButtons.style.display = "none";
