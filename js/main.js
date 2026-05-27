@@ -63,27 +63,29 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
     });
 
-    // Boton de alto contraste: guarda la preferencia en localStorage
-    if (contrastToggle) {
-        const guardado = localStorage.getItem("highContrast");
+    // Restaurar tema guardado en todas las paginas (con o sin boton visible)
+    if (localStorage.getItem("highContrast") === "true") {
+        document.documentElement.setAttribute("data-high-contrast", "true");
+        document.documentElement.setAttribute("data-theme", "dark");
+    }
 
-        if (guardado === "true") {
-            document.documentElement.setAttribute("data-high-contrast", "true");
-            document.documentElement.setAttribute("data-theme", "dark");
-        }
+    // Boton de alto contraste: toggle interactivo (solo paginas que lo tienen)
+    if (contrastToggle) {
+        contrastToggle.setAttribute("aria-pressed", localStorage.getItem("highContrast") === "true" ? "true" : "false");
 
         contrastToggle.addEventListener("click", function () {
-            const valorActual = document.documentElement.getAttribute("data-high-contrast");
-            const estaActivado = valorActual === "true";
+            const estaActivado = document.documentElement.getAttribute("data-high-contrast") === "true";
 
             if (estaActivado) {
                 document.documentElement.removeAttribute("data-high-contrast");
                 document.documentElement.removeAttribute("data-theme");
                 localStorage.setItem("highContrast", "false");
+                contrastToggle.setAttribute("aria-pressed", "false");
             } else {
                 document.documentElement.setAttribute("data-high-contrast", "true");
                 document.documentElement.setAttribute("data-theme", "dark");
                 localStorage.setItem("highContrast", "true");
+                contrastToggle.setAttribute("aria-pressed", "true");
             }
         });
     }

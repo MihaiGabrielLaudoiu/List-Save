@@ -87,20 +87,20 @@
                 <div class="products-search">
                     <div class="products-search__wrapper products-search__wrapper--rows">
                         <div class="products-search__bar">
-                            <i class="fas fa-search products-search__icon"></i>
-                            <input type="text" class="products-search__input" placeholder="Buscar productos, marcas, categorías..." data-i18n-placeholder="products_page.search_placeholder">
+                            <i class="fas fa-search products-search__icon" aria-hidden="true"></i>
+                            <input type="text" id="product-search-input" class="products-search__input" placeholder="Buscar productos, marcas, categorías..." data-i18n-placeholder="products_page.search_placeholder" aria-label="Buscar productos">
                         </div>
                         <div class="products-filters-row">
-                            <select class="products-search__category" id="category-filter">
+                            <select class="products-search__category" id="category-filter" aria-label="Filtrar por categoría">
                                 <option value="" data-i18n="products_page.all_categories">Categoría</option>
                             </select>
-                            <select id="subcategory-filter" class="products-search__category" title="Subcategoria">
+                            <select id="subcategory-filter" class="products-search__category" aria-label="Filtrar por subcategoría">
                                 <option value="">Subcategoría</option>
                             </select>
-                            <select id="supermarket-filter" class="products-search__supermarket">
+                            <select id="supermarket-filter" class="products-search__supermarket" aria-label="Filtrar por supermercado">
                                 <option value="">Supermercado</option>
                             </select>
-                            <select id="sort-filter" class="products-search__category">
+                            <select id="sort-filter" class="products-search__category" aria-label="Ordenar resultados">
                                 <option value="nombre">Nombre</option>
                                 <option value="precio_asc">Precio ↑</option>
                                 <option value="precio_desc">Precio ↓</option>
@@ -108,14 +108,14 @@
                             </select>
                         </div>
                         <div class="products-filters-row products-filters-row--tight">
-                            <select id="marca-filter" class="products-search__category products-search__category--sm">
+                            <select id="marca-filter" class="products-search__category products-search__category--sm" aria-label="Filtrar por marca">
                                 <option value="">Marca</option>
                             </select>
-                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-min" placeholder="€ min">
-                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-max" placeholder="€ max">
-                            <div class="all-products__filters all-products__filters--inline">
-                                <button class="filter-button active" data-filter="all">Todos</button>
-                                <button class="filter-button" data-filter="offers">Ofertas</button>
+                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-min" placeholder="€ min" aria-label="Precio mínimo en euros">
+                            <input type="number" step="0.01" min="0" class="products-search__input products-search__input--sm" id="price-max" placeholder="€ max" aria-label="Precio máximo en euros">
+                            <div class="all-products__filters all-products__filters--inline" role="group" aria-label="Filtrar por tipo">
+                                <button class="filter-button active" data-filter="all" aria-pressed="true">Todos</button>
+                                <button class="filter-button" data-filter="offers" aria-pressed="false">Ofertas</button>
                             </div>
                         </div>
                     </div>
