@@ -550,11 +550,11 @@ body {
 }
 
 // Estilos base para los botones de autenticación
+// display controlado por media query: none por defecto, flex en ≥1024px
 #auth-buttons {
-  display: flex;
   gap: 1.5rem;
   align-items: center;
-  
+
   .button {
     margin: 0;
     max-width: none;

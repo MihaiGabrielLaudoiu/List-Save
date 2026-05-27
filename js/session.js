@@ -127,11 +127,11 @@ function updateUIForLoggedUser() {
         }
     } else {
         if (authButtons) {
-            authButtons.style.display = "flex";
+            authButtons.style.display = ""; // deja que CSS/media queries controlen la visibilidad
         }
 
         if (authButtonsMobile) {
-            authButtonsMobile.style.display = "flex";
+            authButtonsMobile.style.display = "";
         }
 
         if (userMenu) {
