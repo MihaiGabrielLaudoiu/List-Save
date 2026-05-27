@@ -4528,6 +4528,72 @@ select {
   border: 1px solid var(--color-border);
 }
 
+/* ── BANNER MODO INVITADO ── */
+.guest-banner {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 0.75rem 1.1rem 0.75rem 1rem;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+  font-size: 0.92rem;
+  max-width: min(520px, 100vw - 2rem);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.guest-banner i {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+.guest-banner a {
+  color: #60a5fa;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.guest-banner a:hover {
+  color: #93c5fd;
+}
+.guest-banner--visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.guest-banner--dismissed {
+  transform: translateX(-50%) translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+}
+.guest-banner__close {
+  margin-left: auto;
+  padding-left: 0.5rem;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.guest-banner__close:hover {
+  color: #f1f5f9;
+}
+@media (max-width: 480px) {
+  .guest-banner {
+    bottom: 0.75rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    padding: 0.65rem 0.85rem;
+  }
+}
+
 @keyframes battleIn {
   from {
     opacity: 0;
