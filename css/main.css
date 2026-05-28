@@ -6967,6 +6967,26 @@ main {
   }
 }
 
+@media screen and (max-width: 480px) {
+  .notepad-wrapper {
+    max-width: 100%;
+    padding: 0 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .notepad {
+    padding: 1.25rem 1rem 1.5rem 2.4rem;
+    min-height: 320px;
+  }
+  .lista-items {
+    padding: 0 0.25rem;
+  }
+  .list-tab {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    min-height: 40px;
+  }
+}
+
 /* ── BLOC DE NOTAS ── */
 .notepad {
   position: relative;
@@ -7085,6 +7105,10 @@ main {
   margin-bottom: 2px;
   border-bottom: 1.5px solid rgba(184, 200, 232, 0.5);
   white-space: nowrap;
+  flex-wrap: nowrap;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
 .list-tabs::-webkit-scrollbar {
   display: none;
@@ -7107,6 +7131,7 @@ main {
   transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
   backdrop-filter: blur(4px);
 }
+.list-tab { scroll-snap-align: start; flex: 0 0 auto; }
 .list-tab:hover {
   background: rgba(255, 255, 255, 0.95);
   border-color: var(--color-primary);
