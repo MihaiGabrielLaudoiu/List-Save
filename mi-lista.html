@@ -95,7 +95,11 @@
       <div class="notepad" id="notepad" role="region" aria-label="Lista de la compra">
         <div class="nb-fold" aria-hidden="true"></div>
 
-        <div class="list-tabs" id="listTabs" role="tablist" aria-label="Tus listas"></div>
+        <div class="list-selection">
+          <div class="list-tabs" id="listTabs" role="tablist" aria-label="Tus listas"></div>
+          <select id="listSelect" class="list-select" aria-label="Seleccionar lista"></select>
+          <button type="button" id="addListBtnMobile" class="mobile-list-add-btn" aria-label="Crear nueva lista">+ Nueva lista</button>
+        </div>
 
         <div class="add-bar">
           <div class="search-wrap">
@@ -271,7 +275,7 @@
   var isDemo = false;
 
   /* ─── DOM ───────────────────────────────── */
-  var tabsEl, chipRowEl, itemsEl, totalEl, emptyEl, searchEl, suggestEl, addBtnEl;
+  var tabsEl, listSelectEl, addListBtnMobile, chipRowEl, itemsEl, totalEl, emptyEl, searchEl, suggestEl, addBtnEl;
 
   function $$(id) { return document.getElementById(id); }
 
@@ -411,6 +415,7 @@
   /* TABS */
   function renderTabs() {
     var html = '';
+    var selectHtml = '';
     for (var i = 0; i < lists.length; i++) {
       var l = lists[i];
       var act = l.id === activeListId;
@@ -420,9 +425,15 @@
         html += '<span class="close-tab" data-id="' + l.id + '" role="button" aria-label="Eliminar ' + esc(l.name) + '">&times;</span>';
       }
       html += '</button>';
+      selectHtml += '<option value="' + l.id + '"' + (act ? ' selected' : '') + '>' + esc(l.name) + '</option>';
     }
     html += '<button class="tab-add" id="addListBtn" aria-label="Crear nueva lista" title="Nueva lista">+</button>';
     tabsEl.innerHTML = html;
+    if (listSelectEl) {
+      listSelectEl.innerHTML = selectHtml || '<option value="">Sin listas</option>';
+      listSelectEl.value = activeListId ? String(activeListId) : '';
+      listSelectEl.disabled = lists.length === 0;
+    }
 
     tabsEl.querySelectorAll('.list-tab').forEach(function (tab) {
       tab.addEventListener('click', function (e) {
@@ -817,11 +828,26 @@
     tabsEl    = $$('listTabs');
     chipRowEl = $$('chipRow');
     itemsEl   = $$('listaItems');
+    listSelectEl = $$('listSelect');
+    addListBtnMobile = $$('addListBtnMobile');
     totalEl   = $$('totalAmount');
     emptyEl   = $$('emptyState');
     searchEl  = $$('searchInput');
     suggestEl = $$('suggestions');
     addBtnEl  = $$('addBtn');
+
+    if (listSelectEl) {
+      listSelectEl.addEventListener('change', function () {
+        var id = Number(this.value);
+        if (id && id !== activeListId) {
+          activeListId = id;
+          render();
+        }
+      });
+    }
+    if (addListBtnMobile) {
+      addListBtnMobile.addEventListener('click', promptNewList);
+    }
 
     initChips();
     initSearch();
