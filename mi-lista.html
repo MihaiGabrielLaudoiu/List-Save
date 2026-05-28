@@ -452,6 +452,38 @@
     if (addListBtn) addListBtn.addEventListener('click', promptNewList);
   }
 
+  function enableTabsSwipe() {
+    if (!tabsEl) return;
+    var isDown = false;
+    var startX = 0;
+    var scrollLeft = 0;
+
+    tabsEl.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isDown = true;
+      tabsEl.setPointerCapture(e.pointerId);
+      startX = e.pageX - tabsEl.offsetLeft;
+      scrollLeft = tabsEl.scrollLeft;
+      tabsEl.style.cursor = 'grabbing';
+    });
+
+    tabsEl.addEventListener('pointermove', function (e) {
+      if (!isDown) return;
+      var x = e.pageX - tabsEl.offsetLeft;
+      var walk = (x - startX) * 1.2;
+      tabsEl.scrollLeft = scrollLeft - walk;
+    });
+
+    tabsEl.addEventListener('pointerup', function () {
+      isDown = false;
+      tabsEl.style.cursor = '';
+    });
+    tabsEl.addEventListener('pointercancel', function () {
+      isDown = false;
+      tabsEl.style.cursor = '';
+    });
+  }
+
   /* LISTA */
   function renderList() {
     var list = activeList();
@@ -848,6 +880,7 @@
     if (addListBtnMobile) {
       addListBtnMobile.addEventListener('click', promptNewList);
     }
+    enableTabsSwipe();
 
     initChips();
     initSearch();

@@ -7120,6 +7120,8 @@ main {
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
+  scroll-behavior: smooth;
+  cursor: grab;
 }
 .list-tabs::-webkit-scrollbar {
   display: none;
