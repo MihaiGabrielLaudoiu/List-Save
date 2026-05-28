@@ -25,3 +25,7 @@ coverage/
 superpowers/
 *.map
 pnpm-lock.yaml
+db/schema.sql
+db/seed.sql
+backend/config/db.js
+.env

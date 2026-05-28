@@ -3105,6 +3105,14 @@ input[type=number]::-webkit-inner-spin-button {
     gap: clamp(0.75rem, 1.1vw, 1.1rem);
   }
 }
+@media screen and (max-width: 768px) {
+  #auth-buttons {
+    display: none !important;
+  }
+  .demo-fab {
+    display: none !important;
+  }
+}
 /* Nosotros — hero unificado vía _page-hero.scss */
 .team,
 .values,
@@ -4099,11 +4107,18 @@ input[type=number]::-webkit-inner-spin-button {
   margin-bottom: 1.25rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
 }
 
 .list-tabs::-webkit-scrollbar {
   height: 4px;
+}
+
+.list-tab-row {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
 }
 
 .list-tabs::-webkit-scrollbar-thumb {
@@ -7675,9 +7690,23 @@ main {
   width: 100%;
   box-shadow: 0 28px 72px rgba(0, 0, 0, 0.2);
   text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 [data-high-contrast=true] .modal-box, [data-theme=dark] .modal-box {
   background: #1e293b;
+}
+
+@media screen and (max-width: 480px) {
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0.75rem 0.75rem 0;
+  }
+  .modal-box {
+    border-radius: 20px 20px 0 0;
+    margin: 0;
+    max-height: 88vh;
+  }
 }
 
 .modal-icon {

@@ -96,6 +96,20 @@ document.addEventListener("DOMContentLoaded", function () {
         return null;
     }
 
+    function showServerRequiredMessage() {
+        if (!productsGrid) {
+            return;
+        }
+        productsGrid.innerHTML =
+            '<div class="products-empty" style="padding:24px 18px;max-width:640px;margin:0 auto;text-align:center;">' +
+            '<strong>Esta página necesita el servidor backend.</strong><br>' +
+            'Ejecuta <code>npm start</code> y abre esta página desde <code>http://localhost:3000/productos.html</code>.' +
+            '</div>';
+        if (paginationEl) {
+            paginationEl.innerHTML = "";
+        }
+    }
+
     function resolveUnitPriceForCard(fi) {
         if (!fi) {
             return null;
@@ -1042,6 +1056,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Punto de inicio de la pagina: primero fuentes, luego catalogo, luego precios
     async function initPage() {
+        if (window.location.protocol === "file:") {
+            showServerRequiredMessage();
+            return;
+        }
+
         await loadSources();
         await loadMetaFilters();
         await loadProducts(1);
